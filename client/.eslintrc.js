@@ -22,6 +22,17 @@ module.exports = {
     'import/extensions': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/prefer-default-export': 0,
     'import/order': ['warn'],
+    'prettier/prettier': [
+      'error',
+      {
+        tabWidth: 2,
+        useTabs: false,
+        singleQuote: true,
+        trailingComma: 'es5',
+        printWidth: 120,
+        semi: false,
+      },
+    ],
   },
   settings: {
     'import/resolver': { node: { extensions: ['.js', '.jsx'] } },
