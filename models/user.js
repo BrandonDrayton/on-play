@@ -10,8 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Comments)
-      User.hasMany(models.Threads)
+      User.hasMany(models.Comment)
+      User.hasMany(models.Thread)
+      User.belongsTo(models.Team)
+      User.belongsToMany(models.Like, { through: models.Like })
     }
   }
   User.init(

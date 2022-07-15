@@ -1,7 +1,6 @@
 import * as React from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import { ChakraProvider } from '@chakra-ui/react'
 import Home from './routes/Home'
 import About from './routes/About'
 import PrimaryNav from './components/PrimaryNav'

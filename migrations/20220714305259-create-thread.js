@@ -1,7 +1,7 @@
 'use strict'
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable('Threads', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,11 +15,14 @@ module.exports = {
           key: 'id',
         },
       },
+      title: {
+        type: Sequelize.STRING,
+      },
       body: {
         type: Sequelize.STRING,
       },
-      likes: {
-        type: Sequelize.INTEGER,
+      date: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +35,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Comments')
+    await queryInterface.dropTable('Threads')
   },
 }
