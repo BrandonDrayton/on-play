@@ -1,14 +1,28 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Box, Button, Container, Grid, Select } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-import { useGetTeamsQuery } from '../services/createSportsApi'
+import {
+  useGetMlbTeamsQuery,
+  useGetMlsTeamsQuery,
+  useGetNbaTeamsQuery,
+  useGetNflTeamsQuery,
+  useGetNhlTeamsQuery,
+} from '../services/createSportsApi'
 import './PrimaryNav.css'
 
-function PrimaryNav() {
-  const { data, isLoading } = useGetTeamsQuery('')
-  const nflTeams = data?.sports[0].leagues[0].teams
+function PrimaryNav(props) {
+  const { data, isLoading } = useGetMlbTeamsQuery('')
+  const { data: mlsData } = useGetMlsTeamsQuery('')
+  const { data: nbaData } = useGetNbaTeamsQuery('')
+  const { data: nflData } = useGetNflTeamsQuery('')
+  const { data: nhlData } = useGetNhlTeamsQuery('')
+
+  const nflTeams = nflData?.sports[0].leagues[0].teams
+  const mlbTeams = data?.sports[0].leagues[0].teams
+  const nhlTeams = nhlData?.sports[0].leagues[0].teams
+  const mlsTeams = mlsData?.sports[0].leagues[0].teams
+  const nbaTeams = nbaData?.sports[0].leagues[0].teams
   const leagues = data?.sports.leagues
-  console.log(leagues)
   if (isLoading) {
     return null
   }
@@ -33,7 +47,7 @@ function PrimaryNav() {
       </div>
       <Box display="flex">
         <Select icon={<ChevronDownIcon />} variant="outline" size="md">
-          <option value="option1">NFL</option>
+          <option value={nflTeams}>NFL</option>
           <option value="option3">NHL</option>
           <option value="option2">MLB</option>
           <option value="option3">MLS</option>
