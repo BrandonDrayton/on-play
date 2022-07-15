@@ -1,8 +1,12 @@
+import * as React from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
+import { ChakraProvider } from '@chakra-ui/react'
 import Home from './routes/Home'
 import About from './routes/About'
 import PrimaryNav from './components/PrimaryNav'
+import Register from './routes/Register'
+import Login from './routes/Login'
 
 function App() {
   return (
@@ -11,6 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   )

@@ -13,6 +13,12 @@ function PrimaryNav() {
           <Link className="link" to="/about">
             About Us
           </Link>
+          <Link className="link" to="/register">
+            Register
+          </Link>
+          <Link className="link" to="/login">
+            Login
+          </Link>
         </nav>
       </div>
     </div>

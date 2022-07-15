@@ -1,0 +1,13 @@
+.registerHeading {
+  font-size: 30px;
+  text-align: center;
+  padding-bottom: 20px;
+  font-family: Poppins;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.form {
+  font-family: Poppins;
+  text-transform: uppercase;
+}
