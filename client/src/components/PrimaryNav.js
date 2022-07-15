@@ -1,28 +1,25 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Box, Button, Container, Grid, Select } from '@chakra-ui/react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   useGetMlbTeamsQuery,
   useGetMlsTeamsQuery,
   useGetNbaTeamsQuery,
-  useGetNflTeamsQuery,
   useGetNhlTeamsQuery,
+  useGetTeamsQuery,
 } from '../services/createSportsApi'
 import './PrimaryNav.css'
 
-function PrimaryNav(props) {
-  const { data, isLoading } = useGetMlbTeamsQuery('')
-  const { data: mlsData } = useGetMlsTeamsQuery('')
-  const { data: nbaData } = useGetNbaTeamsQuery('')
-  const { data: nflData } = useGetNflTeamsQuery('')
-  const { data: nhlData } = useGetNhlTeamsQuery('')
+function PrimaryNav() {
+  const sports = ['football', 'baseball']
+  const leagues = ['nfl', 'mlb']
+  const [sport, setSport] = useState(sports[0])
+  const [league, setLeague] = useState(leagues[0])
 
-  const nflTeams = nflData?.sports[0].leagues[0].teams
-  const mlbTeams = data?.sports[0].leagues[0].teams
-  const nhlTeams = nhlData?.sports[0].leagues[0].teams
-  const mlsTeams = mlsData?.sports[0].leagues[0].teams
-  const nbaTeams = nbaData?.sports[0].leagues[0].teams
-  const leagues = data?.sports.leagues
+  const { data, isLoading } = useGetTeamsQuery({ sport, league })
+
+  const teams = data?.sports[0].leagues[0].teams
   if (isLoading) {
     return null
   }
@@ -46,16 +43,34 @@ function PrimaryNav(props) {
         </nav>
       </div>
       <Box display="flex">
-        <Select icon={<ChevronDownIcon />} variant="outline" size="md">
-          <option value={nflTeams}>NFL</option>
-          <option value="option3">NHL</option>
-          <option value="option2">MLB</option>
-          <option value="option3">MLS</option>
-          <option value="option3">PGA</option>
-          <option value="option3">NBA</option>
+        <Select
+          icon={<ChevronDownIcon />}
+          variant="outline"
+          size="md"
+          value={league}
+          onChange={(e) => {
+            setLeague(e.target.value)
+            setSport(e.target.selectedOptions[0].dataset.sport)
+          }}
+        >
+          <option value="nfl" data-sport="football">
+            NFL
+          </option>
+          <option value="nhl" data-sport="hockey">
+            NHL
+          </option>
+          <option value="mlb" data-sport="baseball">
+            MLB
+          </option>
+          <option value="usa.1" data-sport="soccer">
+            MLS
+          </option>
+          <option value="nba" data-sport="basketball">
+            NBA
+          </option>
         </Select>
         <Select icon={<ChevronDownIcon />} variant="outline" size="md">
-          {nflTeams.map((team, i) => (
+          {teams?.map((team, i) => (
             <option key={i} value="option1">
               {team.team.name}
             </option>

@@ -5,8 +5,8 @@ export const createSportsApi = createApi({
   reducerPath: 'sportsApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://site.api.espn.com/apis/site/v2/sports/' }),
   endpoints: (builder) => ({
-    getNflTeams: builder.query({
-      query: () => `football/nfl/teams`,
+    getTeams: builder.query({
+      query: ({ sport, league }) => `${sport}/${league}/teams`,
     }),
     getMlbTeams: builder.query({
       query: () => `baseball/mlb/teams`,
@@ -25,10 +25,5 @@ export const createSportsApi = createApi({
     }),
   }),
 })
-export const {
-  useGetNflTeamsQuery,
-  useGetMlbTeamsQuery,
-  useGetNhlTeamsQuery,
-  useGetMlsTeamsQuery,
-  useGetNbaTeamsQuery,
-} = createSportsApi
+export const { useGetTeamsQuery, useGetMlbTeamsQuery, useGetNhlTeamsQuery, useGetMlsTeamsQuery, useGetNbaTeamsQuery } =
+  createSportsApi
