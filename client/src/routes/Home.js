@@ -1,7 +1,9 @@
 function Home() {
   return (
     // TODO: Make Homepage
-    <div>Home Page</div>
+    <>
+      <h1>Home</h1>
+    </>
   )
 }
 

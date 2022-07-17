@@ -6,6 +6,8 @@ import About from './routes/About'
 import PrimaryNav from './components/PrimaryNav'
 import Register from './routes/Register'
 import Login from './routes/Login'
+import Dashboard from './routes/Dashboard'
+import Logout from './routes/Logout'
 
 function App() {
   return (
@@ -13,9 +15,11 @@ function App() {
       <PrimaryNav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </div>
   )
