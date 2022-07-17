@@ -2,13 +2,7 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Box, Button, Container, Grid, Select } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  useGetMlbTeamsQuery,
-  useGetMlsTeamsQuery,
-  useGetNbaTeamsQuery,
-  useGetNhlTeamsQuery,
-  useGetTeamsQuery,
-} from '../services/createSportsApi'
+import { useGetTeamsQuery } from '../services/createSportsApi'
 import './PrimaryNav.css'
 
 function PrimaryNav() {
