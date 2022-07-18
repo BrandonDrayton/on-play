@@ -7,6 +7,8 @@ import Stats from './Stats'
 import './PrimaryNav.css'
 import Forum from './Forum'
 import News from './News'
+import ForumModel from './ForumModel'
+import './Forum.css'
 function Dashboard() {
   const sports = ['football', 'baseball']
   const leagues = ['nfl', 'mlb']
@@ -126,14 +128,16 @@ function Dashboard() {
           <Stats />
         </Box>
         <News />
-        <Box>
-          <Container>
-            <Forum />
-          </Container>
-          <Grid height={400} />
-        </Box>
       </FormControl>
+
     </form>
+
+      <Box className="forum-container">
+        <Forum />
+        <ForumModel />
+      </Box>
+    </>
+
   )
 }
 

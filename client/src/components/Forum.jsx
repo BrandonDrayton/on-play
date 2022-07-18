@@ -1,13 +1,36 @@
 import React from 'react'
-
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Avatar,
+  AvatarBadge,
+  Box,
+  ChakraProvider,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Icon,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Stack,
+  Switch,
+  Text,
+  Textarea,
+} from '@chakra-ui/react'
+import './Forum.css'
 function Forum() {
   return (
     <>
-      <h2>forum goes here</h2>
-      <br />
-      There are many benefits to a joint design and development system. Not only does it bring benefits to the design
-      team, but it also brings benefits to engineering teams. It makes sure that our experiences have a consistent look
-      and feel, not just in our design specs, but in production
+      <Box>
+        <Box>
+          <Text>
+            <h1 className="forum-title">Sports Forum</h1>
+          </Text>
+        </Box>
+      </Box>
     </>
   )
 }
