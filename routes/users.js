@@ -17,10 +17,10 @@ router.post('/register', async (req, res) => {
 
 // GET /api/v1/users/login
 router.post('/login', async (req, res) => {
-  const { email, password, username } = req.body
+  const { email, password } = req.body
   // if required fields missing, send error
-  if (!email || !password || !username) {
-    return res.status(400).json({ error: 'missing email and/or password, username' })
+  if (!email || !password) {
+    return res.status(400).json({ error: 'missing email and/or password' })
   }
   // find user in database
   const user = await models.User.findOne({ where: { email } })
