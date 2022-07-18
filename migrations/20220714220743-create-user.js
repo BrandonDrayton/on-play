@@ -27,8 +27,8 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
       },
-      favoriteTeam: {
-        type: Sequelize.TEXT,
+      FavoriteTeamId: {
+        type: Sequelize.INTEGER,
       },
       iconText: {
         type: Sequelize.TEXT,
