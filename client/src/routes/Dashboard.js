@@ -9,6 +9,7 @@ function Dashboard() {
       <h3>dashboard</h3>
       <Landing />
       <Stats />
+      <ForumModel />
     </>
   )
 }
