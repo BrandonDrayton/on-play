@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Comment)
       User.hasMany(models.Thread)
-      User.belongsTo(models.Team)
+      User.belongsTo(models.Team, { foreignKey: 'FavoriteTeamId' })
       User.belongsToMany(models.Thread, { through: models.Like })
     }
   }
@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       username: DataTypes.STRING,
       password: DataTypes.STRING,
-      favoriteTeam: DataTypes.TEXT,
       iconText: DataTypes.TEXT,
       iconColor: DataTypes.STRING,
     },
