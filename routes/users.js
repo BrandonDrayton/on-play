@@ -5,22 +5,22 @@ const models = require('../models')
 
 // GET /api/v1/users/register
 router.post('/register', async (req, res) => {
-  const { email, password } = req.body
+  const { email, password, username } = req.body
   // if required fields missing, send error
-  if (!email || !password) {
+  if (!email || !password || !username) {
     return res.status(400).json({ error: 'missing email and/or password' })
   }
   // create new user in database and send success message
-  const user = await models.User.create({ email, password })
+  const user = await models.User.create({ email, password, username })
   res.json({ success: 'registered successfully' })
 })
 
 // GET /api/v1/users/login
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body
+  const { email, password, username } = req.body
   // if required fields missing, send error
-  if (!email || !password) {
-    return res.status(400).json({ error: 'missing email and/or password' })
+  if (!email || !password || !username) {
+    return res.status(400).json({ error: 'missing email and/or password, username' })
   }
   // find user in database
   const user = await models.User.findOne({ where: { email } })
