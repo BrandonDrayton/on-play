@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Thread.belongsTo(models.User)
       Thread.belongsTo(models.Team)
       Thread.hasMany(models.Comment)
+      Thread.belongsToMany(models.User, { through: models.Like })
     }
   }
   Thread.init(
@@ -23,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Thread',
+      paranoid: true,
     }
   )
   return Thread

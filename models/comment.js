@@ -12,18 +12,19 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Comment.belongsTo(models.User)
       Comment.belongsTo(models.Thread)
-      Comment.belongsTo(models.parentId)
+      Comment.belongsTo(models.Comment, { foreignKey: 'ParentId', as: 'Parent' })
+      Comment.hasMany(models.Comment, { foreignKey: 'ParentId', as: 'Children' })
     }
   }
   Comment.init(
     {
       body: DataTypes.STRING,
       likes: DataTypes.INTEGER,
-      parentId: INTEGER,
     },
     {
       sequelize,
       modelName: 'Comment',
+      paranoid: true,
     }
   )
   return Comment

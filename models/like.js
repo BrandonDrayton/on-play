@@ -9,14 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Like.belongsTo(models.Comment)
-      Like.belongsToMany(models.User, { through: models.User })
     }
   }
   Like.init(
-    {
-      userId: DataTypes.STRING,
-    },
+    {},
     {
       sequelize,
       modelName: 'Like',
