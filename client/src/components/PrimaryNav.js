@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useGetTeamsQuery } from '../services/createSportsApi'
 import './PrimaryNav.css'
 
 function PrimaryNav() {
