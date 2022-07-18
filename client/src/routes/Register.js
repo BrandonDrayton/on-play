@@ -94,7 +94,7 @@ function Register() {
               onChange={(e) => updateField('username', e.target.value)}
             />
           </FormControl>
-          <Button mt={4} className="form" colorScheme="blackAlpha" size="md">
+          <Button type="submit" isLoading={isLoading} mt={4} className="form" colorScheme="blackAlpha" size="md">
             Register
           </Button>
         </Box>

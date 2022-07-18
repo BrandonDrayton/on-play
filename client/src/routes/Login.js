@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
   Flex,
@@ -13,29 +15,81 @@ import {
 import './Register.css'
 
 function Login() {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    username: '',
+  })
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const updateField = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError('')
+    setSuccess('')
+    fetch('/api/v1/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(false)
+        if (data.error) {
+          setError(data.error)
+        } else {
+          setSuccess('Logged in Successfully')
+        }
+      })
+  }
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
+      {error && (
+        <Alert status="error">
+          <AlertIcon /> {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert status="success">
+          <AlertIcon /> {success}
+        </Alert>
+      )}
       <Flex justify={'center'}>
         <Box boxShadow="md" bg="white" w="450px" p={4} m={20} color="black">
-          <h1 className="registerHeading">Login</h1>
-          <FormControl isRequired>
-            <FormLabel className="form" htmlFor="email">
-              E-mail
-            </FormLabel>
-            <Input id="email" placeholder="johndaly123@gmail.com" />
+          <h1 className="loginHeading">Login</h1>
+          <FormControl my="5">
+            <FormLabel htmlFor="email">Email address</FormLabel>
+            <Input
+              id="email"
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => updateField('email', e.target.value)}
+            />
           </FormControl>
-          <FormControl isRequired>
-            <FormLabel className="form" htmlFor="password">
-              Password
-            </FormLabel>
-            <Input id="password" placeholder="************" />
+          <FormControl my="5">
+            <FormLabel htmlFor="password">Password</FormLabel>
+            <Input
+              id="password"
+              type="password"
+              required
+              value={form.password}
+              onChange={(e) => updateField('password', e.target.value)}
+            />
           </FormControl>
-          <Button className="form" mt={4} colorScheme="blackAlpha" size="md">
-            Login
+          <Button type="submit" isLoading={isLoading} mt={4} className="form" colorScheme="blackAlpha" size="md">
+            Register
           </Button>
         </Box>
       </Flex>
-    </div>
+    </form>
   )
 }
 
