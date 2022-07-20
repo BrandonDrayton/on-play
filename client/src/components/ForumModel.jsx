@@ -97,7 +97,9 @@ function ForumModel() {
                 <Flex align="center" mb="3">
                   <Avatar></Avatar>
                   <Flex>
-                    <Text ml="3">Chase Childers</Text>
+                    <Text ml="3" fontSize="l">
+                      Chase Childers
+                    </Text>
                   </Flex>
                 </Flex>
                 <Box>
@@ -108,57 +110,79 @@ function ForumModel() {
                   </Text>
                 </Box>
                 <Flex justify="flex-end" align={'center'}>
-                  <Flex align="center">
-                    <ArrowUpIcon mr="5" w="6" height="6"></ArrowUpIcon>
+                  <Flex align="center" mt="2" mr="2">
+                    <Flex>
+                      <ChatIcon className="icons" mr="2" w="4" height="6" onClick={onOpen}></ChatIcon>
+                      <Text mr="2">12</Text>
+                    </Flex>
+                    <Flex justify="center">
+                      <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                      <Text mr="2">124</Text>
+                    </Flex>
                   </Flex>
                   <Box>
                     <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
                   </Box>
                 </Flex>
               </Flex>
-              <form method="post">
-                <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
-                  <ModalOverlay />
-                  <ModalContent>
-                    <ModalHeader>
-                      <Flex flexDirection="column">
-                        <Box>
-                          <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
-                        </Box>
-                        <Box>
-                          <Text fontSize="sm" mt="3">
-                            Aug 13th, 2019, 10:08 AM
-                          </Text>
-                        </Box>
-                      </Flex>
-                    </ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                      <Textarea
-                        height={250}
-                        placeholder="Type comment here"
-                        fontFamily="Poppins"
-                        fontSize="20px"
-                      ></Textarea>
-                    </ModalBody>
-
-                    <ModalFooter>
-                      <form>
-                        <Button bg="#66CD00" mr={3}>
-                          Send it
-                        </Button>
-                        <Button onClick={onClose} variant="ghost">
-                          Cancel
-                        </Button>
-                      </form>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
-              </form>
             </Box>
+            <Flex boxShadow="md" p="6" rounded="md" bg="white" mt="3" w="70%" align="flex-end">
+              <Flex flexDirection="column">
+                <Flex align="center" mb="3">
+                  <Avatar></Avatar>
+                  <Flex>
+                    <Text ml="3" fontSize="l">
+                      Chase Childers
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex align="flex-end">
+                  <Text>LMAO what a joke</Text>
+                </Flex>
+                <Flex justify="flex-end" align={'center'}>
+                  <Box>
+                    <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
+                  </Box>
+                </Flex>
+              </Flex>
+            </Flex>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
+      <form method="post">
+        <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>
+              <Flex flexDirection="column">
+                <Box>
+                  <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
+                </Box>
+                <Box>
+                  <Text fontSize="sm" mt="3">
+                    Aug 13th, 2019, 10:08 AM
+                  </Text>
+                </Box>
+              </Flex>
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Textarea height={250} placeholder="Type comment here" fontFamily="Poppins" fontSize="20px"></Textarea>
+            </ModalBody>
+
+            <ModalFooter>
+              <form>
+                <Button bg="#66CD00" mr={3}>
+                  Send it
+                </Button>
+                <Button onClick={onClose} variant="ghost">
+                  Cancel
+                </Button>
+              </form>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </form>
     </>
   )
 }
