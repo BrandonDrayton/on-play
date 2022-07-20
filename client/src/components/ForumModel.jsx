@@ -10,6 +10,7 @@ import {
   Button,
   Flex,
   FormControl,
+  FormHelperText,
   FormLabel,
   Input,
   Modal,
@@ -46,6 +47,30 @@ function ForumModel() {
             SPORTS FORUM
           </Text>
         </Box>
+        <AccordionItem className="accordian-title">
+          <h2>
+            <AccordionButton>
+              <Flex justify="space-between">
+                <Flex flexDirection="column" textAlign="left"></Flex>
+              </Flex>
+              <Button className="thread-comment-button" mt={3} bg="#66CD00">
+                <ChatIcon mr="2"></ChatIcon>
+                <Text>Create New Forum</Text>
+              </Button>
+            </AccordionButton>
+          </h2>
+          <AccordionPanel display="flex" flexDirection="column" pb={4}>
+            <Box boxShadow="md" p="6" rounded="md" bg="white">
+              <Flex flexDirection="column"></Flex>
+              <form method="post">
+                <FormControl>
+                  <FormLabel>Forum Name:</FormLabel>
+                  <Input type="text" />
+                </FormControl>
+              </form>
+            </Box>
+          </AccordionPanel>
+        </AccordionItem>
         <AccordionItem className="accordian-title">
           <h2>
             <AccordionButton>
