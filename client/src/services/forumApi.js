@@ -13,6 +13,14 @@ export const forumApi = createApi({
       query: () => '/user',
       providesTags: ['Thread'],
     }),
+    addNewThread: builder.mutation({
+      query: (newThread) => ({
+        url: '/Threads',
+        method: 'POST',
+        body: newThread,
+      }),
+      invalidatesTags: ['Thread'],
+    }),
   }),
 })
 
