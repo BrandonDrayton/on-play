@@ -2,18 +2,11 @@ import React, { useState } from 'react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Box, Button, Container, FormControl, Grid, Select } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-import {
-  useGetMlbTeamsQuery,
-  useGetMlsTeamsQuery,
-  useGetNbaTeamsQuery,
-  useGetNflNewsQuery,
-  useGetNhlTeamsQuery,
-  useGetTeamsQuery,
-} from '../services/createSportsApi'
+import { useGetTeamsQuery } from '../services/createSportsApi'
 import Stats from './Stats'
 import './PrimaryNav.css'
 import Forum from './Forum'
-import News from './News'
+
 function Dashboard() {
   const sports = ['football', 'baseball']
   const leagues = ['nfl', 'mlb']
@@ -21,9 +14,6 @@ function Dashboard() {
   const [league, setLeague] = useState(leagues[0])
 
   const { data, isLoading } = useGetTeamsQuery({ sport, league })
-
-  const nflNews = useGetNflNewsQuery('')
-  console.log(nflNews)
 
   const teams = data?.sports[0].leagues[0].teams
   if (isLoading) {
@@ -89,7 +79,6 @@ function Dashboard() {
           </Button>
           <Stats />
         </Box>
-        <News />
         <Box>
           <Container>
             <Forum />
