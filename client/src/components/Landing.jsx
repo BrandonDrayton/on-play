@@ -54,12 +54,11 @@ function Dashboard() {
           <AlertIcon /> {success}
         </Alert>
       )}
-      <FormControl>
+      <FormControl mt="5" mb="5">
         <Box display="flex" justifyContent="center">
           <Select
             icon={<ChevronDownIcon />}
             variant="outline"
-            rounded="full"
             maxWidth="200px"
             pr="2"
             size="md"
@@ -97,11 +96,11 @@ function Dashboard() {
               setEspnTeamId(e.target.selectedOptions[0].dataset.id)
             }}
             icon={<ChevronDownIcon />}
-            rounded="full"
             variant="outline"
             size="md"
             maxWidth="400px"
             pr="1"
+            ml="3"
           >
             <option value="" disabled selected>
               Please Select A Team
@@ -114,21 +113,18 @@ function Dashboard() {
           </Select>
 
           <Button
+            ml="3"
             variant="solid"
             size="md"
             display="flex"
             flexDirection="column"
             fontSize="sm"
             type="submit"
-            rounded="full"
             bg="#66CD00"
           >
             Select
           </Button>
           <Stats />
-        </Box>
-        <Box>
-          <Grid height={400} />
         </Box>
       </FormControl>
     </form>
