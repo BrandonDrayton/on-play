@@ -66,6 +66,9 @@ function ForumModel() {
                 <FormControl>
                   <FormLabel>Forum Name:</FormLabel>
                   <Input type="text" />
+                  <Button className="thread-comment-button" mt={3} bg="#66CD00">
+                    <Text>Submit</Text>
+                  </Button>
                 </FormControl>
               </form>
             </Box>
