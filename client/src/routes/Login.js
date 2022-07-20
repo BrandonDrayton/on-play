@@ -13,6 +13,7 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 import './Register.css'
+import LandingNav from '../components/LandingNav'
 
 function Login() {
   const [form, setForm] = useState({
@@ -50,46 +51,49 @@ function Login() {
       })
   }
   return (
-    <form onSubmit={handleSubmit}>
-      {error && (
-        <Alert status="error">
-          <AlertIcon /> {error}
-        </Alert>
-      )}
-      {success && (
-        <Alert status="success">
-          <AlertIcon /> {success}
-        </Alert>
-      )}
-      <Flex justify={'center'}>
-        <Box boxShadow="md" bg="white" w="450px" p={4} m={20} color="black">
-          <h1 className="loginHeading">Login</h1>
-          <FormControl my="5">
-            <FormLabel htmlFor="email">Email address</FormLabel>
-            <Input
-              id="email"
-              type="email"
-              required
-              value={form.email}
-              onChange={(e) => updateField('email', e.target.value)}
-            />
-          </FormControl>
-          <FormControl my="5">
-            <FormLabel htmlFor="password">Password</FormLabel>
-            <Input
-              id="password"
-              type="password"
-              required
-              value={form.password}
-              onChange={(e) => updateField('password', e.target.value)}
-            />
-          </FormControl>
-          <Button type="submit" isLoading={isLoading} mt={4} className="form" colorScheme="blackAlpha" size="md">
-            Register
-          </Button>
-        </Box>
-      </Flex>
-    </form>
+    <>
+      <LandingNav />
+      <form onSubmit={handleSubmit}>
+        {error && (
+          <Alert status="error">
+            <AlertIcon /> {error}
+          </Alert>
+        )}
+        {success && (
+          <Alert status="success">
+            <AlertIcon /> {success}
+          </Alert>
+        )}
+        <Flex justify={'center'}>
+          <Box boxShadow="md" bg="white" w="450px" p={4} m={20} color="black">
+            <h1 className="loginHeading">Login</h1>
+            <FormControl my="5">
+              <FormLabel htmlFor="email">Email address</FormLabel>
+              <Input
+                id="email"
+                type="email"
+                required
+                value={form.email}
+                onChange={(e) => updateField('email', e.target.value)}
+              />
+            </FormControl>
+            <FormControl my="5">
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <Input
+                id="password"
+                type="password"
+                required
+                value={form.password}
+                onChange={(e) => updateField('password', e.target.value)}
+              />
+            </FormControl>
+            <Button type="submit" isLoading={isLoading} mt={4} className="form" colorScheme="blackAlpha" size="md">
+              Register
+            </Button>
+          </Box>
+        </Flex>
+      </form>
+    </>
   )
 }
 
