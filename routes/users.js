@@ -10,8 +10,16 @@ router.post('/register', async (req, res) => {
   if (!email || !password || !username) {
     return res.status(400).json({ error: 'missing email and/or password' })
   }
+  const existingUser = await models.User.findOne({
+    where: { email },
+  })
+  if (existingUser) {
+    res.status(400).json({ error: 'Email already in use' })
+    return
+  }
   // create new user in database and send success message
-  const user = await models.User.create({ email, password, username })
+  const hash = await bcrypt.hash(password, 10)
+  const user = await models.User.create({ email, password: hash, username })
   res.json({ success: 'registered successfully' })
 })
 
@@ -36,6 +44,25 @@ router.post('/login', async (req, res) => {
   // add user to session
   req.session.user = user
   res.status(201).json({ success: 'logged in successfully' })
+})
+
+// GET /api/v1/users/dashboard
+router.post('/favorite', async (req, res) => {
+  const { team, sport, league, espnTeamId } = req.body
+  // if required fields missing, send error
+  if (!team || !sport || !league || !espnTeamId) {
+    return res.status(400).json({ error: 'Please include all required fields' })
+  }
+  const [favoriteTeam] = await models.Team.findOrCreate({
+    where: {
+      name: team,
+      sport,
+      league,
+      espnTeamId,
+    },
+  })
+  req.session.user.setTeam(favoriteTeam)
+  res.json(favoriteTeam)
 })
 
 // GET /api/v1/users/logout

@@ -8,11 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      espnTeamId: {
+        type: Sequelize.INTEGER,
+      },
       sport: {
         type: Sequelize.STRING,
       },
       league: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       name: {
         type: Sequelize.STRING,

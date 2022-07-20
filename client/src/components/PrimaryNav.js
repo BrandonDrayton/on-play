@@ -10,7 +10,7 @@ function PrimaryNav() {
           <img className="logo" src="/images/logo.png" alt="logo"></img>
         </Link>
         <nav className="links">
-          <Link className="link" to="/Dashboard">
+          <Link className="link" to="/dashboard">
             Dashboard
           </Link>
           <Link className="link" to="/about">
