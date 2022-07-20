@@ -1,11 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
+const user = require('../models/user')
 const models = require('../models')
 const checkAuth = require('../middleware/checkAuth')
 
-router.get('/', checkAuth, async (req, res) => {
-  const threads = await req.session.user.getThreads({
+router.get('/user', checkAuth, async (req, res) => {
+  const userThreads = await req.session.user.getThreads({
+    order: [['createdAt', 'DESC']],
+  })
+  res.json(userThreads)
+})
+
+router.get('/all', checkAuth, async (req, res) => {
+  const threads = await models.Thread.findAll({
     order: [['createdAt', 'DESC']],
   })
   res.json(threads)
