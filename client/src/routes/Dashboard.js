@@ -9,10 +9,12 @@ function Dashboard() {
   return (
     // TODO: Make Homepage
     <>
+
       <PrimaryNav />
       <h3>dashboard</h3>
+
       <Landing />
-      <Stats />
+      {/* <News /> */}
       <ForumModel />
     </>
   )
