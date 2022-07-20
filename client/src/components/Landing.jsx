@@ -5,10 +5,6 @@ import { Link } from 'react-router-dom'
 import { useGetTeamsQuery } from '../services/createSportsApi'
 import Stats from './Stats'
 import './PrimaryNav.css'
-
-import Forum from './Forum'
-
-import News from './News'
 import ForumModel from './ForumModel'
 import './Forum.css'
 
@@ -41,7 +37,6 @@ function Dashboard() {
         }
       })
   }
-
 
   const teams = data?.sports[0].leagues[0].teams
   if (isLoading) {
@@ -134,14 +129,8 @@ function Dashboard() {
         </Box>
 
         <Box>
-          <Container>
-            <Forum />
-          </Container>
           <Grid height={400} />
         </Box>
-
-        <News />
-
       </FormControl>
     </form>
   )

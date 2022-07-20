@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      TeamId: {
+      FavoriteTeamId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Teams',
@@ -26,9 +26,6 @@ module.exports = {
       },
       password: {
         type: Sequelize.STRING,
-      },
-      FavoriteTeamId: {
-        type: Sequelize.INTEGER,
       },
       iconText: {
         type: Sequelize.TEXT,
