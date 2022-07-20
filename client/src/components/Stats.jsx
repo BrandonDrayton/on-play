@@ -19,7 +19,9 @@ function Stats() {
   const { isOpen, onToggle } = useDisclosure()
   return (
     <>
-      <Button onClick={onToggle}>Stats</Button>
+      <Button ml="3" onClick={onToggle}>
+        Stats
+      </Button>
       <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
         <Box p="40px" color="white" mt="4" bg="teal.500" rounded="md" shadow="md">
           <Button bg="black" onClick={onToggle}>
