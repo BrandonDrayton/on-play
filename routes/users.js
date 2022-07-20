@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const models = require('../models')
+const checkAuth = require('../middleware/checkAuth')
 
 // GET /api/v1/users/register
 router.post('/register', async (req, res) => {
@@ -46,7 +47,7 @@ router.post('/login', async (req, res) => {
   res.status(201).json({ success: 'logged in successfully' })
 })
 
-// GET /api/v1/users/dashboard
+// GET /api/v1/users/favorite
 router.post('/favorite', async (req, res) => {
   const { team, sport, league, espnTeamId } = req.body
   // if required fields missing, send error

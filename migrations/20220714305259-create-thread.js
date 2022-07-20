@@ -15,14 +15,18 @@ module.exports = {
           key: 'id',
         },
       },
+      TeamId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Teams',
+          key: 'id',
+        },
+      },
       title: {
         type: Sequelize.STRING,
       },
       body: {
         type: Sequelize.STRING,
-      },
-      date: {
-        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,
