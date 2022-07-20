@@ -2,6 +2,7 @@ import ForumModel from '../components/ForumModel'
 import Landing from '../components/Landing'
 import Stats from '../components/Stats'
 import '../components/Forum.css'
+import News from '../components/News'
 
 function Dashboard() {
   return (
@@ -11,6 +12,7 @@ function Dashboard() {
       <Landing />
       <Stats />
       <ForumModel />
+      <News />
     </>
   )
 }
