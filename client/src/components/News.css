@@ -1,0 +1,220 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #f0f8ff;
+  }
+  
+  .header {
+    padding-top: 5%;
+    overflow: hidden;
+    margin: 5px;
+    display: flex;
+    align-items: flex-end;
+    animation-duration: 4s;
+    animation-name: slideIn;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .header-icon {
+    margin: 0 5px;
+    width: 55px;
+  }
+  
+  .header-description {
+    font-size: 33px;
+  }
+  
+  .sidebar {
+    margin: 5em;
+    border-radius: 5px;
+    background-color: black;
+    height: 600px;
+    display: flex;
+    overflow: hidden;
+    animation-duration: 1s;
+    animation-name: slideInSidebar;
+  }
+  
+  .sidebar-section {
+    opacity: 0.7;
+    flex-grow: 1;
+    flex-direction: row;
+    flex-basis: 30%;
+    overflow: hidden;
+    transition: opacity 0.5s;
+    position: relative;
+  }
+  
+  .sidebar-section:hover {
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  
+  .section-body {
+  }
+  
+  .section-footer {
+    position: relative;
+    height: 150px;
+    top: 450px;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: top 0.5s, height 0.5s;
+    color: white;
+  }
+  
+  .sidebar-section:hover .section-footer {
+    height: 170px;
+    top: 430px;
+    transition: top 0.5s, height 0.5s;
+  }
+  
+  .sidebar-section:hover .img-wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1.1);
+    transition: transform 0.5s;
+  }
+  
+  .img-wrap {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s;
+  }
+  
+  .footer-information {
+    /* margin: 4px; */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .warn,
+  .watch {
+  }
+  
+  .watch {
+    background-color: rgba(76, 175, 80, 0.5);
+    padding: 8px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    transition: background-color 0.2s;
+  }
+  
+  .watch:hover {
+    cursor: pointer;
+    background-color: rgba(76, 175, 80, 0.8);
+    transition: background-color 0.2s;
+  }
+  
+  .timer {
+    font-family: "Black Ops One", cursive;
+    font-size: 30px;
+  }
+  
+  .discipline {
+    font-size: 21px;
+    padding-left: 15px;
+  }
+  
+  .discipline,
+  .timer {
+    margin-bottom: 3px;
+  }
+  
+  @keyframes slideIn {
+    from {
+      border-radius: 50px;
+      width: 2%;
+      height: 2%;
+    }
+  
+    to {
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  
+  @keyframes slideInSidebar {
+    from {
+      transform: translate(0, -1500px);
+    }
+  
+    to {
+      transform: translate(0, 0);
+    }
+  }
+  
+  .loading {
+    padding-top: 20%;
+    font-family: "Bebas Neue", cursive;
+    font-size: 50px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    animation: colorChange 2s forwards infinite;
+  }
+  
+  @keyframes colorChange {
+    0% {
+      color: black;
+    }
+  
+    50% {
+      color: green;
+    }
+  
+    100% {
+      color: red;
+    }
+  }
+  .btn {
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+   /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+   }
+  
+  /* Demo Stuff End -> */
+  
+  /* <- Magic Stuff Start */
+  
+  .btn:hover {
+    background-position: right center; /* change the direction of the change here */
+  }
+  
+  /* .btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+  } */
+  .btn-1 {
+    background-image: linear-gradient(to right, #63615b 0%, #844635 51%, #47390b 100%);
+  }

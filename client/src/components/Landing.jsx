@@ -7,6 +7,7 @@ import Stats from './Stats'
 import './PrimaryNav.css'
 import ForumModel from './ForumModel'
 import './Forum.css'
+import News from './News'
 
 function Dashboard() {
   const sports = ['football', 'baseball']
@@ -128,7 +129,8 @@ function Dashboard() {
           <Stats />
         </Box>
         <Box>
-          <Grid height={400} />
+          {/* <Grid height={400} /> */}
+          <News />
         </Box>
       </FormControl>
     </form>
