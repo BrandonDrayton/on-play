@@ -5,9 +5,13 @@ import { Link } from 'react-router-dom'
 import { useGetTeamsQuery } from '../services/createSportsApi'
 import Stats from './Stats'
 import './PrimaryNav.css'
+
+import Forum from './Forum'
+
 import News from './News'
 import ForumModel from './ForumModel'
 import './Forum.css'
+
 function Dashboard() {
   const sports = ['football', 'baseball']
   const leagues = ['nfl', 'mlb']
@@ -16,6 +20,7 @@ function Dashboard() {
   const [team, setTeam] = useState('')
   const [espnTeamId, setEspnTeamId] = useState('')
   const { data, isLoading } = useGetTeamsQuery({ sport, league })
+
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const handleSubmit = (e) => {
@@ -36,6 +41,7 @@ function Dashboard() {
         }
       })
   }
+
 
   const teams = data?.sports[0].leagues[0].teams
   if (isLoading) {
@@ -126,7 +132,16 @@ function Dashboard() {
           </Button>
           <Stats />
         </Box>
+
+        <Box>
+          <Container>
+            <Forum />
+          </Container>
+          <Grid height={400} />
+        </Box>
+
         <News />
+
       </FormControl>
     </form>
   )
