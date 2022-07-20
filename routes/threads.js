@@ -4,6 +4,13 @@ const bcrypt = require('bcrypt')
 const models = require('../models')
 const checkAuth = require('../middleware/checkAuth')
 
+router.get('/', checkAuth, async (req, res) => {
+  const threads = await req.session.user.getThreads({
+    order: [['createdAt', 'DESC']],
+  })
+  res.json(threads)
+})
+
 router.post('/', checkAuth, async (req, res) => {
   const { title, body } = req.body
   const thread = await models.Thread.create({

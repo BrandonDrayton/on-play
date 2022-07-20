@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { useGetTeamsQuery } from '../services/createSportsApi'
 import Stats from './Stats'
 import './PrimaryNav.css'
-
 import ForumModel from './ForumModel'
 import './Forum.css'
 
@@ -129,7 +128,6 @@ function Dashboard() {
           <Stats />
         </Box>
         <Box>
-          <Container></Container>
           <Grid height={400} />
         </Box>
       </FormControl>
