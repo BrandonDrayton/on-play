@@ -1,6 +1,7 @@
 import ForumModel from '../components/ForumModel'
 import Landing from '../components/Landing'
 import Stats from '../components/Stats'
+import '../components/Forum.css'
 
 function Dashboard() {
   return (
