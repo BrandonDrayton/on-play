@@ -17,7 +17,6 @@ function Dashboard() {
   const [team, setTeam] = useState('')
   const [espnTeamId, setEspnTeamId] = useState('')
   const { data, isLoading } = useGetTeamsQuery({ sport, league })
-
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const handleSubmit = (e) => {
@@ -132,7 +131,6 @@ function Dashboard() {
           {/* <Grid height={400} /> */}
           <News />
         </Box>
-
       </FormControl>
     </form>
   )

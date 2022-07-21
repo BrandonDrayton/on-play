@@ -24,12 +24,35 @@ import {
   Textarea,
   useDisclosure,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
+import { useAddNewThreadMutation, useGetThreadsQuery } from '../services/forumApi'
 import './Forum.css'
 
 function ForumModel() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  const { data, isLoading } = useGetThreadsQuery()
+  const [addNewThread] = useAddNewThreadMutation()
+  const [form, setForm] = useState({
+    text: '',
+  })
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    addNewThread(form)
+      .unwrap()
+      .then(() => {
+        setForm({
+          text: '',
+        })
+      })
+      .catch((e) => {})
+  }
+  const updateField = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    })
+  }
+  console.log(data)
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   return (
@@ -62,11 +85,16 @@ function ForumModel() {
           <AccordionPanel display="flex" flexDirection="column" pb={4}>
             <Box boxShadow="md" p="6" rounded="md" bg="white">
               <Flex flexDirection="column"></Flex>
-              <form method="post">
+              <form onSubmit={handleSubmit} method="post">
                 <FormControl>
                   <FormLabel>Forum Name:</FormLabel>
-                  <Input type="text" />
-                  <Button className="thread-comment-button" mt={3} bg="#66CD00">
+                  <Input
+                    id="text"
+                    type="text"
+                    value={form.text}
+                    onChange={(e) => updateField('text', e.target.value)}
+                  />
+                  <Button type="submit" className="thread-comment-button" mt={3} bg="#66CD00">
                     <Text>Submit</Text>
                   </Button>
                 </FormControl>

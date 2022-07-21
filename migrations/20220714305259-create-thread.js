@@ -22,10 +22,7 @@ module.exports = {
           key: 'id',
         },
       },
-      title: {
-        type: Sequelize.STRING,
-      },
-      body: {
+      text: {
         type: Sequelize.STRING,
       },
       createdAt: {

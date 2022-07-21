@@ -10,5 +10,6 @@ export const store = configureStore({
     [createNewsApi.reducerPath]: createNewsApi.reducer,
     [forumApi.reducerPath]: forumApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([forumApi.middleware]),
 })
 setupListeners(store.dispatch)

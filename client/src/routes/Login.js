@@ -19,7 +19,6 @@ function Login() {
   const [form, setForm] = useState({
     email: '',
     password: '',
-    username: '',
   })
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
