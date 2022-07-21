@@ -17,6 +17,11 @@ router.get('/all', checkAuth, async (req, res) => {
   res.json(threads)
 })
 
+router.get('/:id/comment', checkAuth, async (req, res) => {
+  const thread = await models.Threads.findByPk(req.params.id)
+  res.json(thread)
+})
+
 router.post('/', checkAuth, async (req, res) => {
   const { text } = req.body
   const thread = await models.Thread.create({

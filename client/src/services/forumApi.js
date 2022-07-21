@@ -13,6 +13,10 @@ export const forumApi = createApi({
       query: () => '/user',
       providesTags: ['Thread'],
     }),
+    getThreadComments: builder.query({
+      query: () => '/comment',
+      providesTags: ['Thread'],
+    }),
     addNewThread: builder.mutation({
       query: (newThread) => ({
         url: '',
