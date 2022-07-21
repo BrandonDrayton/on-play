@@ -34,7 +34,7 @@ function ForumModel() {
   const { data: allThreads, isLoading } = useGetThreadsQuery()
   const [addNewThread] = useAddNewThreadMutation()
   const [openThread, setOpenThread] = useState()
-  const { data: thread, isLoading: threadIsLoading } = useGetThreadQuery(openThread)
+  const { data: threadData, isLoading: threadDataIsLoading } = useGetThreadQuery(openThread)
   const [form, setForm] = useState({
     text: '',
   })
