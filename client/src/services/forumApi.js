@@ -3,18 +3,18 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const forumApi = createApi({
   reducerPath: 'forum',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/v1/threads' }),
-  tagTypes: ['Thread'],
+  tagTypes: ['Threads', 'Thread'],
   endpoints: (builder) => ({
     getThreads: builder.query({
       query: () => '/all',
-      providesTags: ['Thread'],
+      providesTags: ['Threads'],
     }),
     getUserThreads: builder.query({
       query: () => '/user',
-      providesTags: ['Thread'],
+      providesTags: ['Threads'],
     }),
-    getThreadComments: builder.query({
-      query: () => '/comment',
+    getThread: builder.query({
+      query: (id) => `/${id}/comment`,
       providesTags: ['Thread'],
     }),
     addNewThread: builder.mutation({
@@ -25,12 +25,21 @@ export const forumApi = createApi({
       }),
       invalidatesTags: ['Thread'],
     }),
+    addNewComment: builder.mutation({
+      query: ({ id, newComment }) => ({
+        url: `/${id}/comment`,
+        method: 'POST',
+        body: newComment,
+      }),
+      invalidatesTags: ['Thread'],
+    }),
   }),
 })
 
 export const {
   useGetThreadsQuery,
   useGetUserThreadsQuery,
+  useGetThreadQuery,
   useAddNewThreadMutation,
   useLazyGetThreadsQuery,
   useLazyGetUserThreadsQuery,

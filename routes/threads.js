@@ -17,8 +17,27 @@ router.get('/all', checkAuth, async (req, res) => {
   res.json(threads)
 })
 
-router.get('/:id/comment', checkAuth, async (req, res) => {
-  const thread = await models.Threads.findByPk(req.params.id)
+router.post('/:id/comment', checkAuth, async (req, res) => {
+  const thread = await models.Thread.findByPk(req.params.id)
+  if (!thread) return res.status(404).json({ error: 'thread not found' })
+  thread.addComment({
+    body: req.body.body,
+    likes: 0,
+    parentId: req.body.parentId,
+  })
+})
+
+router.get('/:id', checkAuth, async (req, res) => {
+  const thread = await models.Thread.findByPk(req.params.id, {
+    include: [
+      {
+        model: models.Comment,
+        where: { ParentId: null },
+        include: ['Children'],
+      },
+      'Likes',
+    ],
+  })
   res.json(thread)
 })
 

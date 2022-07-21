@@ -25,13 +25,16 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { useAddNewThreadMutation, useGetThreadsQuery } from '../services/forumApi'
+import { useParams } from 'react-router-dom'
+import { useAddNewThreadMutation, useGetThreadQuery, useGetThreadsQuery } from '../services/forumApi'
 import './Forum.css'
 
 function ForumModel() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: allThreads, isLoading } = useGetThreadsQuery()
   const [addNewThread] = useAddNewThreadMutation()
+  const [openThread, setOpenThread] = useState()
+  const { data: thread, isLoading: threadIsLoading } = useGetThreadQuery(openThread)
   const [form, setForm] = useState({
     text: '',
   })
@@ -106,7 +109,7 @@ function ForumModel() {
           return (
             <AccordionItem className="accordian-title">
               <h2>
-                <AccordionButton>
+                <AccordionButton onClick={() => setOpenThread(thread.id)}>
                   <Flex justify="space-between">
                     <Flex flexDirection="column" textAlign="left">
                       <Text className="accordian-thread-title">{thread.text}</Text>
