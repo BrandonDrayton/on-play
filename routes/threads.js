@@ -18,12 +18,11 @@ router.get('/all', checkAuth, async (req, res) => {
 })
 
 router.post('/', checkAuth, async (req, res) => {
-  const { title, body } = req.body
+  const { text } = req.body
   const thread = await models.Thread.create({
     UserId: req.session.user.id,
     TeamId: req.session.user.FavoriteTeamId,
-    title,
-    body,
+    text,
   })
   const newThread = await models.Thread.findByPk(thread.id, {
     include: [models.User],

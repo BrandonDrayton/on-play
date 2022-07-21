@@ -15,7 +15,7 @@ export const forumApi = createApi({
     }),
     addNewThread: builder.mutation({
       query: (newThread) => ({
-        url: '/Threads',
+        url: '',
         method: 'POST',
         body: newThread,
       }),
@@ -24,4 +24,10 @@ export const forumApi = createApi({
   }),
 })
 
-export const { useGetThreadsQuery, useGetUserThreadsQuery } = forumApi
+export const {
+  useGetThreadsQuery,
+  useGetUserThreadsQuery,
+  useAddNewThreadMutation,
+  useLazyGetThreadsQuery,
+  useLazyGetUserThreadsQuery,
+} = forumApi

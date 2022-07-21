@@ -12,7 +12,7 @@ import Logout from './routes/Logout'
 function App() {
   return (
     <div className="App">
-      {/* <PrimaryNav /> */}
+      <PrimaryNav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
