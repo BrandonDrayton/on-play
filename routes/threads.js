@@ -23,7 +23,7 @@ router.post('/:id/comment', checkAuth, async (req, res) => {
   thread.addComment({
     body: req.body.body,
     likes: 0,
-    parentId: req.body.parentId,
+    ParentId: req.body.parentId,
   })
 })
 
