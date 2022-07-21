@@ -30,7 +30,7 @@ import './Forum.css'
 
 function ForumModel() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { data, isLoading } = useGetThreadsQuery()
+  const { data: allThreads, isLoading } = useGetThreadsQuery()
   const [addNewThread] = useAddNewThreadMutation()
   const [form, setForm] = useState({
     text: '',
@@ -52,7 +52,7 @@ function ForumModel() {
       [name]: value,
     })
   }
-  console.log(data)
+  console.log(allThreads)
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   return (
@@ -102,227 +102,85 @@ function ForumModel() {
             </Box>
           </AccordionPanel>
         </AccordionItem>
-        <AccordionItem className="accordian-title">
-          <h2>
-            <AccordionButton>
-              <Flex justify="space-between">
-                <Flex flexDirection="column" textAlign="left">
-                  <Text className="accordian-thread-title">
-                    ESPN Just Gave Justin Fields Even More Reasons To Crush 2022
-                  </Text>
-                  <Text mt="3">Aug 1st, 2022, 10:08 AM</Text>
-                </Flex>
-                <Box>
-                  <AccordionIcon />
-                </Box>
-              </Flex>
-            </AccordionButton>
-          </h2>
-          <AccordionPanel display="flex" flexDirection="column" pb={4}>
-            <Button className="thread-comment-button" mt={3} onClick={onOpen} bg="#66CD00">
-              <ChatIcon mr="2"></ChatIcon>
-              <Text>Comment</Text>
-            </Button>
-            <Box boxShadow="md" p="6" rounded="md" bg="white">
-              <Flex flexDirection="column">
-                <Flex align="center" mb="3">
-                  <Avatar></Avatar>
-                  <Flex>
-                    <Text ml="3" fontSize="l">
-                      Chase Childers
-                    </Text>
-                  </Flex>
-                </Flex>
-                <Box>
-                  <Text>
-                    It amuses me that a tournament with DJ, Mickelson, Koepka, DeChambeau, Reed, Wolff, Kaymer and
-                    Oosthuizen is a “piss weak and poor tournament”, yet if it was PGA Tour Event people would call it a
-                    “strong field”
-                  </Text>
-                </Box>
-                <Flex justify="flex-end" align={'center'}>
-                  <Flex align="center" mt="2" mr="2">
-                    <Flex>
-                      <ChatIcon className="icons" mr="2" w="4" height="6" onClick={onOpen}></ChatIcon>
-                      <Text mr="2">12</Text>
+        {allThreads?.map((thread) => {
+          return (
+            <AccordionItem className="accordian-title">
+              <h2>
+                <AccordionButton>
+                  <Flex justify="space-between">
+                    <Flex flexDirection="column" textAlign="left">
+                      <Text className="accordian-thread-title">{thread.text}</Text>
+                      <Text mt="3">{thread.createdAt}</Text>
                     </Flex>
-                    <Flex justify="center">
-                      <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
-                      <Text mr="2">124</Text>
+                    <Box>
+                      <AccordionIcon />
+                    </Box>
+                  </Flex>
+                </AccordionButton>
+              </h2>
+              <AccordionPanel display="flex" flexDirection="column" pb={4}>
+                <Button className="thread-comment-button" mt={3} onClick={onOpen} bg="#66CD00">
+                  <ChatIcon mr="2"></ChatIcon>
+                  <Text>Comment</Text>
+                </Button>
+                <Box boxShadow="md" p="6" rounded="md" bg="white">
+                  <Flex flexDirection="column">
+                    <Flex align="center" mb="3">
+                      <Avatar></Avatar>
+                      <Flex>
+                        <Text ml="3" fontSize="l">
+                          Chase Childers
+                        </Text>
+                      </Flex>
+                    </Flex>
+                    <Box>
+                      <Text>
+                        It amuses me that a tournament with DJ, Mickelson, Koepka, DeChambeau, Reed, Wolff, Kaymer and
+                        Oosthuizen is a “piss weak and poor tournament”, yet if it was PGA Tour Event people would call
+                        it a “strong field”
+                      </Text>
+                    </Box>
+                    <Flex justify="flex-end" align={'center'}>
+                      <Flex align="center" mt="2" mr="2">
+                        <Flex>
+                          <ChatIcon className="icons" mr="2" w="4" height="6" onClick={onOpen}></ChatIcon>
+                          <Text mr="2">12</Text>
+                        </Flex>
+                        <Flex justify="center">
+                          <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                          <Text mr="2">124</Text>
+                        </Flex>
+                      </Flex>
+                      <Box>
+                        <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
+                      </Box>
                     </Flex>
                   </Flex>
-                  <Box>
-                    <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
-                  </Box>
-                </Flex>
-              </Flex>
-            </Box>
-            <Flex boxShadow="md" p="6" rounded="md" bg="white" mt="3" w="70%" align="flex-end">
-              <Flex flexDirection="column">
-                <Flex align="center" mb="3">
-                  <Avatar></Avatar>
-                  <Flex>
-                    <Text ml="3" fontSize="l">
-                      Chase Childers
-                    </Text>
+                </Box>
+                <Flex boxShadow="md" p="6" rounded="md" bg="white" mt="3" w="70%" align="flex-end">
+                  <Flex flexDirection="column">
+                    <Flex align="center" mb="3">
+                      <Avatar></Avatar>
+                      <Flex>
+                        <Text ml="3" fontSize="l">
+                          Chase Childers
+                        </Text>
+                      </Flex>
+                    </Flex>
+                    <Flex align="flex-end">
+                      <Text>LMAO what a joke</Text>
+                    </Flex>
+                    <Flex justify="flex-end" align={'center'}>
+                      <Box>
+                        <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
+                      </Box>
+                    </Flex>
                   </Flex>
                 </Flex>
-                <Flex align="flex-end">
-                  <Text>LMAO what a joke</Text>
-                </Flex>
-                <Flex justify="flex-end" align={'center'}>
-                  <Box>
-                    <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
-                  </Box>
-                </Flex>
-              </Flex>
-            </Flex>
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem className="accordian-title">
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <h1 className="accordian-thread-title">Lebron goes to south beach</h1>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel display="flex" flexDirection="column" pb={4}>
-            <Button className="thread-comment-button" mt={3} onClick={onOpen}>
-              Add Comment
-            </Button>
-            <Box>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim eius, alias deserunt tempore corporis non
-              minima, corrupti adipisci ratione magnam ad, aut odit esse quis perspiciatis consequatur dolorem
-              voluptatum tempora.
-            </Box>
-
-            <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader textAlign="center">Modal Title</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <Textarea
-                    height={250}
-                    placeholder="Enter your message here troll.."
-                    borderColor="green"
-                    fontFamily="Poppins"
-                    fontSize="20px"
-                  ></Textarea>
-                </ModalBody>
-
-                <ModalFooter>
-                  <form>
-                    <Button colorScheme="orange" mr={3}>
-                      Send it
-                    </Button>
-                    <Button onClick={onClose} variant="ghost">
-                      Cancel
-                    </Button>
-                  </form>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem className="accordian-title">
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <h1 className="accordian-thread-title">Lebron goes to south beach</h1>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel display="flex" flexDirection="column" pb={4}>
-            <Button className="thread-comment-button" mt={3} onClick={onOpen}>
-              Add Comment
-            </Button>
-            <Box>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim eius, alias deserunt tempore corporis non
-              minima, corrupti adipisci ratione magnam ad, aut odit esse quis perspiciatis consequatur dolorem
-              voluptatum tempora.
-            </Box>
-
-            <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader textAlign="center">Modal Title</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <Textarea
-                    height={250}
-                    placeholder="Enter your message here troll.."
-                    borderColor="green"
-                    fontFamily="Poppins"
-                    fontSize="20px"
-                  ></Textarea>
-                </ModalBody>
-
-                <ModalFooter>
-                  <form>
-                    <Button colorScheme="orange" mr={3}>
-                      Send it
-                    </Button>
-                    <Button onClick={onClose} variant="ghost">
-                      Cancel
-                    </Button>
-                  </form>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem className="accordian-title">
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <h1 className="accordian-thread-title">Lebron goes to south beach</h1>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel display="flex" flexDirection="column" pb={4}>
-            <Button className="thread-comment-button" mt={3} onClick={onOpen}>
-              Add Comment
-            </Button>
-            <Box>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim eius, alias deserunt tempore corporis non
-              minima, corrupti adipisci ratione magnam ad, aut odit esse quis perspiciatis consequatur dolorem
-              voluptatum tempora.
-            </Box>
-
-            <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader textAlign="center">Modal Title</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <Textarea
-                    height={250}
-                    placeholder="Enter your message here troll.."
-                    borderColor="green"
-                    fontFamily="Poppins"
-                    fontSize="20px"
-                  ></Textarea>
-                </ModalBody>
-
-                <ModalFooter>
-                  <form>
-                    <Button colorScheme="orange" mr={3}>
-                      Send it
-                    </Button>
-                    <Button onClick={onClose} variant="ghost">
-                      Cancel
-                    </Button>
-                  </form>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
-          </AccordionPanel>
-        </AccordionItem>
+              </AccordionPanel>
+            </AccordionItem>
+          )
+        })}
       </Accordion>
       <form method="post">
         <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
