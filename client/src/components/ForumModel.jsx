@@ -26,17 +26,28 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAddNewThreadMutation, useGetThreadQuery, useGetThreadsQuery } from '../services/forumApi'
+import {
+  useAddNewCommentMutation,
+  useAddNewThreadMutation,
+  useGetThreadQuery,
+  useGetThreadsQuery,
+} from '../services/forumApi'
 import './Forum.css'
 
 function ForumModel() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [addNewComment] = useAddNewCommentMutation()
   const { data: allThreads, isLoading } = useGetThreadsQuery()
   const [addNewThread] = useAddNewThreadMutation()
   const [openThread, setOpenThread] = useState()
+  const [openComment, setOpenComment] = useState()
   const { data: threadData, isLoading: threadDataIsLoading } = useGetThreadQuery(openThread)
   const [form, setForm] = useState({
     text: '',
+  })
+  const [formComment, setFormComment] = useState({
+    body: '',
+    createdAt: '',
   })
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -49,12 +60,25 @@ function ForumModel() {
       })
       .catch((e) => {})
   }
+  const handleAddComment = (e) => {
+    e.preventDefault()
+    addNewComment(formComment)
+      .unwrap()
+      .then(() => {
+        setFormComment({
+          body: '',
+          createdAt: '',
+        })
+      })
+      .catch((e) => {})
+  }
   const updateField = (name, value) => {
     setForm({
       ...form,
       [name]: value,
     })
   }
+
   console.log(allThreads)
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
@@ -127,40 +151,40 @@ function ForumModel() {
                     <ChatIcon mr="2"></ChatIcon>
                     <Text>Comment</Text>
                   </Button>
-                  <Box boxShadow="md" p="6" rounded="md" bg="white">
-                    <Flex flexDirection="column">
-                      <Flex align="center" mb="3">
-                        <Avatar></Avatar>
-                        <Flex>
-                          <Text ml="3" fontSize="l">
-                            Chase Childers
-                          </Text>
+                  {threadData?.Comment.map((Comments) => {
+                    return (
+                      <Box boxShadow="md" p="6" rounded="md" bg="white">
+                        <Flex flexDirection="column">
+                          <Flex align="center" mb="3">
+                            <Avatar></Avatar>
+                            <Flex>
+                              <Text ml="3" fontSize="l">
+                                Chase Childers
+                              </Text>
+                            </Flex>
+                          </Flex>
+                          <Box>
+                            <Text>{Comments.body}</Text>
+                          </Box>
+                          <Flex justify="flex-end" align={'center'}>
+                            <Flex align="center" mt="2" mr="2">
+                              <Flex>
+                                <ChatIcon className="icons" mr="2" w="4" height="6" onClick={onOpen}></ChatIcon>
+                                <Text mr="2">12</Text>
+                              </Flex>
+                              <Flex justify="center">
+                                <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                                <Text mr="2">{Comments.likes}</Text>
+                              </Flex>
+                            </Flex>
+                            <Box>
+                              <Text mt="2">{Comments.createdAt}</Text>
+                            </Box>
+                          </Flex>
                         </Flex>
-                      </Flex>
-                      <Box>
-                        <Text>
-                          It amuses me that a tournament with DJ, Mickelson, Koepka, DeChambeau, Reed, Wolff, Kaymer and
-                          Oosthuizen is a “piss weak and poor tournament”, yet if it was PGA Tour Event people would
-                          call it a “strong field”
-                        </Text>
                       </Box>
-                      <Flex justify="flex-end" align={'center'}>
-                        <Flex align="center" mt="2" mr="2">
-                          <Flex>
-                            <ChatIcon className="icons" mr="2" w="4" height="6" onClick={onOpen}></ChatIcon>
-                            <Text mr="2">12</Text>
-                          </Flex>
-                          <Flex justify="center">
-                            <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
-                            <Text mr="2">124</Text>
-                          </Flex>
-                        </Flex>
-                        <Box>
-                          <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
-                        </Box>
-                      </Flex>
-                    </Flex>
-                  </Box>
+                    )
+                  })}
                   <Flex boxShadow="md" p="6" rounded="md" bg="white" mt="3" w="70%" align="flex-end">
                     <Flex flexDirection="column">
                       <Flex align="center" mb="3">
@@ -203,20 +227,20 @@ function ForumModel() {
               </Flex>
             </ModalHeader>
             <ModalCloseButton />
-            <ModalBody>
-              <Textarea height={250} placeholder="Type comment here" fontFamily="Poppins" fontSize="20px"></Textarea>
-            </ModalBody>
+            <form onSubmit={handleAddComment}>
+              <ModalBody>
+                <Textarea height={250} placeholder="Type comment here" fontFamily="Poppins" fontSize="20px"></Textarea>
+              </ModalBody>
 
-            <ModalFooter>
-              <form>
-                <Button bg="#66CD00" mr={3}>
+              <ModalFooter>
+                <Button type="submit" bg="#66CD00" mr={3}>
                   Send it
                 </Button>
                 <Button onClick={onClose} variant="ghost">
                   Cancel
                 </Button>
-              </form>
-            </ModalFooter>
+              </ModalFooter>
+            </form>
           </ModalContent>
         </Modal>
       </form>
