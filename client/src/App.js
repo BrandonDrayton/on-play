@@ -8,6 +8,7 @@ import Register from './routes/Register'
 import Login from './routes/Login'
 import Dashboard from './routes/Dashboard'
 import Logout from './routes/Logout'
+import Protected from './components/Protected'
 
 function App() {
   return (
@@ -15,7 +16,14 @@ function App() {
       <PrimaryNav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <Protected>
+              <Dashboard />
+            </Protected>
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

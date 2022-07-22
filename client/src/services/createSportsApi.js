@@ -23,9 +23,6 @@ export const createSportsApi = createApi({
     getMlsTeams: builder.query({
       query: () => `soccer/mls/teams`,
     }),
-    //   getPgaTeams: builder.query({
-    //     query: () => `golf/leagues/pga/playe`,
-    //   }),
     getNbaTeams: builder.query({
       query: () => `basketball/nba/teams`,
     }),
