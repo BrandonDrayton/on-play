@@ -40,6 +40,7 @@ function Dashboard() {
   }
 
   const teams = data?.sports[0].leagues[0].teams
+  // console.log(teams)
   if (isLoading) {
     return <Spinner />
   }
