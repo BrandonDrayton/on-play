@@ -18,26 +18,34 @@ router.get('/all', checkAuth, async (req, res) => {
 })
 
 router.post('/:id/comment', checkAuth, async (req, res) => {
-  const thread = await models.Thread.findByPk(req.params.id)
+  const id = Number(req.params.id)
+  if (isNaN(id)) return res.status(404).json({ error: 'thread not found' })
+  const thread = await models.Thread.findByPk(id)
   if (!thread) return res.status(404).json({ error: 'thread not found' })
-  thread.addComment({
+  const comment = await thread.createComment({
     body: req.body.body,
     likes: 0,
     ParentId: req.body.parentId,
+    UserId: req.session.user.id,
   })
+  res.json(comment)
 })
 
 router.get('/:id', checkAuth, async (req, res) => {
+  const id = Number(req.params.id)
+  if (isNaN(id)) return res.status(404).json({ error: 'thread not found' })
   const thread = await models.Thread.findByPk(req.params.id, {
     include: [
       {
         model: models.Comment,
         where: { ParentId: null },
         include: ['Children'],
+        required: false,
       },
       'Likes',
     ],
   })
+  if (!thread) return res.status(404).json({ error: 'thread not found' })
   res.json(thread)
 })
 
