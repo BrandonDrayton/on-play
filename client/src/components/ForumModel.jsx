@@ -40,6 +40,7 @@ function ForumModel() {
   const { data: allThreads, isLoading } = useGetThreadsQuery()
   const [addNewThread] = useAddNewThreadMutation()
   const [openThread, setOpenThread] = useState()
+  const [threadId, setThreadId] = useState()
   const [openComment, setOpenComment] = useState()
   const { data: threadData, isLoading: threadDataIsLoading } = useGetThreadQuery(openThread)
   const [form, setForm] = useState({
@@ -62,7 +63,7 @@ function ForumModel() {
   }
   const handleAddComment = (e) => {
     e.preventDefault()
-    addNewComment(formComment)
+    addNewComment({ id: openThread, newComment: formComment })
       .unwrap()
       .then(() => {
         setFormComment({
@@ -78,8 +79,14 @@ function ForumModel() {
       [name]: value,
     })
   }
+  const updateCommentField = (name, value) => {
+    setFormComment({
+      ...formComment,
+      [name]: value,
+    })
+  }
 
-  console.log(allThreads)
+  console.log(threadData)
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   return (
@@ -151,9 +158,9 @@ function ForumModel() {
                     <ChatIcon mr="2"></ChatIcon>
                     <Text>Comment</Text>
                   </Button>
-                  {threadData?.Comment.map((Comments) => {
+                  {threadData?.Comments?.map((Comment) => {
                     return (
-                      <Box boxShadow="md" p="6" rounded="md" bg="white">
+                      <Box key={Comment.id} boxShadow="md" p="6" rounded="md" bg="white">
                         <Flex flexDirection="column">
                           <Flex align="center" mb="3">
                             <Avatar></Avatar>
@@ -164,7 +171,7 @@ function ForumModel() {
                             </Flex>
                           </Flex>
                           <Box>
-                            <Text>{Comments.body}</Text>
+                            <Text>{Comment.body}</Text>
                           </Box>
                           <Flex justify="flex-end" align={'center'}>
                             <Flex align="center" mt="2" mr="2">
@@ -174,11 +181,11 @@ function ForumModel() {
                               </Flex>
                               <Flex justify="center">
                                 <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
-                                <Text mr="2">{Comments.likes}</Text>
+                                <Text mr="2">{Comment.likes}</Text>
                               </Flex>
                             </Flex>
                             <Box>
-                              <Text mt="2">{Comments.createdAt}</Text>
+                              <Text mt="2">{Comment.createdAt}</Text>
                             </Box>
                           </Flex>
                         </Flex>
@@ -210,40 +217,44 @@ function ForumModel() {
             )
           })}
       </Accordion>
-      <form method="post">
-        <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>
-              <Flex flexDirection="column">
-                <Box>
-                  <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" mt="3">
-                    Aug 13th, 2019, 10:08 AM
-                  </Text>
-                </Box>
-              </Flex>
-            </ModalHeader>
-            <ModalCloseButton />
-            <form onSubmit={handleAddComment}>
-              <ModalBody>
-                <Textarea height={250} placeholder="Type comment here" fontFamily="Poppins" fontSize="20px"></Textarea>
-              </ModalBody>
-
-              <ModalFooter>
-                <Button type="submit" bg="#66CD00" mr={3}>
-                  Send it
-                </Button>
-                <Button onClick={onClose} variant="ghost">
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </form>
-          </ModalContent>
-        </Modal>
-      </form>
+      <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex flexDirection="column">
+              <Box>
+                <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
+              </Box>
+              <Box>
+                <Text fontSize="sm" mt="3">
+                  Aug 13th, 2019, 10:08 AM
+                </Text>
+              </Box>
+            </Flex>
+          </ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleAddComment}>
+            <ModalBody>
+              <Textarea
+                value={formComment.body}
+                height={250}
+                placeholder="Type comment here"
+                fontFamily="Poppins"
+                fontSize="20px"
+                onChange={(e) => updateCommentField('body', e.target.value)}
+              ></Textarea>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" bg="#66CD00" mr={3}>
+                Send it
+              </Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
     </>
   )
 }

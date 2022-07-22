@@ -14,7 +14,7 @@ export const forumApi = createApi({
       providesTags: ['Threads'],
     }),
     getThread: builder.query({
-      query: (id) => `/${id}/comment`,
+      query: (id) => `/${id}`,
       providesTags: ['Thread'],
     }),
     addNewThread: builder.mutation({
