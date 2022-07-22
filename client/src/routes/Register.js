@@ -15,6 +15,7 @@ import {
 import './Register.css'
 import LandingNav from '../components/LandingNav'
 import PrimaryNav from '../components/PrimaryNav'
+import { useAddUserRegisterMutation, useGetUserRegisterQuery } from '../services/createUserApi'
 
 function Register() {
   const [form, setForm] = useState({
@@ -25,31 +26,31 @@ function Register() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const updateField = (name, value) => {
-    setForm({
-      ...form,
-      [name]: value,
-    })
-  }
+  const { data: user } = useGetUserRegisterQuery()
+  const [addUserRegister] = useAddUserRegisterMutation()
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
     setSuccess('')
-    fetch('/api/v1/users/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setIsLoading(false)
-        if (data.error) {
-          setError(data.error)
-        } else {
-          setSuccess('Registered Successfully')
-        }
+    addUserRegister(form)
+      .unwrap()
+      .then(() => {
+        setForm({
+          email: '',
+          password: '',
+          username: '',
+        })
       })
+      .catch((e) => {})
+    setSuccess('Registered Successfully')
+    setIsLoading(false)
+  }
+  const updateField = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    })
   }
   return (
     <>

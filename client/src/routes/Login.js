@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import './Register.css'
 import LandingNav from '../components/LandingNav'
+import { useAddUserLoginMutation, useGetUserLoginQuery } from '../services/createUserApi'
 
 function Login() {
   const [form, setForm] = useState({
@@ -23,35 +24,34 @@ function Login() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const { data: user } = useGetUserLoginQuery()
+  const [addUserLogin] = useAddUserLoginMutation()
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError('')
+    setSuccess('')
+    addUserLogin(form)
+      .unwrap()
+      .then(() => {
+        setForm({
+          email: '',
+          password: '',
+        })
+      })
+      .catch((e) => {})
+    setSuccess('Logged in Successfully!')
+    setIsLoading(false)
+  }
   const updateField = (name, value) => {
     setForm({
       ...form,
       [name]: value,
     })
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError('')
-    setSuccess('')
-    fetch('/api/v1/users/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setIsLoading(false)
-        if (data.error) {
-          setError(data.error)
-        } else {
-          setSuccess('Logged in Successfully')
-        }
-      })
-  }
   return (
     <>
-      <LandingNav />
+      {/* <LandingNav /> */}
       <form onSubmit={handleSubmit}>
         {error && (
           <Alert status="error">
@@ -87,7 +87,7 @@ function Login() {
               />
             </FormControl>
             <Button type="submit" isLoading={isLoading} mt={4} className="form" colorScheme="blackAlpha" size="md">
-              Register
+              Login
             </Button>
           </Box>
         </Flex>

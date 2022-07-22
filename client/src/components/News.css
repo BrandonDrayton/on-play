@@ -87,7 +87,7 @@ body {
   
   .img-wrap {
     position: absolute;
-
+    object-fit: cover;
     left: 50%;
     top: 50%;
     height: 100%;

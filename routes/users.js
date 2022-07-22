@@ -66,6 +66,14 @@ router.post('/favorite', async (req, res) => {
   res.json(favoriteTeam)
 })
 
+router.get('/current', checkAuth, async (req, res) => {
+  if (!req.session) {
+    res.json(null)
+    return
+  }
+  res.json(req.session.user)
+})
+
 // GET /api/v1/users/logout
 router.get('/logout', async (req, res) => {
   req.session.user = null

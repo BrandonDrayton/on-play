@@ -9,7 +9,7 @@ function Dashboard() {
   return (
     // TODO: Make Homepage
     <>
-      <PrimaryNav />
+      {/* <PrimaryNav /> */}
       <h3>dashboard</h3>
 
       <Landing />
