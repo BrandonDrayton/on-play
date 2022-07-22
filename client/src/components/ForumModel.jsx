@@ -105,85 +105,86 @@ function ForumModel() {
             </Box>
           </AccordionPanel>
         </AccordionItem>
-        {allThreads?.map((thread) => {
-          return (
-            <AccordionItem className="accordian-title">
-              <h2>
-                <AccordionButton onClick={() => setOpenThread(thread.id)}>
-                  <Flex justify="space-between">
-                    <Flex flexDirection="column" textAlign="left">
-                      <Text className="accordian-thread-title">{thread.text}</Text>
-                      <Text mt="3">{thread.createdAt}</Text>
-                    </Flex>
-                    <Box>
-                      <AccordionIcon />
-                    </Box>
-                  </Flex>
-                </AccordionButton>
-              </h2>
-              <AccordionPanel display="flex" flexDirection="column" pb={4}>
-                <Button className="thread-comment-button" mt={3} onClick={onOpen} bg="#66CD00">
-                  <ChatIcon mr="2"></ChatIcon>
-                  <Text>Comment</Text>
-                </Button>
-                <Box boxShadow="md" p="6" rounded="md" bg="white">
-                  <Flex flexDirection="column">
-                    <Flex align="center" mb="3">
-                      <Avatar></Avatar>
-                      <Flex>
-                        <Text ml="3" fontSize="l">
-                          Chase Childers
-                        </Text>
+        {isLoading ||
+          allThreads?.map((thread) => {
+            return (
+              <AccordionItem className="accordian-title">
+                <h2>
+                  <AccordionButton onClick={() => setOpenThread(thread.id)}>
+                    <Flex justify="space-between">
+                      <Flex flexDirection="column" textAlign="left">
+                        <Text className="accordian-thread-title">{thread.text}</Text>
+                        <Text mt="3">{thread.createdAt}</Text>
                       </Flex>
+                      <Box>
+                        <AccordionIcon />
+                      </Box>
                     </Flex>
-                    <Box>
-                      <Text>
-                        It amuses me that a tournament with DJ, Mickelson, Koepka, DeChambeau, Reed, Wolff, Kaymer and
-                        Oosthuizen is a “piss weak and poor tournament”, yet if it was PGA Tour Event people would call
-                        it a “strong field”
-                      </Text>
-                    </Box>
-                    <Flex justify="flex-end" align={'center'}>
-                      <Flex align="center" mt="2" mr="2">
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel display="flex" flexDirection="column" pb={4}>
+                  <Button className="thread-comment-button" mt={3} onClick={onOpen} bg="#66CD00">
+                    <ChatIcon mr="2"></ChatIcon>
+                    <Text>Comment</Text>
+                  </Button>
+                  <Box boxShadow="md" p="6" rounded="md" bg="white">
+                    <Flex flexDirection="column">
+                      <Flex align="center" mb="3">
+                        <Avatar></Avatar>
                         <Flex>
-                          <ChatIcon className="icons" mr="2" w="4" height="6" onClick={onOpen}></ChatIcon>
-                          <Text mr="2">12</Text>
-                        </Flex>
-                        <Flex justify="center">
-                          <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
-                          <Text mr="2">124</Text>
+                          <Text ml="3" fontSize="l">
+                            Chase Childers
+                          </Text>
                         </Flex>
                       </Flex>
                       <Box>
-                        <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
-                      </Box>
-                    </Flex>
-                  </Flex>
-                </Box>
-                <Flex boxShadow="md" p="6" rounded="md" bg="white" mt="3" w="70%" align="flex-end">
-                  <Flex flexDirection="column">
-                    <Flex align="center" mb="3">
-                      <Avatar></Avatar>
-                      <Flex>
-                        <Text ml="3" fontSize="l">
-                          Chase Childers
+                        <Text>
+                          It amuses me that a tournament with DJ, Mickelson, Koepka, DeChambeau, Reed, Wolff, Kaymer and
+                          Oosthuizen is a “piss weak and poor tournament”, yet if it was PGA Tour Event people would
+                          call it a “strong field”
                         </Text>
+                      </Box>
+                      <Flex justify="flex-end" align={'center'}>
+                        <Flex align="center" mt="2" mr="2">
+                          <Flex>
+                            <ChatIcon className="icons" mr="2" w="4" height="6" onClick={onOpen}></ChatIcon>
+                            <Text mr="2">12</Text>
+                          </Flex>
+                          <Flex justify="center">
+                            <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                            <Text mr="2">124</Text>
+                          </Flex>
+                        </Flex>
+                        <Box>
+                          <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
+                        </Box>
                       </Flex>
                     </Flex>
-                    <Flex align="flex-end">
-                      <Text>LMAO what a joke</Text>
-                    </Flex>
-                    <Flex justify="flex-end" align={'center'}>
-                      <Box>
-                        <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
-                      </Box>
+                  </Box>
+                  <Flex boxShadow="md" p="6" rounded="md" bg="white" mt="3" w="70%" align="flex-end">
+                    <Flex flexDirection="column">
+                      <Flex align="center" mb="3">
+                        <Avatar></Avatar>
+                        <Flex>
+                          <Text ml="3" fontSize="l">
+                            Chase Childers
+                          </Text>
+                        </Flex>
+                      </Flex>
+                      <Flex align="flex-end">
+                        <Text>LMAO what a joke</Text>
+                      </Flex>
+                      <Flex justify="flex-end" align={'center'}>
+                        <Box>
+                          <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
+                        </Box>
+                      </Flex>
                     </Flex>
                   </Flex>
-                </Flex>
-              </AccordionPanel>
-            </AccordionItem>
-          )
-        })}
+                </AccordionPanel>
+              </AccordionItem>
+            )
+          })}
       </Accordion>
       <form method="post">
         <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
