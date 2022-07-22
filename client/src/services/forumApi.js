@@ -43,4 +43,5 @@ export const {
   useAddNewThreadMutation,
   useLazyGetThreadsQuery,
   useLazyGetUserThreadsQuery,
+  useAddNewCommentMutation,
 } = forumApi
