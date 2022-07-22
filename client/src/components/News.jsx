@@ -11,9 +11,9 @@ function News() {
   const { data } = useGetNewsQuery({ search })
   const [searchTeam, setSearchTeam] = useState('')
   const { data: team } = useGetTeamQuery({
-    sport: user.Team.sport,
-    league: user.Team.league,
-    id: user.Team.espnTeamId,
+    sport: user.Team?.sport,
+    league: user.Team?.league,
+    id: user.Team?.espnTeamId,
   })
 
   // if (!favoriteTeam) {
