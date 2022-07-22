@@ -85,8 +85,6 @@ function ForumModel() {
       [name]: value,
     })
   }
-
-  console.log(threadData)
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   return (
