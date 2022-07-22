@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router'
-import { useGetCurrentUserQuery } from '../services/user'
+import { useGetCurrentUserQuery } from '../services/createUserApi'
 
 function Protected({ children }) {
   const { data, isUninitialized, isLoading, isFetching } = useGetCurrentUserQuery()

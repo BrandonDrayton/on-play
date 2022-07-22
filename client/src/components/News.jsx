@@ -7,7 +7,7 @@ import './News.css'
 
 function News() {
   const { data: user, isLoading } = useGetCurrentUserQuery()
-  let search = user ? `${user.Team.league} ${user.Team.name}` : 'sports news'
+  let search = user.FavoriteTeamId ? `${user.Team.league} ${user.Team.name}` : 'sports news'
   const { data } = useGetNewsQuery({ search })
   const [searchTeam, setSearchTeam] = useState('')
   // if (!favoriteTeam) {

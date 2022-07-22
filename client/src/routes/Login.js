@@ -13,6 +13,7 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 import './Register.css'
+import { useNavigate } from 'react-router-dom'
 import LandingNav from '../components/LandingNav'
 import { useAddUserLoginMutation, useGetUserLoginQuery } from '../services/createUserApi'
 
@@ -21,11 +22,18 @@ function Login() {
     email: '',
     password: '',
   })
+  const updateField = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    })
+  }
+  const navigate = useNavigate()
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { data: user } = useGetUserLoginQuery()
-  const [addUserLogin] = useAddUserLoginMutation()
+  const [addUserLogin, isError] = useAddUserLoginMutation()
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
@@ -38,17 +46,17 @@ function Login() {
           email: '',
           password: '',
         })
+        setSuccess('Logged in Successfully..?')
+        navigate('/dashboard')
+        setIsLoading(false)
       })
-      .catch((e) => {})
-    setSuccess('Logged in Successfully!')
-    setIsLoading(false)
+      .catch((e) => {
+        setError('Invalid Email or Password')
+        navigate('/login')
+        setIsLoading(false)
+      })
   }
-  const updateField = (name, value) => {
-    setForm({
-      ...form,
-      [name]: value,
-    })
-  }
+
   return (
     <>
       {/* <LandingNav /> */}
