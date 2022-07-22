@@ -19,6 +19,7 @@ function Dashboard() {
   const { data, isLoading } = useGetTeamsQuery({ sport, league })
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setError('')

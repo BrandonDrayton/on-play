@@ -1,13 +1,19 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
+import { useGetCurrentUserQuery } from '../services/createUserApi'
 import { useGetNewsQuery } from '../services/createNewsApi'
 import { useGetSpecificTeamQuery } from '../services/createSportsApi'
 import './News.css'
 
 function News() {
-  let search = 'nfl'
-  const { data, isLoading } = useGetNewsQuery({ search })
-  console.log(data)
+  const { data: user, isLoading } = useGetCurrentUserQuery()
+  let search = user ? `${user.Team.league} ${user.Team.name}` : 'sports news'
+  const { data } = useGetNewsQuery({ search })
+  const [searchTeam, setSearchTeam] = useState('')
+  // if (!favoriteTeam) {
+  //   return null
+  // }
+  // console.log(favoriteTeam)
 
   const news = data?.items
   console.log(news)
