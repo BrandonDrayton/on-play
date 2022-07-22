@@ -8,6 +8,9 @@ export const createSportsApi = createApi({
     getTeams: builder.query({
       query: ({ sport, league }) => `${sport}/${league}/teams`,
     }),
+    getTeam: builder.query({
+      query: ({ sport, league, id }) => `${sport}/${league}/teams/${id}`,
+    }),
     getNews: builder.query({
       query: ({ sport, league }) => `${sport}/${league}/news`,
     }),
@@ -28,4 +31,4 @@ export const createSportsApi = createApi({
     }),
   }),
 })
-export const { useGetTeamsQuery, useGetSpecificTeamQuery } = createSportsApi
+export const { useGetTeamsQuery, useGetSpecificTeamQuery, useGetTeamQuery } = createSportsApi
