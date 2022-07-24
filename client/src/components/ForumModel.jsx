@@ -24,10 +24,12 @@ import {
   Textarea,
   useDisclosure,
 } from '@chakra-ui/react'
+import Moment from 'moment'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   useAddNewCommentMutation,
+  useAddNewSubCommentMutation,
   useAddNewThreadMutation,
   useGetThreadQuery,
   useGetThreadsQuery,
@@ -36,7 +38,9 @@ import './Forum.css'
 
 function ForumModel() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isSecondOpen, onOpen: onSecondOpen, onClose: onSecondClose } = useDisclosure()
   const [addNewComment] = useAddNewCommentMutation()
+  const [addNewSubComment] = useAddNewSubCommentMutation()
   const { data: allThreads, isLoading } = useGetThreadsQuery()
   const [addNewThread] = useAddNewThreadMutation()
   const [openThread, setOpenThread] = useState()
@@ -49,6 +53,9 @@ function ForumModel() {
   const [formComment, setFormComment] = useState({
     body: '',
     createdAt: '',
+  })
+  const [formSubComment, setFormSubComment] = useState({
+    body: '',
   })
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -73,6 +80,17 @@ function ForumModel() {
       })
       .catch((e) => {})
   }
+  const handleAddSubComment = (e) => {
+    e.preventDefault()
+    addNewSubComment({ id: openThread, newSubComment: formComment })
+      .unwrap()
+      .then(() => {
+        setFormSubComment({
+          body: '',
+        })
+      })
+      .catch((e) => {})
+  }
   const updateField = (name, value) => {
     setForm({
       ...form,
@@ -85,8 +103,15 @@ function ForumModel() {
       [name]: value,
     })
   }
+  const updateSubCommentField = (name, value) => {
+    setFormSubComment({
+      ...formSubComment,
+      [name]: value,
+    })
+  }
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+  const formatDate = Moment().format('MM-DD-YYYY HH:MM')
   return (
     <>
       <Accordion
@@ -197,29 +222,42 @@ function ForumModel() {
                             </Box>
                           </Flex>
                         </Flex>
+                        {Comment.Children.map((Child) => {
+                          return (
+                            <Flex
+                              boxShadow="md"
+                              p="6"
+                              rounded="md"
+                              bg="white"
+                              mt="3"
+                              w="70%"
+                              align="flex-end"
+                              key={Child.id}
+                            >
+                              <Flex flexDirection="column">
+                                <Flex align="center" mb="3">
+                                  <Avatar></Avatar>
+                                  <Flex>
+                                    <Text ml="3" fontSize="l">
+                                      Chase Childers
+                                    </Text>
+                                  </Flex>
+                                </Flex>
+                                <Flex align="flex-end">
+                                  <Text>{Child.body}</Text>
+                                </Flex>
+                                <Flex justify="flex-end" align={'center'}>
+                                  <Box>
+                                    <Text mt="2">{Child.createdAt}</Text>
+                                  </Box>
+                                </Flex>
+                              </Flex>
+                            </Flex>
+                          )
+                        })}
                       </Box>
                     )
                   })}
-                  <Flex boxShadow="md" p="6" rounded="md" bg="white" mt="3" w="70%" align="flex-end">
-                    <Flex flexDirection="column">
-                      <Flex align="center" mb="3">
-                        <Avatar></Avatar>
-                        <Flex>
-                          <Text ml="3" fontSize="l">
-                            Chase Childers
-                          </Text>
-                        </Flex>
-                      </Flex>
-                      <Flex align="flex-end">
-                        <Text>LMAO what a joke</Text>
-                      </Flex>
-                      <Flex justify="flex-end" align={'center'}>
-                        <Box>
-                          <Text mt="2">Aug 13th, 2019, 12:08 AM</Text>
-                        </Box>
-                      </Flex>
-                    </Flex>
-                  </Flex>
                 </AccordionPanel>
               </AccordionItem>
             )
@@ -250,6 +288,44 @@ function ForumModel() {
                 fontFamily="Poppins"
                 fontSize="20px"
                 onChange={(e) => updateCommentField('body', e.target.value)}
+              ></Textarea>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" bg="#66CD00" mr={3}>
+                Send it
+              </Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+      <Modal size="xl" isOpen={isSecondOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex flexDirection="column">
+              <Box>
+                <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
+              </Box>
+              <Box>
+                <Text fontSize="sm" mt="3">
+                  Aug 13th, 2019, 10:08 AM
+                </Text>
+              </Box>
+            </Flex>
+          </ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleAddSubComment}>
+            <ModalBody>
+              <Textarea
+                value={formSubComment.body}
+                height={250}
+                placeholder="Type comment here"
+                fontFamily="Poppins"
+                fontSize="20px"
+                onChange={(e) => updateSubCommentField('body', e.target.value)}
               ></Textarea>
             </ModalBody>
             <ModalFooter>
