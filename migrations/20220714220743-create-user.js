@@ -31,7 +31,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       iconColor: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(6),
       },
       createdAt: {
         allowNull: false,

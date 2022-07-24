@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { BlockPicker, SketchPicker } from 'react-color'
+
 import {
   Alert,
   AlertIcon,
   Box,
   Button,
+  Collapse,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -11,6 +14,7 @@ import {
   FormLabel,
   Input,
   Spacer,
+  useDisclosure,
 } from '@chakra-ui/react'
 import './Register.css'
 import { useNavigate } from 'react-router-dom'
@@ -19,10 +23,14 @@ import PrimaryNav from '../components/PrimaryNav'
 import { useAddUserRegisterMutation, useGetUserRegisterQuery } from '../services/createUserApi'
 
 function Register() {
+  const [color, setColor] = useState('#FF0000')
+  const { isOpen, onToggle } = useDisclosure()
   const [form, setForm] = useState({
     email: '',
     password: '',
     username: '',
+    iconText: '',
+    iconColor: '',
   })
   const navigate = useNavigate()
   const [error, setError] = useState('')
@@ -42,6 +50,8 @@ function Register() {
           email: '',
           password: '',
           username: '',
+          iconText: '',
+          iconColor: '',
         })
       })
       .catch((e) => {})
@@ -55,6 +65,7 @@ function Register() {
       [name]: value,
     })
   }
+
   return (
     <>
       <LandingNav />
@@ -101,6 +112,25 @@ function Register() {
                 value={form.username}
                 onChange={(e) => updateField('username', e.target.value)}
               />
+            </FormControl>
+            <FormControl my="5">
+              <FormLabel htmlFor="iconText">Enter your initials here:</FormLabel>
+              <Input
+                id="iconText"
+                type="iconText"
+                required
+                value={form.iconText}
+                onChange={(e) => updateField('iconText', e.target.value)}
+              />
+            </FormControl>
+            <FormControl w="65px" flexShrink="0">
+              <FormLabel htmlFor="color">Color</FormLabel>
+              <Input
+                id="color"
+                type="color"
+                value={'#' + form.iconColor}
+                onChange={(e) => updateField('iconColor', e.target.value.slice(1))}
+              />{' '}
             </FormControl>
             <Button type="submit" isLoading={isLoading} mt={4} className="form" colorScheme="blackAlpha" size="md">
               Register

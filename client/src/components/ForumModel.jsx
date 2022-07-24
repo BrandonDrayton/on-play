@@ -103,12 +103,14 @@ function ForumModel() {
       [name]: value,
     })
   }
+
   const updateSubCommentField = (name, value) => {
     setFormSubComment({
       ...formSubComment,
       [name]: value,
     })
   }
+
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   const formatDate = Moment().format('MM-DD-YYYY HH:MM')
