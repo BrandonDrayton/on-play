@@ -1,4 +1,4 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useGetCurrentUserQuery } from '../services/createUserApi'
 import { useGetNewsQuery } from '../services/createNewsApi'
@@ -26,25 +26,27 @@ function News() {
 
   return (
     <>
-      <div>
-        <div className="sidebar">
-          {news?.slice(96, 100).map((team) => (
-            <div className="sidebar-section">
-              <div className="section-body">
-                <img className="img-wrap" src={teamLogo?.href} alt="" />
-              </div>
-              <div className="section-footer">
-                <div className="footer-information">
-                  <div className="discipline">{team.title.slice(0, 40) + '...'}</div>
-                  <a className="articleButton btn btn-1" href={team.link}>
-                    Full article
-                  </a>
+      <Flex>
+        <div>
+          <div className="sidebar">
+            {news?.slice(96, 100).map((team) => (
+              <div className="sidebar-section">
+                <div className="section-body">
+                  <img className="img-wrap" src={teamLogo?.href} alt="" />
+                </div>
+                <div className="section-footer">
+                  <div className="footer-information">
+                    <div className="discipline">{team.title.slice(0, 50) + '...'}</div>
+                    <a className="articleButton btn btn-1" href={team.link}>
+                      Full article
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </Flex>
     </>
   )
 }
