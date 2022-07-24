@@ -32,6 +32,8 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.19",
     "pg": "^8.7.3",
+    "react-color": "^2.19.3",
+    "react-colorful": "^5.5.1",
     "rss-to-json": "^2.1.0",
     "sequelize": "^6.21.2",
     "sequelize-cli": "^6.4.1"

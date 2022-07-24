@@ -6,7 +6,7 @@ const checkAuth = require('../middleware/checkAuth')
 
 // GET /api/v1/users/register
 router.post('/register', async (req, res) => {
-  const { email, password, username } = req.body
+  const { email, password, username, iconText, iconColor } = req.body
   // if required fields missing, send error
   if (!email || !password || !username) {
     return res.status(400).json({ error: 'missing email and/or password' })
@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
   }
   // create new user in database and send success message
   const hash = await bcrypt.hash(password, 10)
-  const user = await models.User.create({ email, password: hash, username })
+  const user = await models.User.create({ email, password: hash, username, iconText, iconColor })
   res.json({ success: 'registered successfully' })
 })
 
@@ -76,6 +76,11 @@ router.get('/current', checkAuth, async (req, res) => {
 
 // GET /api/v1/users/logout
 router.get('/logout', async (req, res) => {
+  req.session.user = null
+  res.json({ success: 'logged out successfully' })
+})
+// POST /api/v1/users/logout
+router.post('/logout', async (req, res) => {
   req.session.user = null
   res.json({ success: 'logged out successfully' })
 })
