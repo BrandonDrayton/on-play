@@ -1,0 +1,45 @@
+.profile-card{
+    background-color: aquamarine;
+    width: auto;
+    max-width: 95%;
+    border-radius: 15px;
+    margin-left: 3em;
+    margin-right: 3em;
+}
+.outer-box{
+    display: flex;
+    max-width: 500px;
+    justify-content: center;
+    border: 1px solid red;
+    border-radius: 15px;
+}
+.profile-image{
+    border-radius: 10px;
+    margin: 10px;
+}
+.title{
+    text-align: end;
+    margin-right: 3em;
+    font-size: 25px;
+}
+.title2{
+    font-size: 25px;
+}
+.team{
+    text-align: center;
+    font-size: 50px;
+    text-decoration: underline;
+  }
+  .title-intro{
+    text-align: center;
+    font-size: 75px;
+  }
+  .intro-text{
+    text-align: center;
+  }
+  .dev-outer-div{
+    /* max-height: 10em; */
+    /* height: 500px; */
+    flex-direction: column;
+
+  }

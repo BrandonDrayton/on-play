@@ -17,6 +17,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import './Register.css'
+import { useNavigate } from 'react-router-dom'
 import LandingNav from '../components/LandingNav'
 import PrimaryNav from '../components/PrimaryNav'
 import { useAddUserRegisterMutation, useGetUserRegisterQuery } from '../services/createUserApi'
@@ -31,6 +32,7 @@ function Register() {
     iconText: '',
     iconColor: '',
   })
+  const navigate = useNavigate()
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -54,6 +56,7 @@ function Register() {
       })
       .catch((e) => {})
     setSuccess('Registered Successfully')
+    navigate('/login')
     setIsLoading(false)
   }
   const updateField = (name, value) => {

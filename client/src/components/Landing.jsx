@@ -39,7 +39,9 @@ function Dashboard() {
       })
   }
 
-  const teams = data?.sports[0].leagues[0].teams
+  let teams = data?.sports[0].leagues[0].teams
+  // setTeam(teams.sort((a, b) => a.name.localeCompare(b.name)))
+
   // console.log(teams)
   if (isLoading) {
     return <Spinner />
@@ -109,7 +111,7 @@ function Dashboard() {
             </option>
             {teams?.map((team, i) => (
               <option key={i} value={team.team.name} data-id={team.team.id}>
-                {team.team.name}
+                {team.team.displayName}
               </option>
             ))}
           </Select>

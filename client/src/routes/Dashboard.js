@@ -10,7 +10,6 @@ function Dashboard() {
     // TODO: Make Homepage
     <>
       {/* <PrimaryNav /> */}
-      <h3>dashboard</h3>
 
       <Landing />
       {/* <News /> */}
