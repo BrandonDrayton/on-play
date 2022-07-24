@@ -21,6 +21,7 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "bcrypt": "^5.0.1",
+    "bootstrap": "^5.2.0",
     "concurrently": "^7.2.2",
     "connect-session-sequelize": "^7.1.4",
     "cookie-parser": "~1.4.4",
@@ -32,6 +33,7 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.19",
     "pg": "^8.7.3",
+    "react-bootstrap": "^2.4.0",
     "rss-to-json": "^2.1.0",
     "sequelize": "^6.21.2",
     "sequelize-cli": "^6.4.1"

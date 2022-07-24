@@ -136,6 +136,10 @@ function ForumModel() {
         </AccordionItem>
         {isLoading ||
           allThreads?.map((thread) => {
+            const currentDate = new Date(thread.createdAt)
+            const createAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `full` })
+            const createdAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
+            const subCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
             return (
               <AccordionItem className="accordian-title">
                 <h2>
@@ -143,7 +147,11 @@ function ForumModel() {
                     <Flex justify="space-between">
                       <Flex flexDirection="column" textAlign="left">
                         <Text className="accordian-thread-title">{thread.text}</Text>
-                        <Text mt="3">{thread.createdAt}</Text>
+                        <Text mt="3">
+                          {createAtDate}
+                          <br></br>
+                          {createdAtTime}
+                        </Text>
                       </Flex>
                       <Box>
                         <AccordionIcon />
@@ -183,7 +191,9 @@ function ForumModel() {
                               </Flex>
                             </Flex>
                             <Box>
-                              <Text mt="2">{Comment.createdAt}</Text>
+                              <Text mt="2">
+                                {subCommentTime} {createdAtTime}
+                              </Text>
                             </Box>
                           </Flex>
                         </Flex>
