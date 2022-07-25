@@ -3,7 +3,7 @@ import { Navigate } from 'react-router'
 import { useGetCurrentUserQuery } from '../services/createUserApi'
 
 function Protected({ children }) {
-  const { data, isUninitialized, isLoading, isFetching } = useGetCurrentUserQuery()
+  const { data, isUninitialized, isLoading, isFetching, isError } = useGetCurrentUserQuery()
 
   // checking
   if (isUninitialized || isLoading || isFetching) {
@@ -11,7 +11,7 @@ function Protected({ children }) {
   }
 
   // checked & not logged in
-  if (!data) {
+  if (!data || isError) {
     return <Navigate to="/login" replace />
   }
 

@@ -9,10 +9,6 @@ export const createUserApi = createApi({
       query: () => '/current',
       providesTags: ['User'],
     }),
-    getUserLogin: builder.query({
-      query: () => '/login',
-      providesTags: ['User'],
-    }),
     getUserRegister: builder.query({
       query: () => '/register',
       providesTags: ['User'],
@@ -62,7 +58,6 @@ export const createUserApi = createApi({
 
 export const {
   useGetCurrentUserQuery,
-  useGetUserLoginQuery,
   useGetUserRegisterQuery,
   useGetUserLogoutQuery,
   useGetUserFavoriteQuery,

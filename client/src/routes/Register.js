@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { BlockPicker, SketchPicker } from 'react-color'
 
 import {
   Alert,

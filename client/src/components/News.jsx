@@ -16,11 +16,6 @@ function News() {
     id: user.Team?.espnTeamId,
   })
 
-  // if (!favoriteTeam) {
-  //   return null
-  // }
-  // console.log(favoriteTeam)
-
   const news = data?.items
   const teamLogo = team?.team.logos[1]
 

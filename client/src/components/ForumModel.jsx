@@ -29,6 +29,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   useAddNewCommentMutation,
+  useAddNewLikeMutation,
   useAddNewSubCommentMutation,
   useAddNewThreadMutation,
   useGetThreadQuery,
@@ -43,10 +44,11 @@ function ForumModel() {
   const [addNewSubComment] = useAddNewSubCommentMutation()
   const { data: allThreads, isLoading } = useGetThreadsQuery()
   const [addNewThread] = useAddNewThreadMutation()
+  const [addnewLike] = useAddNewLikeMutation()
   const [openThread, setOpenThread] = useState()
-  const [threadId, setThreadId] = useState()
   const [openComment, setOpenComment] = useState()
   const { data: threadData, isLoading: threadDataIsLoading } = useGetThreadQuery(openThread)
+  const [count, setCount] = useState(threadData)
   const [form, setForm] = useState({
     text: '',
   })
@@ -80,6 +82,11 @@ function ForumModel() {
           parentId: null,
         })
       })
+      .catch((e) => {})
+  }
+  const handleAddLike = (e) => {
+    addnewLike({ threadId: openThread, commentId: openComment })
+      .unwrap()
       .catch((e) => {})
   }
   const handleAddSubComment = (e) => {
@@ -199,7 +206,14 @@ function ForumModel() {
                   </Button>
                   {threadData?.Comments?.map((Comment) => {
                     return (
-                      <Box key={Comment.id} boxShadow="md" p="6" rounded="md" bg="white">
+                      <Box
+                        onClick={() => setOpenComment(Comment.id)}
+                        key={Comment.id}
+                        boxShadow="md"
+                        p="6"
+                        rounded="md"
+                        bg="white"
+                      >
                         <Flex flexDirection="column">
                           <Flex align="center" mb="3">
                             <Avatar></Avatar>
