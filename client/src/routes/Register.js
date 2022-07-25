@@ -67,7 +67,6 @@ function Register() {
 
   return (
     <>
-      <LandingNav />
       <form onSubmit={handleSubmit}>
         {error && (
           <Alert status="error">

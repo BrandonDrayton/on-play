@@ -36,6 +36,7 @@
     "react-bootstrap": "^2.4.0",
     "react-color": "^2.19.3",
     "react-colorful": "^5.5.1",
+    "react-responsive-carousel": "^3.2.23",
     "rss-to-json": "^2.1.0",
     "sequelize": "^6.21.2",
     "sequelize-cli": "^6.4.1"

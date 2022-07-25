@@ -59,7 +59,7 @@ function Dashboard() {
         </Alert>
       )}
       <FormControl mt="5" mb="5">
-        <Box display="flex" justifyContent="center">
+        <Box className="drop-down-selector" display="flex" justifyContent="center">
           <Select
             icon={<ChevronDownIcon />}
             variant="outline"

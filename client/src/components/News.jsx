@@ -4,6 +4,8 @@ import { useGetCurrentUserQuery } from '../services/createUserApi'
 import { useGetNewsQuery } from '../services/createNewsApi'
 import { useGetSpecificTeamQuery, useGetTeamQuery } from '../services/createSportsApi'
 import './News.css'
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 function News() {
   const { data: user, isLoading } = useGetCurrentUserQuery()
@@ -21,25 +23,27 @@ function News() {
 
   return (
     <>
-      <Flex>
-        <div>
-          <div className="sidebar">
-            {news?.slice(96, 100).map((team) => (
-              <div className="sidebar-section">
-                <div className="section-body">
-                  <img className="img-wrap" src={teamLogo?.href} alt="" />
-                </div>
-                <div className="section-footer">
-                  <div className="footer-information">
-                    <div className="discipline">{team.title.slice(0, 50) + '...'}</div>
-                    <a className="articleButton btn btn-1" href={team.link}>
-                      Full article
-                    </a>
+      <Flex justifyContent="center">
+        <div className="outer-div">
+          <Flex>
+            <div className="sidebar">
+              {news?.slice(96, 100).map((team) => (
+                <div className="sidebar-section">
+                  <div className="section-body">
+                    <img className="img-wrap" src={teamLogo?.href} alt="" />
+                  </div>
+                  <div className="section-footer">
+                    <div className="footer-information">
+                      <div className="discipline">{team.title.slice(0, 50) + '...'}</div>
+                      <a className="articleButton btn btn-1" href={team.link}>
+                        Full article
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Flex>
         </div>
       </Flex>
     </>
