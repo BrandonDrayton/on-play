@@ -41,6 +41,13 @@ export const forumApi = createApi({
       }),
       invalidatesTags: ['Thread'],
     }),
+    addNewLike: builder.mutation({
+      query: ({ threadId, commentId, newLike }) => ({
+        url: `/${threadId}/comment/${commentId}/likes`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Thread'],
+    }),
   }),
 })
 
@@ -53,4 +60,5 @@ export const {
   useLazyGetUserThreadsQuery,
   useAddNewCommentMutation,
   useAddNewSubCommentMutation,
+  useAddNewLikeMutation,
 } = forumApi

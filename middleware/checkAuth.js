@@ -8,7 +8,7 @@
 async function checkAuth(req, res, next) {
   // if not logged in send error
   if (!req.session.user) {
-    res.json({ error: 'unauthorized' })
+    res.status(401).json({ error: 'unauthorized' })
     return
   }
 

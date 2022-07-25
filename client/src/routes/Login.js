@@ -15,7 +15,7 @@ import {
 import './Register.css'
 import { useNavigate } from 'react-router-dom'
 import LandingNav from '../components/LandingNav'
-import { useAddUserLoginMutation, useGetUserLoginQuery } from '../services/createUserApi'
+import { useAddUserLoginMutation } from '../services/createUserApi'
 
 function Login() {
   const [form, setForm] = useState({
@@ -32,7 +32,6 @@ function Login() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { data: user } = useGetUserLoginQuery()
   const [addUserLogin, isError] = useAddUserLoginMutation()
   const handleSubmit = (e) => {
     e.preventDefault()
