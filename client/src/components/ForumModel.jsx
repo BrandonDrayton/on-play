@@ -55,6 +55,7 @@ function ForumModel() {
   const [formComment, setFormComment] = useState({
     body: '',
     createdAt: '',
+    parentId: null,
   })
   const [formSubComment, setFormSubComment] = useState({
     body: '',
@@ -78,6 +79,7 @@ function ForumModel() {
         setFormComment({
           body: '',
           createdAt: '',
+          parentId: null,
         })
       })
       .catch((e) => {})
@@ -121,6 +123,10 @@ function ForumModel() {
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
   const formatDate = Moment().format('MM-DD-YYYY HH:MM')
+  const onCommentClick = (id) => {
+    onOpen()
+    updateCommentField('parentId', id)
+  }
   return (
     <>
       <Accordion
@@ -194,7 +200,7 @@ function ForumModel() {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel display="flex" flexDirection="column" pb={4}>
-                  <Button className="thread-comment-button" mt={3} onClick={onOpen} bg="#66CD00">
+                  <Button className="thread-comment-button" mt={3} onClick={() => onCommentClick(null)} bg="#66CD00">
                     <ChatIcon mr="2"></ChatIcon>
                     <Text>Comment</Text>
                   </Button>
@@ -223,18 +229,18 @@ function ForumModel() {
                           <Flex justify="flex-end" align={'center'}>
                             <Flex align="center" mt="2" mr="2">
                               <Flex>
-                                <ChatIcon className="icons" mr="2" w="4" height="6" onClick={onOpen}></ChatIcon>
-                                <Text mr="2">12</Text>
-                              </Flex>
-                              <Flex justify="center">
-                                <ArrowUpIcon
+                                <ChatIcon
                                   className="icons"
                                   mr="2"
-                                  w="5"
+                                  w="4"
                                   height="6"
-                                  onClick={(e) => handleAddLike}
-                                ></ArrowUpIcon>
-                                <Text mr="2">{Comment.likes}</Text>
+                                  onClick={() => onCommentClick(Comment.id)}
+                                ></ChatIcon>
+                                <Text mr="2">{Comment.Children?.length ?? 0}</Text>
+                              </Flex>
+                              <Flex justify="center">
+                                <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                                <Text mr="2">{Comment.Likes?.length ?? 0}</Text>
                               </Flex>
                             </Flex>
                             <Box>
@@ -261,7 +267,7 @@ function ForumModel() {
                                   <Avatar></Avatar>
                                   <Flex>
                                     <Text ml="3" fontSize="l">
-                                      Chase Childers
+                                      sdkjhfbkdbfksdf
                                     </Text>
                                   </Flex>
                                 </Flex>
