@@ -8,8 +8,10 @@ import Login from './routes/Login'
 import Dashboard from './routes/Dashboard'
 import Logout from './routes/Logout'
 import Protected from './components/Protected'
+import { useGetCurrentUserQuery } from './services/createUserApi'
 
 function App() {
+  const { data } = useGetCurrentUserQuery()
   return (
     <div className="App">
       <PrimaryNav />

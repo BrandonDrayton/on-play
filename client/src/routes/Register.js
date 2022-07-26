@@ -19,7 +19,7 @@ import './Register.css'
 import { useNavigate } from 'react-router-dom'
 import LandingNav from '../components/LandingNav'
 import PrimaryNav from '../components/PrimaryNav'
-import { useAddUserRegisterMutation, useGetUserRegisterQuery } from '../services/createUserApi'
+import { useAddUserRegisterMutation } from '../services/createUserApi'
 
 function Register() {
   const [color, setColor] = useState('#FF0000')
@@ -36,7 +36,6 @@ function Register() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { data: user } = useGetUserRegisterQuery()
   const [addUserRegister] = useAddUserRegisterMutation()
   const handleSubmit = (e) => {
     e.preventDefault()

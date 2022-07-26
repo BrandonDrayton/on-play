@@ -10,8 +10,8 @@ function Logout() {
   const [isLoading, setIsLoading] = useState(false)
   const [addUserLogout, isError] = useAddUserLogoutMutation()
   const [form, setForm] = useState({
-    email: data.email,
-    password: data.password,
+    email: data?.email,
+    password: data?.password,
   })
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -25,7 +25,7 @@ function Logout() {
           email: null,
           password: null,
         })
-        setSuccess('Logged in Successfully..?')
+        setSuccess('Logged out Successfully..?')
         navigate('/login')
         setIsLoading(false)
       })
