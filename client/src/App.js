@@ -1,7 +1,6 @@
 import * as React from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import Home from './routes/Home'
 import About from './routes/About'
 import PrimaryNav from './components/PrimaryNav'
 import Register from './routes/Register'
@@ -17,7 +16,6 @@ function App() {
     <div className="App">
       <PrimaryNav />
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route
           path="/dashboard"
           element={

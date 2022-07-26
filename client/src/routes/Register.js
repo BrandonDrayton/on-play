@@ -25,6 +25,7 @@ function Register() {
   const [color, setColor] = useState('#FF0000')
   const { isOpen, onToggle } = useDisclosure()
   const [form, setForm] = useState({
+    name: '',
     email: '',
     password: '',
     username: '',
@@ -45,6 +46,7 @@ function Register() {
       .unwrap()
       .then(() => {
         setForm({
+          name: '',
           email: '',
           password: '',
           username: '',
@@ -80,6 +82,16 @@ function Register() {
         <Flex justify={'center'}>
           <Box boxShadow="md" bg="white" w="450px" p={4} m={20} color="black">
             <h1 className="registerHeading">Register</h1>
+            <FormControl my="5">
+              <FormLabel htmlFor="name">Name</FormLabel>
+              <Input
+                id="name"
+                type="name"
+                required
+                value={form.name}
+                onChange={(e) => updateField('name', e.target.value)}
+              />
+            </FormControl>
             <FormControl my="5">
               <FormLabel htmlFor="email">Email address</FormLabel>
               <Input

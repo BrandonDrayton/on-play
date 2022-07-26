@@ -158,9 +158,8 @@ function ForumModel() {
               <Flex justify="space-between">
                 <Flex flexDirection="column" textAlign="left"></Flex>
               </Flex>
-              <Button className="thread-comment-button" mt={3} bg="#66CD00">
-                <ChatIcon mr="2"></ChatIcon>
-                <Text>Create {userData?.Team?.name} Thread</Text>
+              <Button className="thread-comment-button" leftIcon={<ChatIcon />} mt={3} bg="#66CD00" mb="3">
+                Create {userData?.Team?.name} Thread
               </Button>
             </AccordionButton>
           </h2>
@@ -207,7 +206,15 @@ function ForumModel() {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel display="flex" flexDirection="column" pb={4}>
-                  <Button className="thread-comment-button" mt={3} onClick={() => onCommentClick(null)} bg="#66CD00">
+                  <Button
+                    w="100"
+                    ml="4"
+                    mb="3"
+                    className="thread-comment-button"
+                    mt={3}
+                    onClick={() => onCommentClick(null)}
+                    bg="#66CD00"
+                  >
                     <ChatIcon mr="2"></ChatIcon>
                     <Text>Comment</Text>
                   </Button>
@@ -220,43 +227,21 @@ function ForumModel() {
                         p="6"
                         rounded="md"
                         bg="white"
+                        m="3"
                       >
                         <Flex flexDirection="column">
                           <Flex align="center" mb="3">
-                            <Avatar></Avatar>
-                            <Flex>
-                              <ChatIcon
-                                className="icons"
-                                mr="2"
-                                w="4"
-                                height="6"
-                                onClick={() => onCommentClick(Comment.id)}
-                              ></ChatIcon>
-                              <Text mr="2">{Comment.Children?.length ?? 0}</Text>
-                            </Flex>
-                            <Flex justify="center">
-                              <WrapItem>
-                                <Button
-                                  isDisabled={Comment.Likes.some((l) => l.UserId === userData.id)}
-                                  isActive={Comment.Likes.some((l) => l.UserId !== userData.id)}
-                                  onClick={() => handleAddLike(openThread, Comment.id)}
-                                  colorScheme="whatsapp"
-                                >
-                                  <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
-                                  <Text mr="2">{Comment.Likes.length}</Text>
-                                </Button>
-                              </WrapItem>
-                              <Text ml="3" fontSize="l">
-                                Chase Childers
-                              </Text>
-                            </Flex>
+                            <Avatar name={userData.name} bg={'#' + userData.iconColor} src=""></Avatar>
+                            <Text ml="3" fontSize="l">
+                              {userData.name}
+                            </Text>
                           </Flex>
                           <Box>
                             <Text>{Comment.body}</Text>
                           </Box>
                           <Flex justify="flex-end" align={'center'}>
                             <Flex align="center" mt="2" mr="2">
-                              <Flex>
+                              <Flex mr="3">
                                 <ChatIcon
                                   className="icons"
                                   mr="2"
@@ -266,9 +251,18 @@ function ForumModel() {
                                 ></ChatIcon>
                                 <Text mr="2">{Comment.Children?.length ?? 0}</Text>
                               </Flex>
-                              <Flex justify="center">
-                                <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
-                                <Text mr="2">{Comment.Likes?.length ?? 0}</Text>
+                              <Flex justify="center" mr="3">
+                                <WrapItem>
+                                  <Button
+                                    isDisabled={Comment.Likes.some((l) => l.UserId === userData.id)}
+                                    isActive={Comment.Likes.some((l) => l.UserId !== userData.id)}
+                                    onClick={() => handleAddLike(openThread, Comment.id)}
+                                    colorScheme="orange"
+                                  >
+                                    <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                                    <Text mr="2">{Comment.Likes.length}</Text>
+                                  </Button>
+                                </WrapItem>
                               </Flex>
                             </Flex>
                             <Box>
@@ -292,10 +286,10 @@ function ForumModel() {
                             >
                               <Flex flexDirection="column">
                                 <Flex align="center" mb="3">
-                                  <Avatar></Avatar>
+                                  <Avatar name={userData.name} bg={'#' + userData.iconColor} src=""></Avatar>
                                   <Flex>
                                     <Text ml="3" fontSize="l">
-                                      sdkjhfbkdbfksdf
+                                      {userData.name}
                                     </Text>
                                   </Flex>
                                 </Flex>
@@ -325,12 +319,7 @@ function ForumModel() {
           <ModalHeader>
             <Flex flexDirection="column">
               <Box>
-                <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
-              </Box>
-              <Box>
-                <Text fontSize="sm" mt="3">
-                  Aug 13th, 2019, 10:08 AM
-                </Text>
+                <Text>Add Comment</Text>
               </Box>
             </Flex>
           </ModalHeader>
