@@ -11,7 +11,7 @@ function Protected({ children }) {
   }
 
   // checked & not logged in
-  if (!data || isError) {
+  if (!data || isError || null) {
     return <Navigate to="/login" replace />
   }
 

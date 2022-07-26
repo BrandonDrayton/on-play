@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Comment.belongsTo(models.Thread)
       Comment.belongsTo(models.Comment, { foreignKey: 'ParentId', as: 'Parent' })
       Comment.hasMany(models.Comment, { foreignKey: 'ParentId', as: 'Children' })
+      Comment.belongsToMany(models.User, { through: models.Like, as: 'Likes' })
     }
   }
   Comment.init(

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Comment)
       User.hasMany(models.Thread)
       User.belongsTo(models.Team, { foreignKey: 'FavoriteTeamId' })
-      User.belongsToMany(models.Thread, { through: models.Like, as: 'Likes' })
+      User.belongsToMany(models.Comment, { through: models.Like, as: 'Likes' })
     }
   }
   User.init(

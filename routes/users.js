@@ -66,6 +66,24 @@ router.post('/favorite', async (req, res) => {
   res.json(favoriteTeam)
 })
 
+router.get('/favorite', async (req, res) => {
+  const { team, sport, league, espnTeamId } = req.body
+  // if required fields missing, send error
+  if (!team || !sport || !league || !espnTeamId) {
+    return res.status(400).json({ error: 'Please include all required fields' })
+  }
+  const [favoriteTeam] = await models.Team.findOrCreate({
+    where: {
+      name: team,
+      sport,
+      league,
+      espnTeamId,
+    },
+  })
+  req.session.user.setTeam(favoriteTeam)
+  res.json(favoriteTeam)
+})
+
 router.get('/current', checkAuth, async (req, res) => {
   if (!req.session) {
     res.json(null)

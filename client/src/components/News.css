@@ -36,8 +36,8 @@ body {
     height: 600px;
     display: flex;
     overflow: hidden;
-    animation-duration: 1s;
-    animation-name: slideInSidebar;
+    /* animation-duration: 1s;
+    animation-name: slideInSidebar; */
   }
   
   .sidebar-section {

@@ -15,4 +15,5 @@ async function checkAuth(req, res, next) {
   // call into next middleware
   next()
 }
+
 module.exports = checkAuth

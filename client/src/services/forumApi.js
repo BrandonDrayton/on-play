@@ -42,7 +42,7 @@ export const forumApi = createApi({
       invalidatesTags: ['Thread'],
     }),
     addNewLike: builder.mutation({
-      query: ({ threadId, commentId, newLike }) => ({
+      query: ({ threadId, commentId }) => ({
         url: `/${threadId}/comment/${commentId}/likes`,
         method: 'POST',
       }),

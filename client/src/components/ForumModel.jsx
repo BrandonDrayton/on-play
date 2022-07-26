@@ -23,10 +23,12 @@ import {
   Text,
   Textarea,
   useDisclosure,
+  WrapItem,
 } from '@chakra-ui/react'
 import Moment from 'moment'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useGetCurrentUserQuery } from '../services/createUserApi'
 import {
   useAddNewCommentMutation,
   useAddNewLikeMutation,
@@ -47,6 +49,8 @@ function ForumModel() {
   const [addnewLike] = useAddNewLikeMutation()
   const [openThread, setOpenThread] = useState()
   const [openComment, setOpenComment] = useState()
+  const [isDisabled, setIsDisabled] = useState(false)
+  const { data: userData } = useGetCurrentUserQuery()
   const { data: threadData, isLoading: threadDataIsLoading } = useGetThreadQuery(openThread)
   const [count, setCount] = useState(threadData)
   const [form, setForm] = useState({
@@ -60,6 +64,7 @@ function ForumModel() {
   const [formSubComment, setFormSubComment] = useState({
     body: '',
   })
+  console.log(userData)
   const handleSubmit = (e) => {
     e.preventDefault()
     addNewThread(form)
@@ -81,14 +86,17 @@ function ForumModel() {
           createdAt: '',
           parentId: null,
         })
+        onClose()
       })
       .catch((e) => {})
   }
-  const handleAddLike = (e) => {
-    addnewLike({ threadId: openThread, commentId: openComment })
+
+  const handleAddLike = (threadId, Comment) => {
+    addnewLike({ threadId: openThread, commentId: Comment })
       .unwrap()
       .catch((e) => {})
   }
+
   const handleAddSubComment = (e) => {
     e.preventDefault()
     addNewSubComment({ id: openThread, newSubComment: formComment })
@@ -97,7 +105,9 @@ function ForumModel() {
         setFormSubComment({
           body: '',
         })
+        onClose()
       })
+
       .catch((e) => {})
   }
   const updateField = (name, value) => {
@@ -139,7 +149,7 @@ function ForumModel() {
       >
         <Box>
           <Text className="forumheading" fontSize="3xl" align="center" mb="4" color="white" bg="black" p="4">
-            SPORTS FORUM
+            {userData?.Team?.name} Forum
           </Text>
         </Box>
         <AccordionItem className="accordian-title">
@@ -150,7 +160,7 @@ function ForumModel() {
               </Flex>
               <Button className="thread-comment-button" mt={3} bg="#66CD00">
                 <ChatIcon mr="2"></ChatIcon>
-                <Text>Create New Forum</Text>
+                <Text>Create {userData?.Team?.name} Thread</Text>
               </Button>
             </AccordionButton>
           </h2>
@@ -239,8 +249,17 @@ function ForumModel() {
                                 <Text mr="2">{Comment.Children?.length ?? 0}</Text>
                               </Flex>
                               <Flex justify="center">
-                                <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
-                                <Text mr="2">{Comment.Likes?.length ?? 0}</Text>
+                                <WrapItem>
+                                  <Button
+                                    isDisabled={Comment.Likes.some((l) => l.UserId === userData.id)}
+                                    isActive={Comment.Likes.some((l) => l.UserId !== userData.id)}
+                                    onClick={() => handleAddLike(openThread, Comment.id)}
+                                    colorScheme="whatsapp"
+                                  >
+                                    <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                                    <Text mr="2">{Comment.Likes.length}</Text>
+                                  </Button>
+                                </WrapItem>
                               </Flex>
                             </Flex>
                             <Box>

@@ -47,10 +47,16 @@ router.post('/:threadId/comment/:commentId', checkAuth, async (req, res) => {
 router.post('/:threadId/comment/:commentId/likes', checkAuth, async (req, res) => {
   const threadId = Number(req.params.threadId)
   const commentId = Number(req.params.commentId)
-  if (isNaN(threadId || commentId)) return res.status(404).json({ error: 'thread not found' })
+  if (isNaN(threadId || commentId)) return res.status(404).json({ error: 'comment not found' })
   const comment = await models.Comment.findByPk(commentId)
-  if (!comment) return res.status(404).json({ error: 'thread not found' })
-  const likes = await comment.increment('likes', { by: `1`, where: { id: commentId } })
+  if (!comment) return res.status(404).json({ error: 'comment not found' })
+  const [like, created] = await models.Like.findOrCreate({
+    where: { UserId: req.session.user.id, CommentId: commentId },
+  })
+  if (!created) await like.destroy()
+  const likes = await comment.countLikes()
+  comment.likes = likes
+  comment.save()
   res.json(likes)
 })
 
@@ -62,11 +68,12 @@ router.get('/:id', checkAuth, async (req, res) => {
       {
         model: models.Comment,
         where: { ParentId: null },
-        include: ['Children'],
+        include: ['Children', 'Likes'],
         required: false,
+        order: [['likes', 'DESC']],
       },
-      'Likes',
     ],
+    order: [['createdAt', 'DESC']],
   })
   if (!thread) return res.status(404).json({ error: 'thread not found' })
   res.json(thread)

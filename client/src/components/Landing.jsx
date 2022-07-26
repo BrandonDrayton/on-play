@@ -3,6 +3,7 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import { Alert, AlertIcon, Box, Button, Container, FormControl, Grid, Select, Spinner } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { useGetTeamsQuery } from '../services/createSportsApi'
+import { useGetCurrentUserQuery } from '../services/createUserApi'
 import Stats from './Stats'
 import './PrimaryNav.css'
 import ForumModel from './ForumModel'
@@ -19,9 +20,8 @@ function Dashboard() {
   const { data, isLoading } = useGetTeamsQuery({ sport, league })
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-
+  const { data: user } = useGetCurrentUserQuery()
   const handleSubmit = (e) => {
-    e.preventDefault()
     setError('')
     setSuccess('')
     fetch('/api/v1/users/favorite', {
@@ -40,9 +40,7 @@ function Dashboard() {
   }
 
   let teams = data?.sports[0].leagues[0].teams
-  // setTeam(teams.sort((a, b) => a.name.localeCompare(b.name)))
 
-  // console.log(teams)
   if (isLoading) {
     return <Spinner />
   }
@@ -72,6 +70,7 @@ function Dashboard() {
               setSport(e.target.selectedOptions[0].dataset.sport)
               setTeam('')
               setEspnTeamId('')
+              e.preventDefault()
             }}
           >
             <option value="" disabled selected>
@@ -98,6 +97,7 @@ function Dashboard() {
             onChange={(e) => {
               setTeam(e.target.value)
               setEspnTeamId(e.target.selectedOptions[0].dataset.id)
+              e.preventDefault()
             }}
             icon={<ChevronDownIcon />}
             variant="outline"
