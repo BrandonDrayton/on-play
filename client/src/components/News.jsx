@@ -4,8 +4,6 @@ import { useGetCurrentUserQuery } from '../services/createUserApi'
 import { useGetNewsQuery } from '../services/createNewsApi'
 import { useGetSpecificTeamQuery, useGetTeamQuery } from '../services/createSportsApi'
 import './News.css'
-import { Carousel } from 'react-responsive-carousel'
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 function News() {
   const { data: user, isLoading } = useGetCurrentUserQuery()
@@ -35,7 +33,7 @@ function News() {
                   <div className="section-footer">
                     <div className="footer-information">
                       <div className="discipline">{team.title.slice(0, 50) + '...'}</div>
-                      <a className="articleButton btn btn-1" href={team.link}>
+                      <a className="articleButton btn btn-1" href={team.link} target="_blank" rel="noreferrer">
                         Full article
                       </a>
                     </div>
