@@ -3,23 +3,15 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const createUserApi = createApi({
   reducerPath: 'user',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/v1/users' }),
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Favorite'],
   endpoints: (builder) => ({
     getCurrentUser: builder.query({
       query: () => '/current',
       providesTags: ['User'],
     }),
-    getUserRegister: builder.query({
-      query: () => '/register',
-      providesTags: ['User'],
-    }),
-    getUserLogout: builder.query({
-      query: () => '/logout',
-      providesTags: ['User'],
-    }),
     getUserFavorite: builder.query({
       query: () => '/favorite',
-      providesTags: ['User'],
+      providesTags: ['Favorite'],
     }),
     addUserLogin: builder.mutation({
       query: (userLogin) => ({
@@ -58,8 +50,6 @@ export const createUserApi = createApi({
 
 export const {
   useGetCurrentUserQuery,
-  useGetUserRegisterQuery,
-  useGetUserLogoutQuery,
   useGetUserFavoriteQuery,
   useAddUserLoginMutation,
   useAddUserRegisterMutation,

@@ -12,7 +12,6 @@ const usersRouter = require('./routes/users')
 const threadsRouter = require('./routes/threads')
 const newsRouter = require('./routes/news')
 
-
 // configure express app
 const app = express()
 
