@@ -37,13 +37,37 @@
 @media(min-width: 320px) and (max-width: 680px) {
   .navbar{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
   }
   .links{
     display: none;
   }
   .menu-icon-drop-down{
     display: true;
+  }
+  .drop-down-league{
+    margin-bottom: 1em;
+  }
+  .drop-down-selector{
+    margin-top: 3em;
+    flex-direction: column;
+    align-items: center;
+  }
+  .drop-down-team{
+    margin-right: 20px;
+    padding-bottom: 15px;
+    width: 180px;
+  }
+  .drop-down-button{
+    width: 190px;
+    margin-bottom: 10px;
+  }
+  .menu-icon-drop-down{
+    padding-right: 1em
+  }
+  .drop-down-list{
+    background-color: aqua;
   }
 }
 .menu-links{
@@ -52,7 +76,9 @@
 .menu-links:hover{
   /* background-color: black; */
   background-color: none;
+
 }
+
 @media(min-width: 681px) and (max-width: 9999px){
 
   .menu-icon-drop-down{
@@ -71,8 +97,8 @@
   }
 }
 .drop-down-selector{
-  margin-top: 3em;
+  /* margin-top: 3em;
   margin-left: 3em;
-  margin-right: 3em;
+  margin-right: 3em; */
 
 }

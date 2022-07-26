@@ -60,66 +60,72 @@ function Dashboard() {
       )}
       <FormControl mt="5" mb="5">
         <Box className="drop-down-selector" display="flex" justifyContent="center">
-          <Select
-            icon={<ChevronDownIcon />}
-            variant="outline"
-            maxWidth="200px"
-            pr="2"
-            size="md"
-            value={league}
-            onChange={(e) => {
-              setLeague(e.target.value)
-              setSport(e.target.selectedOptions[0].dataset.sport)
-              setTeam('')
-              setEspnTeamId('')
-            }}
-          >
-            <option value="" disabled selected>
-              Please Select A League
-            </option>
-            <option value="nfl" data-sport="football">
-              NFL
-            </option>
-            <option value="nba" data-sport="basketball">
-              NBA
-            </option>
-            <option value="mlb" data-sport="baseball">
-              MLB
-            </option>
-            <option value="nhl" data-sport="hockey">
-              NHL
-            </option>
-            <option value="usa.1" data-sport="soccer">
-              MLS
-            </option>
-          </Select>
-          <Select
-            value={team}
-            onChange={(e) => {
-              setTeam(e.target.value)
-              setEspnTeamId(e.target.selectedOptions[0].dataset.id)
-            }}
-            icon={<ChevronDownIcon />}
-            variant="outline"
-            size="md"
-            maxWidth="400px"
-            pr="1"
-            ml="3"
-          >
-            <option value="" disabled selected>
-              Please Select A Team
-            </option>
-            {teams?.map((team, i) => (
-              <option key={i} value={team.team.name} data-id={team.team.id}>
-                {team.team.displayName}
+          <div className="drop-down-league">
+            <Select
+              icon={<ChevronDownIcon />}
+              variant="outline"
+              maxWidth="200px"
+              pr="2"
+              size="md"
+              value={league}
+              onChange={(e) => {
+                setLeague(e.target.value)
+                setSport(e.target.selectedOptions[0].dataset.sport)
+                setTeam('')
+                setEspnTeamId('')
+              }}
+            >
+              <option value="" disabled selected>
+                Select A League
               </option>
-            ))}
-          </Select>
+              <option value="nfl" data-sport="football">
+                NFL
+              </option>
+              <option value="nba" data-sport="basketball">
+                NBA
+              </option>
+              <option value="mlb" data-sport="baseball">
+                MLB
+              </option>
+              <option value="nhl" data-sport="hockey">
+                NHL
+              </option>
+              <option value="usa.1" data-sport="soccer">
+                MLS
+              </option>
+            </Select>
+          </div>
+          <div className="drop-down-team">
+            <Select
+              value={team}
+              onChange={(e) => {
+                setTeam(e.target.value)
+                setEspnTeamId(e.target.selectedOptions[0].dataset.id)
+              }}
+              icon={<ChevronDownIcon />}
+              variant="outline"
+              size="md"
+              className="drop-down-team"
+              maxWidth="400px"
+              pr="1"
+              ml="3"
+            >
+              <option value="" disabled selected>
+                Select A Team
+              </option>
+              {teams?.map((team, i) => (
+                <option key={i} value={team.team.name} data-id={team.team.id}>
+                  {team.team.displayName}
+                </option>
+              ))}
+            </Select>
+          </div>
 
           <Button
             ml="3"
             variant="solid"
             size="md"
+            className="drop-down-button"
             display="flex"
             flexDirection="column"
             fontSize="sm"
@@ -128,7 +134,7 @@ function Dashboard() {
           >
             Select
           </Button>
-          <Stats />
+          {/* <Stats /> */}
         </Box>
 
         <Box>
