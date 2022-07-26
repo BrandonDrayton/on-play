@@ -139,93 +139,110 @@ function ForumModel() {
   }
   return (
     <>
-      <div className="forum-box">
-        <Accordion
-          defaultIndex={[0]}
-          allowToggle
-          className="forum-container"
-          boxShadow="lg"
-          rounded="md"
-          bg="blackAlpha.100"
-        >
-          <Box>
-            <Text className="forumheading" fontSize="3xl" align="center" mb="4" color="white" bg="black" p="4">
-              {userData?.Team?.name} Forum
-            </Text>
-          </Box>
-          <AccordionItem className="accordian-title">
-            <h2>
-              <AccordionButton>
-                <Flex justify="space-between">
-                  <Flex flexDirection="column" textAlign="left"></Flex>
-                </Flex>
-                <Button className="thread-comment-button" mt={3} bg="#66CD00">
-                  <ChatIcon mr="2"></ChatIcon>
-                  <Text>Create {userData?.Team?.name} Thread</Text>
-                </Button>
-              </AccordionButton>
-            </h2>
-            <AccordionPanel display="flex" flexDirection="column" pb={4}>
-              <Box boxShadow="md" p="6" rounded="md" bg="white">
-                <Flex flexDirection="column"></Flex>
-                <form onSubmit={handleSubmit} method="post">
-                  <FormControl>
-                    <FormLabel>Forum Name:</FormLabel>
-                    <Input
-                      id="text"
-                      type="text"
-                      value={form.text}
-                      onChange={(e) => updateField('text', e.target.value)}
-                    />
-                    <Button type="submit" className="thread-comment-button" mt={3} bg="#66CD00">
-                      <Text>Submit</Text>
-                    </Button>
-                  </FormControl>
-                </form>
-              </Box>
-            </AccordionPanel>
-          </AccordionItem>
-          {isLoading ||
-            allThreads?.map((thread) => {
-              const currentDate = new Date(thread.createdAt)
-              const createAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `full` })
-              const createdAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
-              const subCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
-              return (
-                <AccordionItem className="accordian-title">
-                  <h2>
-                    <AccordionButton onClick={() => setOpenThread(thread.id)}>
-                      <Flex justify="space-between">
-                        <Flex flexDirection="column" textAlign="left">
-                          <Text className="accordian-thread-title">{thread.text}</Text>
-                          <Text mt="3">
-                            {createAtDate}
-                            <br></br>
-                            {createdAtTime}
-                          </Text>
-                        </Flex>
+
+      <Accordion
+        defaultIndex={[0]}
+        allowToggle
+        className="forum-container"
+        boxShadow="lg"
+        rounded="md"
+        bg="blackAlpha.100"
+      >
+        <Box>
+          <Text className="forumheading" fontSize="3xl" align="center" mb="4" color="white" bg="black" p="4">
+            {userData?.Team?.name} Forum
+          </Text>
+        </Box>
+        <AccordionItem className="accordian-title">
+          <h2>
+            <AccordionButton>
+              <Flex justify="space-between">
+                <Flex flexDirection="column" textAlign="left"></Flex>
+              </Flex>
+              <Button className="thread-comment-button" leftIcon={<ChatIcon />} mt={3} bg="#66CD00" mb="3">
+                Create {userData?.Team?.name} Thread
+              </Button>
+            </AccordionButton>
+          </h2>
+          <AccordionPanel display="flex" flexDirection="column" pb={4}>
+            <Box boxShadow="md" p="6" rounded="md" bg="white">
+              <Flex flexDirection="column"></Flex>
+              <form onSubmit={handleSubmit} method="post">
+                <FormControl>
+                  <FormLabel>Forum Name:</FormLabel>
+                  <Input
+                    id="text"
+                    type="text"
+                    value={form.text}
+                    onChange={(e) => updateField('text', e.target.value)}
+                  />
+                  <Button type="submit" className="thread-comment-button" mt={3} bg="#66CD00">
+                    <Text>Submit</Text>
+                  </Button>
+                </FormControl>
+              </form>
+            </Box>
+          </AccordionPanel>
+        </AccordionItem>
+        {isLoading ||
+          allThreads?.map((thread) => {
+            const currentDate = new Date(thread.createdAt)
+            const createAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `full` })
+            const createdAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
+            const subCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
+            return (
+              <AccordionItem className="accordian-title">
+                <h2>
+                  <AccordionButton onClick={() => setOpenThread(thread.id)}>
+                    <Flex justify="space-between">
+                      <Flex flexDirection="column" textAlign="left">
+                        <Text className="accordian-thread-title">{thread.text}</Text>
+                        <Text mt="3">
+                          {createAtDate}
+                          <br></br>
+                          {createdAtTime}
+                        </Text>
                       </Flex>
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel display="flex" flexDirection="column" pb={4}>
-                    <Button className="thread-comment-button" mt={3} onClick={() => onCommentClick(null)} bg="#66CD00">
-                      <ChatIcon mr="2"></ChatIcon>
-                      <Text>Comment</Text>
-                    </Button>
-                    {threadData?.Comments?.map((Comment) => {
-                      return (
-                        <Box
-                          onClick={() => setOpenComment(Comment.id)}
-                          key={Comment.id}
-                          boxShadow="md"
-                          p="6"
-                          rounded="md"
-                          bg="white"
-                        >
-                          <Flex flexDirection="column">
-                            <Flex align="center" mb="3">
-                              <Avatar></Avatar>
-                              <Flex>
+                    </Flex>
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel display="flex" flexDirection="column" pb={4}>
+                  <Button
+                    w="100"
+                    ml="4"
+                    mb="3"
+                    className="thread-comment-button"
+                    mt={3}
+                    onClick={() => onCommentClick(null)}
+                    bg="#66CD00"
+                  >
+                    <ChatIcon mr="2"></ChatIcon>
+                    <Text>Comment</Text>
+                  </Button>
+                  {threadData?.Comments?.map((Comment) => {
+                    return (
+                      <Box
+                        onClick={() => setOpenComment(Comment.id)}
+                        key={Comment.id}
+                        boxShadow="md"
+                        p="6"
+                        rounded="md"
+                        bg="white"
+                        m="3"
+                      >
+                        <Flex flexDirection="column">
+                          <Flex align="center" mb="3">
+                            <Avatar name={userData.name} bg={'#' + userData.iconColor} src=""></Avatar>
+                            <Text ml="3" fontSize="l">
+                              {userData.name}
+                            </Text>
+                          </Flex>
+                          <Box>
+                            <Text>{Comment.body}</Text>
+                          </Box>
+                          <Flex justify="flex-end" align={'center'}>
+                            <Flex align="center" mt="2" mr="2">
+                              <Flex mr="3">
                                 <ChatIcon
                                   className="icons"
                                   mr="2"
@@ -235,18 +252,19 @@ function ForumModel() {
                                 ></ChatIcon>
                                 <Text mr="2">{Comment.Children?.length ?? 0}</Text>
                               </Flex>
-                              <Flex justify="center">
+                              <Flex justify="center" mr="3">
                                 <WrapItem>
                                   <Button
                                     isDisabled={Comment.Likes.some((l) => l.UserId === userData.id)}
                                     isActive={Comment.Likes.some((l) => l.UserId !== userData.id)}
                                     onClick={() => handleAddLike(openThread, Comment.id)}
-                                    colorScheme="whatsapp"
-                                  >
+                                    colorScheme="orange"
+                                    >
                                     <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
                                     <Text mr="2">{Comment.Likes.length}</Text>
                                   </Button>
                                 </WrapItem>
+
                                 <Text ml="3" fontSize="l">
                                   Chase Childers
                                 </Text>
@@ -255,6 +273,31 @@ function ForumModel() {
                             <Box>
                               <Text>{Comment.body}</Text>
                             </Box>
+                          </Flex>
+                        </Flex>
+                        {Comment.Children.map((Child) => {
+                          return (
+                            <Flex
+                              boxShadow="md"
+                              p="6"
+                              rounded="md"
+                              bg="white"
+                              mt="3"
+                              w="70%"
+                              align="flex-end"
+                              key={Child.id}
+                            >
+                              <Flex flexDirection="column">
+                                <Flex align="center" mb="3">
+                                  <Avatar name={userData.name} bg={'#' + userData.iconColor} src=""></Avatar>
+                                  <Flex>
+                                    <Text ml="3" fontSize="l">
+                                      {userData.name}
+                                    </Text>
+                                  </Flex>
+                                </Flex>
+                                <Flex align="flex-end">
+                                  <Text>{Child.body}</Text>
                             <Flex justify="flex-end" align={'center'}>
                               <Flex align="center" mt="2" mr="2">
                                 <Flex>
@@ -278,124 +321,163 @@ function ForumModel() {
                                 </Text>
                               </Box>
                             </Flex>
-                          </Flex>
-                          {Comment.Children.map((Child) => {
-                            return (
-                              <Flex
-                                boxShadow="md"
-                                p="6"
-                                rounded="md"
-                                bg="white"
-                                mt="3"
-                                w="70%"
-                                align="flex-end"
-                                key={Child.id}
-                              >
-                                <Flex flexDirection="column">
-                                  <Flex align="center" mb="3">
-                                    <Avatar></Avatar>
-                                    <Flex>
-                                      <Text ml="3" fontSize="l">
-                                        sdkjhfbkdbfksdf
-                                      </Text>
-                                    </Flex>
-                                  </Flex>
-                                  <Flex align="flex-end">
-                                    <Text>{Child.body}</Text>
-                                  </Flex>
-                                  <Flex justify="flex-end" align={'center'}>
-                                    <Box>
-                                      <Text mt="2">{Child.createdAt}</Text>
-                                    </Box>
-                                  </Flex>
-                                </Flex>
-                              </Flex>
-                            )
-                          })}
-                        </Box>
-                      )
-                    })}
-                  </AccordionPanel>
-                </AccordionItem>
-              )
-            })}
-        </Accordion>
-        <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>
-              <Flex flexDirection="column">
-                <Box>
-                  <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" mt="3">
-                    Aug 13th, 2019, 10:08 AM
-                  </Text>
-                </Box>
-              </Flex>
-            </ModalHeader>
-            <ModalCloseButton />
-            <form onSubmit={handleAddComment}>
-              <ModalBody>
-                <Textarea
-                  value={formComment.body}
-                  height={250}
-                  placeholder="Type comment here"
-                  fontFamily="Poppins"
-                  fontSize="20px"
-                  onChange={(e) => updateCommentField('body', e.target.value)}
-                ></Textarea>
-              </ModalBody>
-              <ModalFooter>
-                <Button type="submit" bg="#66CD00" mr={3}>
-                  Send it
-                </Button>
-                <Button onClick={onClose} variant="ghost">
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </form>
-          </ModalContent>
-        </Modal>
-        <Modal size="xl" isOpen={isSecondOpen} onClose={onClose} isCentered>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>
-              <Flex flexDirection="column">
-                <Box>
-                  <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
-                </Box>
-                <Box>
-                  <Text fontSize="sm" mt="3">
-                    Aug 13th, 2019, 10:08 AM
-                  </Text>
-                </Box>
-              </Flex>
-            </ModalHeader>
-            <ModalCloseButton />
-            <form onSubmit={handleAddSubComment}>
-              <ModalBody>
-                <Textarea
-                  value={formSubComment.body}
-                  height={250}
-                  placeholder="Type comment here"
-                  fontFamily="Poppins"
-                  fontSize="20px"
-                  onChange={(e) => updateSubCommentField('body', e.target.value)}
-                ></Textarea>
-              </ModalBody>
-              <ModalFooter>
-                <Button type="submit" bg="#66CD00" mr={3}>
-                  Send it
-                </Button>
-                <Button onClick={onClose} variant="ghost">
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </form>
-          </ModalContent>
-        </Modal>
+                          )
+                        })}
+                      </Box>
+                    )
+                  })}
+                </AccordionPanel>
+              </AccordionItem>
+            )
+          })}
+      </Accordion>
+      <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex flexDirection="column">
+              <Box>
+                <Text>Add Comment</Text>
+              </Box>
+            </Flex>
+          </ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleAddComment}>
+            <ModalBody>
+              <Textarea
+                value={formComment.body}
+                height={250}
+                placeholder="Type comment here"
+                fontFamily="Poppins"
+                fontSize="20px"
+                onChange={(e) => updateCommentField('body', e.target.value)}
+              ></Textarea>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" bg="#66CD00" mr={3}>
+                Send it
+              </Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+      <Modal size="xl" isOpen={isSecondOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex flexDirection="column">
+              <Box>
+                <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
+              </Box>
+              <Box>
+                <Text fontSize="sm" mt="3">
+                  Aug 13th, 2019, 10:08 AM
+                </Text>
+              </Box>
+            </Flex>
+          </ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleAddSubComment}>
+            <ModalBody>
+              <Textarea
+                value={formSubComment.body}
+                height={250}
+                placeholder="Type comment here"
+                fontFamily="Poppins"
+                fontSize="20px"
+                onChange={(e) => updateSubCommentField('body', e.target.value)}
+              ></Textarea>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" bg="#66CD00" mr={3}>
+                Send it
+              </Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+      <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex flexDirection="column">
+              <Box>
+                <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
+              </Box>
+              <Box>
+                <Text fontSize="sm" mt="3">
+                  Aug 13th, 2019, 10:08 AM
+                </Text>
+              </Box>
+            </Flex>
+          </ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleAddComment}>
+            <ModalBody>
+              <Textarea
+                value={formComment.body}
+                height={250}
+                placeholder="Type comment here"
+                fontFamily="Poppins"
+                fontSize="20px"
+                onChange={(e) => updateCommentField('body', e.target.value)}
+              ></Textarea>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" bg="#66CD00" mr={3}>
+                Send it
+              </Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+      <Modal size="xl" isOpen={isSecondOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex flexDirection="column">
+              <Box>
+                <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
+              </Box>
+              <Box>
+                <Text fontSize="sm" mt="3">
+                  Aug 13th, 2019, 10:08 AM
+                </Text>
+              </Box>
+            </Flex>
+          </ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleAddSubComment}>
+            <ModalBody>
+              <Textarea
+                value={formSubComment.body}
+                height={250}
+                placeholder="Type comment here"
+                fontFamily="Poppins"
+                fontSize="20px"
+                onChange={(e) => updateSubCommentField('body', e.target.value)}
+              ></Textarea>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" bg="#66CD00" mr={3}>
+                Send it
+              </Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
       </div>
     </>
   )
