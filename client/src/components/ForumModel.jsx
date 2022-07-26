@@ -139,6 +139,7 @@ function ForumModel() {
   }
   return (
     <>
+
       <Accordion
         defaultIndex={[0]}
         allowToggle
@@ -258,17 +259,19 @@ function ForumModel() {
                                     isActive={Comment.Likes.some((l) => l.UserId !== userData.id)}
                                     onClick={() => handleAddLike(openThread, Comment.id)}
                                     colorScheme="orange"
-                                  >
+                                    >
                                     <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
                                     <Text mr="2">{Comment.Likes.length}</Text>
                                   </Button>
                                 </WrapItem>
+
+                                <Text ml="3" fontSize="l">
+                                  Chase Childers
+                                </Text>
                               </Flex>
                             </Flex>
                             <Box>
-                              <Text mt="2">
-                                {subCommentTime} {createdAtTime}
-                              </Text>
+                              <Text>{Comment.body}</Text>
                             </Box>
                           </Flex>
                         </Flex>
@@ -295,13 +298,28 @@ function ForumModel() {
                                 </Flex>
                                 <Flex align="flex-end">
                                   <Text>{Child.body}</Text>
+                            <Flex justify="flex-end" align={'center'}>
+                              <Flex align="center" mt="2" mr="2">
+                                <Flex>
+                                  <ChatIcon
+                                    className="icons"
+                                    mr="2"
+                                    w="4"
+                                    height="6"
+                                    onClick={() => onCommentClick(Comment.id)}
+                                  ></ChatIcon>
+                                  <Text mr="2">{Comment.Children?.length ?? 0}</Text>
                                 </Flex>
-                                <Flex justify="flex-end" align={'center'}>
-                                  <Box>
-                                    <Text mt="2">{Child.createdAt}</Text>
-                                  </Box>
+                                <Flex justify="center">
+                                  <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                                  <Text mr="2">{Comment.Likes?.length ?? 0}</Text>
                                 </Flex>
                               </Flex>
+                              <Box>
+                                <Text mt="2">
+                                  {subCommentTime} {createdAtTime}
+                                </Text>
+                              </Box>
                             </Flex>
                           )
                         })}
@@ -384,6 +402,83 @@ function ForumModel() {
           </form>
         </ModalContent>
       </Modal>
+      <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex flexDirection="column">
+              <Box>
+                <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
+              </Box>
+              <Box>
+                <Text fontSize="sm" mt="3">
+                  Aug 13th, 2019, 10:08 AM
+                </Text>
+              </Box>
+            </Flex>
+          </ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleAddComment}>
+            <ModalBody>
+              <Textarea
+                value={formComment.body}
+                height={250}
+                placeholder="Type comment here"
+                fontFamily="Poppins"
+                fontSize="20px"
+                onChange={(e) => updateCommentField('body', e.target.value)}
+              ></Textarea>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" bg="#66CD00" mr={3}>
+                Send it
+              </Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+      <Modal size="xl" isOpen={isSecondOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Flex flexDirection="column">
+              <Box>
+                <Text>ESPN Just Gave Justin Fields Even More Reasons To Crush 2022</Text>
+              </Box>
+              <Box>
+                <Text fontSize="sm" mt="3">
+                  Aug 13th, 2019, 10:08 AM
+                </Text>
+              </Box>
+            </Flex>
+          </ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleAddSubComment}>
+            <ModalBody>
+              <Textarea
+                value={formSubComment.body}
+                height={250}
+                placeholder="Type comment here"
+                fontFamily="Poppins"
+                fontSize="20px"
+                onChange={(e) => updateSubCommentField('body', e.target.value)}
+              ></Textarea>
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" bg="#66CD00" mr={3}>
+                Send it
+              </Button>
+              <Button onClick={onClose} variant="ghost">
+                Cancel
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
+      </Modal>
+      </div>
     </>
   )
 }
