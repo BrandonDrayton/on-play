@@ -250,8 +250,8 @@
       align-content: flex-start;
     }
     .articleButton{
-      /* margin-left: 60px;
-      margin-top: 3em; */
+      /* margin-left: 60px; */
+      /* margin-top: 5px; */
     }
     .outer-div{
       height: fit-content;
@@ -264,10 +264,14 @@
     .articleButton{
       /* margin-left: -35px; */
       width: auto;
-      margin-top: 0em
+      padding: 8px;
+      margin-top: 1em
     }
     .img-wrap{
       object-fit: contain;
+    }
+    .discipline{
+      font: 17px;
     }
     
   }

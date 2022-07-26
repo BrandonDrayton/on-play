@@ -31,10 +31,11 @@ function About() {
                   alt="some guy"
                 />
                 <div className="text-box">
-                  <Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat eos odit quod, sit accusantium
-                    nobis perferendis dolores aliquid suscipit doloremque excepturi voluptates veniam reprehenderit
-                    earum asperiores dolor. Quod, ducimus laboriosam.
+                  <Text className="text-box-text">
+                    I am a web developer who enjoys creating and implementing different technologies to build beautiful
+                    websites. Learning to solve problems and pushing limits is not new territory for me. I believe with
+                    the right mindset, you can experience growth in all facets of your life. Solving one problem can
+                    trickle down and solve all your other problems.
                   </Text>
                 </div>
               </Box>
@@ -45,10 +46,9 @@ function About() {
             <Flex>
               <Box className="profile-card" display="flex" flexDirection="row">
                 <div className="text-box">
-                  <Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat eos odit quod, sit accusantium
-                    nobis perferendis dolores aliquid suscipit doloremque excepturi voluptates veniam reprehenderit
-                    earum asperiores dolor. Quod, ducimus laboriosam.
+                  <Text className="text-box-text">
+                    I am a Software Engineer from Swan Point, Maryland. I have a passion for building beautiful websites
+                    with clean, elegant, and efficient code.
                   </Text>
                 </div>
                 <Image
@@ -69,7 +69,7 @@ function About() {
                   alt="some guy"
                 />
                 <div className="text-box">
-                  <Text>
+                  <Text className="text-box-text">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat eos odit quod, sit accusantium
                     nobis perferendis dolores aliquid suscipit doloremque excepturi voluptates veniam reprehenderit
                     earum asperiores dolor. Quod, ducimus laboriosam.
@@ -83,10 +83,11 @@ function About() {
             <Flex>
               <Box className="profile-card" display="flex" flexDirection="row">
                 <div className="text-box">
-                  <Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat eos odit quod, sit accusantium
-                    nobis perferendis dolores aliquid suscipit doloremque excepturi voluptates veniam reprehenderit
-                    earum asperiores dolor. Quod, ducimus laboriosam.
+                  <Text className="text-box-text">
+                    I'm Kyle Huskey from Memphis, TN, but for the past six years my wife and I have lived in
+                    Indianapolis. With my son being born last fall, I realized that it was time for a career change to
+                    provide a better work life balance. I've always been fascinated by technology and have a passion for
+                    learning new skills. I found all of that and even more in the world of tech.
                   </Text>
                 </div>
                 <Image
