@@ -16,7 +16,7 @@ function PrimaryNav() {
   return (
     <>
       <div className="navbar">
-        <Link className="link" to="/">
+        <Link className="link" to="/dashboard">
           <Flex>
             <img className="logo" src="/images/logo.png" alt="logo"></img>
           </Flex>
@@ -29,29 +29,32 @@ function PrimaryNav() {
               icon={<HamburgerIcon />}
               variant="outline"
               className="menu-drop-down"
+              _focus={null}
+              colorScheme="black"
+              _hover={{ bg: 'greenyellow' }}
             />
-            <MenuList>
-              <MenuItem className="menu-links">
+            <MenuList bg={'black'} border={'none'}>
+              <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
                 <Link className="link" to="/dashboard">
                   Dashboard
                 </Link>
               </MenuItem>
-              <MenuItem className="menu-links">
+              <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
                 <Link className="link" to="/about">
                   About Us
                 </Link>
               </MenuItem>
-              <MenuItem className="menu-links">
+              <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
                 <Link className="link" to="/register">
                   Register
                 </Link>
               </MenuItem>
-              <MenuItem className="menu-links">
+              <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
                 <Link className="link" to="/login">
                   Login
                 </Link>
               </MenuItem>
-              <MenuItem className="menu-links">
+              <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
                 <Link className="link" to="/logout">
                   Logout
                 </Link>
