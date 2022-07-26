@@ -5,6 +5,7 @@
   align-items: center;
   color: white;
   background-color: black;
+  flex: auto;
 }
 
 .links {
@@ -32,4 +33,73 @@
   margin-left: 40px;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+@media(min-width: 320px) and (max-width: 680px) {
+  .navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin:-4px;
+  }
+  .links{
+    display: none;
+  }
+  .menu-icon-drop-down{
+    display: true;
+  }
+  .drop-down-league{
+    margin-bottom: 1em;
+  }
+  .drop-down-selector{
+    margin-top: 3em;
+    flex-direction: column;
+    align-items: center;
+  }
+  .drop-down-team{
+    margin-right: 20px;
+    padding-bottom: 15px;
+    width: 180px;
+  }
+  .drop-down-button{
+    width: 190px;
+    margin-bottom: 10px;
+  }
+  .menu-icon-drop-down{
+    padding-right: 1em
+  }
+  .drop-down-list{
+    background-color: aqua;
+  }
+}
+.menu-links{
+  background-color: black;
+}
+.menu-links:hover{
+  /* background-color: black; */
+  background-color: none;
+
+}
+
+@media(min-width: 681px) and (max-width: 9999px){
+
+  .menu-icon-drop-down{
+    display: none;
+  }
+}
+@media(min-width: 681px) and (max-width: 900px){
+  .navbar{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+  }
+}
+.drop-down-selector{
+  /* margin-top: 3em;
+  margin-left: 3em;
+  margin-right: 3em; */
+
 }

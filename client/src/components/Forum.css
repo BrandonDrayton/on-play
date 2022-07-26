@@ -30,3 +30,11 @@
     height: 25px;
     width: 25px;
 }
+/* thread forum */
+@media(min-width: 320px) and (max-width: 680px) {
+    .forum-box{
+        display:flex;
+        justify-content: center;
+        margin-left: -1px;
+    }
+}
