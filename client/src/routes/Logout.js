@@ -9,27 +9,9 @@ function Logout() {
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [addUserLogout, isError] = useAddUserLogoutMutation()
-  const handleClick = (e) => {
-    setIsLoading(true)
-    setError('')
-    setSuccess('')
-    fetch('/api/v1/users/logout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setIsLoading(false)
-        if (data.error) {
-          setError(data.error)
-        } else {
-          setSuccess('Logged out Successfully')
-        }
-      })
-  }
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: data.email,
+    password: data.password,
   })
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -40,8 +22,8 @@ function Logout() {
       .unwrap()
       .then(() => {
         setForm({
-          email: '',
-          password: '',
+          email: null,
+          password: null,
         })
         setSuccess('Logged in Successfully..?')
         navigate('/login')
@@ -69,15 +51,7 @@ function Logout() {
             <AlertIcon /> {success}
           </Alert>
         )}
-        <Button
-          type="submit"
-          isLoading={isLoading}
-          onClick={handleClick}
-          mt={4}
-          className="form"
-          colorScheme="blackAlpha"
-          size="md"
-        >
+        <Button type="submit" isLoading={isLoading} mt={4} className="form" colorScheme="blackAlpha" size="md">
           Logout
         </Button>
       </form>

@@ -23,10 +23,12 @@ import {
   Text,
   Textarea,
   useDisclosure,
+  WrapItem,
 } from '@chakra-ui/react'
 import Moment from 'moment'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useGetCurrentUserQuery } from '../services/createUserApi'
 import {
   useAddNewCommentMutation,
   useAddNewLikeMutation,
@@ -47,6 +49,8 @@ function ForumModel() {
   const [addnewLike] = useAddNewLikeMutation()
   const [openThread, setOpenThread] = useState()
   const [openComment, setOpenComment] = useState()
+  const [isDisabled, setIsDisabled] = useState(false)
+  const { data: userData } = useGetCurrentUserQuery()
   const { data: threadData, isLoading: threadDataIsLoading } = useGetThreadQuery(openThread)
   const [count, setCount] = useState(threadData)
   const [form, setForm] = useState({
@@ -60,6 +64,7 @@ function ForumModel() {
   const [formSubComment, setFormSubComment] = useState({
     body: '',
   })
+  console.log(userData)
   const handleSubmit = (e) => {
     e.preventDefault()
     addNewThread(form)
@@ -81,14 +86,17 @@ function ForumModel() {
           createdAt: '',
           parentId: null,
         })
+        onClose()
       })
       .catch((e) => {})
   }
-  const handleAddLike = (e) => {
-    addnewLike({ threadId: openThread, commentId: openComment })
+
+  const handleAddLike = (threadId, Comment) => {
+    addnewLike({ threadId: openThread, commentId: Comment })
       .unwrap()
       .catch((e) => {})
   }
+
   const handleAddSubComment = (e) => {
     e.preventDefault()
     addNewSubComment({ id: openThread, newSubComment: formComment })
@@ -97,7 +105,9 @@ function ForumModel() {
         setFormSubComment({
           body: '',
         })
+        onClose()
       })
+
       .catch((e) => {})
   }
   const updateField = (name, value) => {
@@ -129,74 +139,69 @@ function ForumModel() {
   }
   return (
     <>
-      <div className="forum-box">
-        <Accordion
-          defaultIndex={[0]}
-          allowToggle
-          className="forum-container"
-          boxShadow="lg"
-          rounded="md"
-          bg="blackAlpha.100"
-        >
-          <Box>
-            <Text className="forumheading" fontSize="3xl" align="center" mb="4" color="white" bg="black" p="4">
-              SPORTS FORUM
-            </Text>
-          </Box>
-          <AccordionItem className="accordian-title">
-            <h2>
-              <AccordionButton>
-                <Flex justify="space-between">
-                  <Flex flexDirection="column" textAlign="left"></Flex>
-                </Flex>
-                <Button className="thread-comment-button" mt={3} bg="#66CD00">
-                  <ChatIcon mr="2"></ChatIcon>
-                  <Text>Create New Forum</Text>
-                </Button>
-              </AccordionButton>
-            </h2>
-            <AccordionPanel display="flex" flexDirection="column" pb={4}>
-              <Box boxShadow="md" p="6" rounded="md" bg="white">
-                <Flex flexDirection="column"></Flex>
-                <form onSubmit={handleSubmit} method="post">
-                  <FormControl>
-                    <FormLabel>Forum Name:</FormLabel>
-                    <Input
-                      id="text"
-                      type="text"
-                      value={form.text}
-                      onChange={(e) => updateField('text', e.target.value)}
-                    />
-                    <Button type="submit" className="thread-comment-button" mt={3} bg="#66CD00">
-                      <Text>Submit</Text>
-                    </Button>
-                  </FormControl>
-                </form>
-              </Box>
-            </AccordionPanel>
-          </AccordionItem>
-          {isLoading ||
-            allThreads?.map((thread) => {
-              const currentDate = new Date(thread.createdAt)
-              const createAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `full` })
-              const createdAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
-              const subCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
-              return (
-                <AccordionItem className="accordian-title">
-                  <h2>
-                    <AccordionButton onClick={() => setOpenThread(thread.id)}>
-                      <Flex justify="space-between">
-                        <Flex flexDirection="column" textAlign="left">
-                          <Text className="accordian-thread-title">{thread.text}</Text>
-                          <Text mt="3">
-                            {createAtDate}
-                            <br></br>
-                            {createdAtTime}
-                          </Text>
-                        </Flex>
-                        <Box>
-                          <AccordionIcon />
-                        </Box>
+      <Accordion
+        defaultIndex={[0]}
+        allowToggle
+        className="forum-container"
+        boxShadow="lg"
+        rounded="md"
+        bg="blackAlpha.100"
+      >
+        <Box>
+          <Text className="forumheading" fontSize="3xl" align="center" mb="4" color="white" bg="black" p="4">
+            {userData?.Team?.name} Forum
+          </Text>
+        </Box>
+        <AccordionItem className="accordian-title">
+          <h2>
+            <AccordionButton>
+              <Flex justify="space-between">
+                <Flex flexDirection="column" textAlign="left"></Flex>
+              </Flex>
+              <Button className="thread-comment-button" mt={3} bg="#66CD00">
+                <ChatIcon mr="2"></ChatIcon>
+                <Text>Create {userData?.Team?.name} Thread</Text>
+              </Button>
+            </AccordionButton>
+          </h2>
+          <AccordionPanel display="flex" flexDirection="column" pb={4}>
+            <Box boxShadow="md" p="6" rounded="md" bg="white">
+              <Flex flexDirection="column"></Flex>
+              <form onSubmit={handleSubmit} method="post">
+                <FormControl>
+                  <FormLabel>Forum Name:</FormLabel>
+                  <Input
+                    id="text"
+                    type="text"
+                    value={form.text}
+                    onChange={(e) => updateField('text', e.target.value)}
+                  />
+                  <Button type="submit" className="thread-comment-button" mt={3} bg="#66CD00">
+                    <Text>Submit</Text>
+                  </Button>
+                </FormControl>
+              </form>
+            </Box>
+          </AccordionPanel>
+        </AccordionItem>
+        {isLoading ||
+          allThreads?.map((thread) => {
+            const currentDate = new Date(thread.createdAt)
+            const createAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `full` })
+            const createdAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
+            const subCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
+            return (
+              <AccordionItem className="accordian-title">
+                <h2>
+                  <AccordionButton onClick={() => setOpenThread(thread.id)}>
+                    <Flex justify="space-between">
+                      <Flex flexDirection="column" textAlign="left">
+                        <Text className="accordian-thread-title">{thread.text}</Text>
+                        <Text mt="3">
+                          {createAtDate}
+                          <br></br>
+                          {createdAtTime}
+                        </Text>
                       </Flex>
                     </AccordionButton>
                   </h2>
@@ -219,6 +224,27 @@ function ForumModel() {
                             <Flex align="center" mb="3">
                               <Avatar></Avatar>
                               <Flex>
+                                <ChatIcon
+                                  className="icons"
+                                  mr="2"
+                                  w="4"
+                                  height="6"
+                                  onClick={() => onCommentClick(Comment.id)}
+                                ></ChatIcon>
+                                <Text mr="2">{Comment.Children?.length ?? 0}</Text>
+                              </Flex>
+                              <Flex justify="center">
+                                <WrapItem>
+                                  <Button
+                                    isDisabled={Comment.Likes.some((l) => l.UserId === userData.id)}
+                                    isActive={Comment.Likes.some((l) => l.UserId !== userData.id)}
+                                    onClick={() => handleAddLike(openThread, Comment.id)}
+                                    colorScheme="whatsapp"
+                                  >
+                                    <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                                    <Text mr="2">{Comment.Likes.length}</Text>
+                                  </Button>
+                                </WrapItem>
                                 <Text ml="3" fontSize="l">
                                   Chase Childers
                                 </Text>

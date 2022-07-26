@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ThreadId: {
+      CommentId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Comments',
