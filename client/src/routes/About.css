@@ -1,10 +1,13 @@
 .profile-card{
-    background-color: aquamarine;
+    background-color: rgba(0, 0, 0, 0.482);
     width: auto;
     max-width: 95%;
     border-radius: 15px;
     margin-left: 3em;
     margin-right: 3em;
+}
+.about-box{
+  /* width: 1000px; */
 }
 .outer-box{
     display: flex;
@@ -14,7 +17,7 @@
     border-radius: 15px;
 }
 .profile-image{
-    border-radius: 10px;
+    border-radius: 50%;
     margin: 10px;
 }
 .title{
@@ -47,6 +50,7 @@
   @media(min-width: 320px) and (max-width: 680px) {
     .about-box{
       display:flex;
+      justify-content: center;
       width:20px;
       max-height:20px;
     }
@@ -58,10 +62,12 @@
     }
     .profile-card{
       display:flex;
-      height:200px;
+      /* height:200px; */
       width:300px;
       margin-left: 34px;
       margin-right: 40px;
+      height: auto;
+      padding: 5px;
 
     }
     .profile-image{
