@@ -6,9 +6,9 @@ const checkAuth = require('../middleware/checkAuth')
 
 // GET /api/v1/register
 router.post('/register', async (req, res) => {
-  const { email, password, username } = req.body
+  const { name, email, password, username } = req.body
   // if required fields missing, send error
-  if (!email || !password || !username) {
+  if (!email || !password || !username || !name) {
     return res.status(400).json({ error: 'missing email and/or password' })
   }
   const existingUser = await models.User.findOne({
