@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { useAddUserLogoutMutation, useGetCurrentUserQuery } from '../services/createUserApi'
 function Logout() {
   const navigate = useNavigate()
-  const { data, isUninitialized, isFetching } = useGetCurrentUserQuery()
+  const { data, isUninitialized, isFetching, refetch } = useGetCurrentUserQuery()
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)

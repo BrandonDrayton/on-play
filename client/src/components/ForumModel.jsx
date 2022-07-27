@@ -44,7 +44,7 @@ function ForumModel() {
   const { isOpen: isSecondOpen, onOpen: onSecondOpen, onClose: onSecondClose } = useDisclosure()
   const [addNewComment] = useAddNewCommentMutation()
   const [addNewSubComment] = useAddNewSubCommentMutation()
-  const { data: allThreads, isLoading } = useGetThreadsQuery()
+  const { data: allThreads, isLoading, refetch } = useGetThreadsQuery()
   const [addNewThread] = useAddNewThreadMutation()
   const [addnewLike] = useAddNewLikeMutation()
   const [openThread, setOpenThread] = useState()
@@ -64,7 +64,6 @@ function ForumModel() {
   const [formSubComment, setFormSubComment] = useState({
     body: '',
   })
-  console.log(userData)
   const handleSubmit = (e) => {
     e.preventDefault()
     addNewThread(form)
@@ -73,6 +72,7 @@ function ForumModel() {
         setForm({
           text: '',
         })
+        refetch()
       })
       .catch((e) => {})
   }
@@ -168,7 +168,7 @@ function ForumModel() {
               <Box boxShadow="md" p="6" rounded="md" bg="white">
                 <Flex flexDirection="column"></Flex>
                 <form onSubmit={handleSubmit} method="post">
-                  <FormControl>
+                  <FormControl isRequired>
                     <FormLabel>Forum Name:</FormLabel>
                     <Input
                       id="text"
@@ -220,7 +220,6 @@ function ForumModel() {
                       <Text>Comment</Text>
                     </Button>
                     {threadData?.Comments?.map((Comment) => {
-                      console.log(Comment)
                       return (
                         <Box
                           onClick={() => setOpenComment(Comment.id)}
@@ -288,10 +287,10 @@ function ForumModel() {
                               >
                                 <Flex flexDirection="column">
                                   <Flex align="center" mb="3">
-                                    <Avatar name={userData.name} bg={'#' + userData.iconColor} src=""></Avatar>
+                                    <Avatar name={Child.name} bg={'#' + Child.iconColor} src=""></Avatar>
                                     <Flex>
                                       <Text ml="3" fontSize="l">
-                                        {userData.name}
+                                        {Child.name}
                                       </Text>
                                     </Flex>
                                   </Flex>
@@ -327,16 +326,18 @@ function ForumModel() {
             </ModalHeader>
             <ModalCloseButton />
             <form onSubmit={handleAddComment}>
-              <ModalBody>
-                <Textarea
-                  value={formComment.body}
-                  height={250}
-                  placeholder="Type comment here"
-                  fontFamily="Poppins"
-                  fontSize="20px"
-                  onChange={(e) => updateCommentField('body', e.target.value)}
-                ></Textarea>
-              </ModalBody>
+              <FormControl isRequired>
+                <ModalBody>
+                  <Textarea
+                    value={formComment.body}
+                    height={250}
+                    placeholder="Type comment here"
+                    fontFamily="Poppins"
+                    fontSize="20px"
+                    onChange={(e) => updateCommentField('body', e.target.value)}
+                  ></Textarea>
+                </ModalBody>
+              </FormControl>
               <ModalFooter>
                 <Button type="submit" bg="#66CD00" mr={3}>
                   Send it
@@ -365,16 +366,18 @@ function ForumModel() {
             </ModalHeader>
             <ModalCloseButton />
             <form onSubmit={handleAddSubComment}>
-              <ModalBody>
-                <Textarea
-                  value={formSubComment.body}
-                  height={250}
-                  placeholder="Type comment here"
-                  fontFamily="Poppins"
-                  fontSize="20px"
-                  onChange={(e) => updateSubCommentField('body', e.target.value)}
-                ></Textarea>
-              </ModalBody>
+              <FormControl isRequired>
+                <ModalBody>
+                  <Textarea
+                    value={formSubComment.body}
+                    height={250}
+                    placeholder="Type comment here"
+                    fontFamily="Poppins"
+                    fontSize="20px"
+                    onChange={(e) => updateSubCommentField('body', e.target.value)}
+                  ></Textarea>
+                </ModalBody>
+              </FormControl>
               <ModalFooter>
                 <Button type="submit" bg="#66CD00" mr={3}>
                   Send it

@@ -84,7 +84,7 @@ router.get('/favorite', async (req, res) => {
   res.json(favoriteTeam)
 })
 
-router.get('/current', checkAuth, async (req, res) => {
+router.get('/current', async (req, res) => {
   if (!req.session) {
     res.json(null)
     return

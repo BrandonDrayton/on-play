@@ -9,12 +9,13 @@ import Dashboard from './routes/Dashboard'
 import Logout from './routes/Logout'
 import Protected from './components/Protected'
 import { useGetCurrentUserQuery } from './services/createUserApi'
+import LandingNav from './components/LandingNav'
 
 function App() {
   const { data } = useGetCurrentUserQuery()
   return (
     <div className="App">
-      <PrimaryNav />
+      {!data ? <LandingNav /> : <PrimaryNav />}
       <Routes>
         <Route
           path="/"
