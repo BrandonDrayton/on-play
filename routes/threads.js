@@ -22,11 +22,14 @@ router.post('/:id/comment', checkAuth, async (req, res) => {
   if (isNaN(id)) return res.status(404).json({ error: 'thread not found' })
   const thread = await models.Thread.findByPk(id)
   if (!thread) return res.status(404).json({ error: 'thread not found' })
+  console.log('FIND MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', req.session.user.iconColor, req.session.user.name)
   const comment = await thread.createComment({
     body: req.body.body,
     likes: 0,
     ParentId: req.body.parentId,
     UserId: req.session.user.id,
+    iconColor: req.session.user.iconColor,
+    name: req.session.user.name,
   })
   res.json(comment)
 })
@@ -37,10 +40,20 @@ router.post('/:threadId/comment/:commentId', checkAuth, async (req, res) => {
   if (isNaN(threadId || commentId)) return res.status(404).json({ error: 'thread not found' })
   const thread = await models.Thread.findByPk(threadId)
   if (!thread) return res.status(404).json({ error: 'thread not found' })
+  console.log(req.session.user.iconColor)
+  console.log(req.session.user.name)
   const subComment = await thread.createComment({
     body: req.body.body,
     ParentId: commentId,
     UserId: req.session.user.id,
+    include: [
+      {
+        model: models.User,
+        where: { id: req.session.user.id },
+        include: ['iconColor', 'name'],
+        required: false,
+      },
+    ],
   })
   res.json(subComment)
 })
@@ -72,7 +85,14 @@ router.get('/:id', checkAuth, async (req, res) => {
         required: false,
         order: [['likes', 'DESC']],
       },
+
+      {
+        model: models.User,
+        where: { id: req.session.user.id },
+        required: false,
+      },
     ],
+
     order: [['createdAt', 'DESC']],
   })
   if (!thread) return res.status(404).json({ error: 'thread not found' })

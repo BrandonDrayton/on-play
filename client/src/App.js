@@ -17,7 +17,7 @@ function App() {
       <PrimaryNav />
       <Routes>
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <Protected>
               <Dashboard />
