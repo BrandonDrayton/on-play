@@ -62,7 +62,6 @@
     }
     .profile-card{
       display:flex;
-      flex-direction: column;
       /* height:200px; */
       width:300px;
       margin-left: 34px;
@@ -72,12 +71,12 @@
 
     }
     .profile-image{
-      /* display:flex; */
+      display:flex;
       width:150px;
       height: 150px;
     }
     .text-box{
-      /* display:flex; */
+      display:flex;
       font-size: 12px;
     }
   }

@@ -28,7 +28,8 @@ function News() {
               {news?.slice(96, 100).map((team) => (
                 <div className="sidebar-section">
                   <div className="section-body">
-                    <img className="img-wrap" src={teamLogo?.href} alt="" />
+                    {/* <img src={'/images/logo.png'} alt="" /> */}
+                    <img className="img-wrap" src={teamLogo?.href || '/images/logo.png'} alt="" />
                   </div>
                   <div className="section-footer">
                     <div className="footer-information">
