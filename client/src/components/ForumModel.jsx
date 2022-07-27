@@ -137,6 +137,7 @@ function ForumModel() {
     onOpen()
     updateCommentField('parentId', id)
   }
+  console.log(allThreads, userData)
   return (
     <>
       <div className="forum-box">
@@ -185,140 +186,142 @@ function ForumModel() {
             </AccordionPanel>
           </AccordionItem>
           {isLoading ||
-            allThreads?.map((thread) => {
-              const currentDate = new Date(thread.createdAt)
-              const createAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `full` })
-              const createdAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
-              const subCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
-              return (
-                <AccordionItem className="accordian-title">
-                  <h2>
-                    <AccordionButton onClick={() => setOpenThread(thread.id)}>
-                      <Flex justify="space-between">
-                        <Flex flexDirection="column" textAlign="left">
-                          <Text className="accordian-thread-title">{thread.text}</Text>
-                          <Text mt="3">
-                            {createAtDate}
-                            <br></br>
-                            {createdAtTime}
-                          </Text>
+            allThreads
+              ?.filter((t) => t.TeamId === userData.FavoriteTeamId)
+              .map((thread) => {
+                const currentDate = new Date(thread.createdAt)
+                const createAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `full` })
+                const createdAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
+                const subCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
+                return (
+                  <AccordionItem className="accordian-title">
+                    <h2>
+                      <AccordionButton onClick={() => setOpenThread(thread.id)}>
+                        <Flex justify="space-between">
+                          <Flex flexDirection="column" textAlign="left">
+                            <Text className="accordian-thread-title">{thread.text}</Text>
+                            <Text mt="3">
+                              {createAtDate}
+                              <br></br>
+                              {createdAtTime}
+                            </Text>
+                          </Flex>
                         </Flex>
-                      </Flex>
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel display="flex" flexDirection="column" pb={4}>
-                    <Button
-                      w="100"
-                      ml="4"
-                      mb="3"
-                      className="thread-comment-button"
-                      mt={3}
-                      onClick={() => onCommentClick(null)}
-                      bg="#66CD00"
-                    >
-                      <ChatIcon mr="2"></ChatIcon>
-                      <Text>Comment</Text>
-                    </Button>
-                    {threadData?.Comments?.map((Comment) => {
-                      return (
-                        <Box
-                          onClick={() => setOpenComment(Comment.id)}
-                          key={Comment.id}
-                          boxShadow="md"
-                          p="6"
-                          rounded="md"
-                          bg="white"
-                          m="3"
-                        >
-                          <Flex flexDirection="column">
-                            <Flex align="center" mb="3">
-                              <Avatar name={Comment.name} bg={'#' + Comment.iconColor} src=""></Avatar>
-                              <Text ml="3" fontSize="l">
-                                {Comment.name}
-                              </Text>
-                            </Flex>
-                            <Box>
-                              <Text>{Comment.body}</Text>
-                            </Box>
-                            <Flex justify="flex-end" align={'center'}>
-                              <Flex align="center" mt="2" mr="2">
-                                <Flex mr="3">
-                                  <ChatIcon
-                                    className="icons"
-                                    mr="2"
-                                    w="4"
-                                    height="6"
-                                    onClick={() => onCommentClick(Comment.id)}
-                                  ></ChatIcon>
-                                  <Text mr="2">{Comment.Children?.length ?? 0}</Text>
-                                </Flex>
-                                <Flex justify="center" mr="3">
-                                  <WrapItem>
-                                    <Button
-                                      isDisabled={Comment.Likes.some((l) => l.UserId === userData.id)}
-                                      isActive={Comment.Likes.some((l) => l.UserId !== userData.id)}
-                                      onClick={() => handleAddLike(openThread, Comment.id)}
-                                      colorScheme="orange"
-                                    >
-                                      <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
-                                      <Text mr="2">{Comment.Likes.length}</Text>
-                                    </Button>
-                                  </WrapItem>
-                                </Flex>
+                      </AccordionButton>
+                    </h2>
+                    <AccordionPanel display="flex" flexDirection="column" pb={4}>
+                      <Button
+                        w="100"
+                        ml="4"
+                        mb="3"
+                        className="thread-comment-button"
+                        mt={3}
+                        onClick={() => onCommentClick(null)}
+                        bg="#66CD00"
+                      >
+                        <ChatIcon mr="2"></ChatIcon>
+                        <Text>Comment</Text>
+                      </Button>
+                      {threadData?.Comments?.map((Comment) => {
+                        return (
+                          <Box
+                            onClick={() => setOpenComment(Comment.id)}
+                            key={Comment.id}
+                            boxShadow="md"
+                            p="6"
+                            rounded="md"
+                            bg="white"
+                            m="3"
+                          >
+                            <Flex flexDirection="column">
+                              <Flex align="center" mb="3">
+                                <Avatar name={Comment.name} bg={'#' + Comment.iconColor} src=""></Avatar>
+                                <Text ml="3" fontSize="l">
+                                  {Comment.name}
+                                </Text>
                               </Flex>
                               <Box>
-                                <Text mt="2">
-                                  {subCommentTime} {createdAtTime}
-                                </Text>
+                                <Text>{Comment.body}</Text>
                               </Box>
-                            </Flex>
-                          </Flex>
-                          {Comment.Children.map((Child) => {
-                            const currentDate = new Date(Child.createdAt)
-                            const childCreateAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
-                            const childCreatedAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
-                            const childSubCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
-                            return (
-                              <Flex
-                                boxShadow="md"
-                                p="6"
-                                rounded="md"
-                                bg="white"
-                                mt="3"
-                                w="70%"
-                                align="flex-end"
-                                key={Child.id}
-                              >
-                                <Flex flexDirection="column">
-                                  <Flex align="center" mb="3">
-                                    <Avatar name={Child.name} bg={'#' + Child.iconColor} src=""></Avatar>
-                                    <Flex>
-                                      <Text ml="3" fontSize="l">
-                                        {Child.name}
-                                      </Text>
-                                    </Flex>
+                              <Flex justify="flex-end" align={'center'}>
+                                <Flex align="center" mt="2" mr="2">
+                                  <Flex mr="3">
+                                    <ChatIcon
+                                      className="icons"
+                                      mr="2"
+                                      w="4"
+                                      height="6"
+                                      onClick={() => onCommentClick(Comment.id)}
+                                    ></ChatIcon>
+                                    <Text mr="2">{Comment.Children?.length ?? 0}</Text>
                                   </Flex>
-                                  <Flex align="flex-end">
-                                    <Text>{Child.body}</Text>
-                                  </Flex>
-                                  <Flex justify="flex-end" align={'center'}>
-                                    <Box>
-                                      <Text mt="2">
-                                        {childCreateAtDate} {childCreatedAtTime}
-                                      </Text>
-                                    </Box>
+                                  <Flex justify="center" mr="3">
+                                    <WrapItem>
+                                      <Button
+                                        isDisabled={Comment.Likes.some((l) => l.UserId === userData.id)}
+                                        isActive={Comment.Likes.some((l) => l.UserId !== userData.id)}
+                                        onClick={() => handleAddLike(openThread, Comment.id)}
+                                        colorScheme="orange"
+                                      >
+                                        <ArrowUpIcon className="icons" mr="2" w="5" height="6"></ArrowUpIcon>
+                                        <Text mr="2">{Comment.Likes.length}</Text>
+                                      </Button>
+                                    </WrapItem>
                                   </Flex>
                                 </Flex>
+                                <Box>
+                                  <Text mt="2">
+                                    {subCommentTime} {createdAtTime}
+                                  </Text>
+                                </Box>
                               </Flex>
-                            )
-                          })}
-                        </Box>
-                      )
-                    })}
-                  </AccordionPanel>
-                </AccordionItem>
-              )
-            })}
+                            </Flex>
+                            {Comment.Children.map((Child) => {
+                              const currentDate = new Date(Child.createdAt)
+                              const childCreateAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
+                              const childCreatedAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
+                              const childSubCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
+                              return (
+                                <Flex
+                                  boxShadow="md"
+                                  p="6"
+                                  rounded="md"
+                                  bg="white"
+                                  mt="3"
+                                  w="70%"
+                                  align="flex-end"
+                                  key={Child.id}
+                                >
+                                  <Flex flexDirection="column">
+                                    <Flex align="center" mb="3">
+                                      <Avatar name={Child.name} bg={'#' + Child.iconColor} src=""></Avatar>
+                                      <Flex>
+                                        <Text ml="3" fontSize="l">
+                                          {Child.name}
+                                        </Text>
+                                      </Flex>
+                                    </Flex>
+                                    <Flex align="flex-end">
+                                      <Text>{Child.body}</Text>
+                                    </Flex>
+                                    <Flex justify="flex-end" align={'center'}>
+                                      <Box>
+                                        <Text mt="2">
+                                          {childCreateAtDate} {childCreatedAtTime}
+                                        </Text>
+                                      </Box>
+                                    </Flex>
+                                  </Flex>
+                                </Flex>
+                              )
+                            })}
+                          </Box>
+                        )
+                      })}
+                    </AccordionPanel>
+                  </AccordionItem>
+                )
+              })}
         </Accordion>
         <Modal size="xl" isOpen={isOpen} onClose={onClose} isCentered>
           <ModalOverlay />
