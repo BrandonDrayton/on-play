@@ -1,13 +1,28 @@
+*{
+  font-family: 'Poppins';
+}
 .profile-card{
-    background-color: rgba(0, 0, 0, 0.482);
+    /* background-color: rgba(0, 0, 0, 0.253); */
+    background-color: rgba(64, 249, 2, 0.706);
     width: auto;
     max-width: 95%;
     border-radius: 15px;
     margin-left: 3em;
     margin-right: 3em;
 }
+.about-us-body{
+  background-color: black;
+  color: white;
+}
+.kyle-chase{
+  background-color: rgba(255, 119, 0, 0.865);
+}
 .about-box{
   width: 1000px;
+}
+.body{
+  padding-top: 4em;
+  padding-bottom: 4em;
 }
 .outer-box{
     display: flex;
@@ -19,11 +34,13 @@
 .profile-image{
     border-radius: 50%;
     margin: 10px;
+    height: 200px;
 }
 .title{
     text-align: end;
     margin-right: 3em;
     font-size: 25px;
+    font-family: 'Poppins';
 }
 .title2{
     font-size: 25px;
@@ -36,17 +53,46 @@
   .title-intro{
     text-align: center;
     font-size: 75px;
+    font-family: 'Poppins';
+    background-color: gray;
   }
   .intro-text{
     text-align: center;
+    font-family: 'Poppins';
+    font-size: 20px;
+    background-color: gray;
   }
   .dev-outer-div{
-    /* max-height: 10em; */
-    /* height: 500px; */
     flex-direction: column;
 
   }
-
+  .text-box-text{
+    margin-top: 3em;
+    margin-left: 15px;
+    font-size: 17px;
+    line-height: 2;
+  }
+  .footer{
+    background-color: gray;
+    height: 100px;
+  }
+  .social-flex{
+    display: flex;
+  }
+  .social-container{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2em
+  }
+  .social-container-reverse{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin-right: 2em
+  }
+  .social-links{
+    padding-right: 10px;
+  }
   @media(min-width: 320px) and (max-width: 680px) {
     .about-box{
       display:flex;
@@ -54,21 +100,40 @@
       width:20px;
       max-height:20px;
     }
+    .body{
+      background-color: black;
+      height: 3000px;
+    }
+    .footer{
+      display: none;
+    }
+    /* .profile-card{
+      display: flex;
+      flex-direction: column;
+    } */
     .team-box{
       display:flex;
       justify-content: center;
       margin-left:41px;
       margin-right:60px;
     }
+    
     .profile-card{
-      display:flex;
-      /* height:200px; */
+       display: -webkit-flex; 
+       display:flex; 
+       height:200px; 
+       display: flex;
       width:300px;
       margin-left: 34px;
       margin-right: 40px;
       height: auto;
       padding: 5px;
-
+      flex-direction: column; 
+      align-items: center;
+    }
+    .kyle-chase{
+      flex-direction: column-reverse;
+      align-items: center;
     }
     .profile-image{
       display:flex;
@@ -79,8 +144,21 @@
       display:flex;
       font-size: 12px;
     }
+    .text-box-text{
+      margin-top: 3em;
+      margin-left: 15px;
+      font-size: 17px;
+      line-height: 2;
+    }
+    .footer{
+      background-color: gray;
+      height: 100px;
+    }
+    .title2{
+      margin-left: -2em;
+    }
+   .brandon{
+    padding-left: 12px;
+   }
   }
-  .text-box-text{
-    margin-top: 3em;
-    margin-left: 15px;
-  }
+ 

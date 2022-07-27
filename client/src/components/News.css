@@ -111,6 +111,8 @@
   .footer-information {
     display: flex;
     flex-direction: column;
+    border-top: 2px solid silver;
+    border-radius: 15px;
   }
   
   .warn,
