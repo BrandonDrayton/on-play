@@ -16,7 +16,7 @@ function PrimaryNav() {
   return (
     <>
       <div className="navbar">
-        <Link className="link" to="/dashboard">
+        <Link className="link" to="/">
           <Flex>
             <img className="logo" src="/images/logo.png" alt="logo"></img>
           </Flex>
@@ -35,7 +35,7 @@ function PrimaryNav() {
             />
             <MenuList bg={'black'} border={'none'}>
               <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
-                <Link className="link" to="/dashboard">
+                <Link className="link" to="/">
                   Dashboard
                 </Link>
               </MenuItem>
@@ -63,7 +63,7 @@ function PrimaryNav() {
           </Menu>
         </Box>
         <nav className="links">
-          <Link className="link" to="/dashboard">
+          <Link className="link" to="/">
             Dashboard
           </Link>
           <Link className="link" to="/about">

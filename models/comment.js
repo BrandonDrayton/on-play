@@ -21,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       body: DataTypes.STRING,
       likes: DataTypes.INTEGER,
+      iconColor: DataTypes.STRING,
+      name: DataTypes.STRING,
     },
     {
       sequelize,

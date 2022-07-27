@@ -35,6 +35,12 @@ module.exports = {
       likes: {
         type: Sequelize.INTEGER,
       },
+      iconColor: {
+        type: Sequelize.STRING,
+      },
+      name: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -28,7 +28,7 @@ import {
 import Moment from 'moment'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useGetCurrentUserQuery } from '../services/createUserApi'
+import { useGetCurrentUserQuery, useGetUserQuery } from '../services/createUserApi'
 import {
   useAddNewCommentMutation,
   useAddNewLikeMutation,
@@ -220,6 +220,7 @@ function ForumModel() {
                       <Text>Comment</Text>
                     </Button>
                     {threadData?.Comments?.map((Comment) => {
+                      console.log(Comment)
                       return (
                         <Box
                           onClick={() => setOpenComment(Comment.id)}
@@ -232,9 +233,9 @@ function ForumModel() {
                         >
                           <Flex flexDirection="column">
                             <Flex align="center" mb="3">
-                              <Avatar name={userData.name} bg={'#' + userData.iconColor} src=""></Avatar>
+                              <Avatar name={Comment.name} bg={'#' + Comment.iconColor} src=""></Avatar>
                               <Text ml="3" fontSize="l">
-                                {userData.name}
+                                {Comment.name}
                               </Text>
                             </Flex>
                             <Box>

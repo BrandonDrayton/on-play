@@ -9,6 +9,10 @@ export const createUserApi = createApi({
       query: () => '/current',
       providesTags: ['User'],
     }),
+    getUser: builder.query({
+      query: (id) => `/${id}`,
+      providesTags: ['User'],
+    }),
     getUserFavorite: builder.query({
       query: () => '/favorite',
       providesTags: ['Favorite'],
@@ -50,6 +54,7 @@ export const createUserApi = createApi({
 
 export const {
   useGetCurrentUserQuery,
+  useGetUserQuery,
   useGetUserFavoriteQuery,
   useAddUserLoginMutation,
   useAddUserRegisterMutation,

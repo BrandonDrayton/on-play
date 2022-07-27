@@ -46,7 +46,7 @@ function Login() {
           password: '',
         })
         setSuccess('Logged in Successfully..?')
-        navigate('/dashboard')
+        navigate('/')
         setIsLoading(false)
       })
       .catch((e) => {

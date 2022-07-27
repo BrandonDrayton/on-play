@@ -92,12 +92,6 @@ router.get('/current', checkAuth, async (req, res) => {
   res.json(req.session.user)
 })
 
-// GET /api/v1/users/logout
-// router.get('/logout', async (req, res) => {
-//   req.session.user = null
-//   res.json({ success: 'logged out successfully' })
-// })
-// POST /api/v1/users/logout
 router.post('/logout', async (req, res) => {
   req.session.destroy((err) => {
     if (err) {
