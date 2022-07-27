@@ -45,16 +45,6 @@ function PrimaryNav() {
                 </Link>
               </MenuItem>
               <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
-                <Link className="link" to="/register">
-                  Register
-                </Link>
-              </MenuItem>
-              <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
-                <Link className="link" to="/login">
-                  Login
-                </Link>
-              </MenuItem>
-              <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
                 <Link className="link" to="/logout">
                   Logout
                 </Link>
@@ -68,12 +58,6 @@ function PrimaryNav() {
           </Link>
           <Link className="link" to="/about">
             About Us
-          </Link>
-          <Link className="link" to="/register">
-            Register
-          </Link>
-          <Link className="link" to="/login">
-            Login
           </Link>
           <Link className="link" to="/logout">
             Logout
