@@ -6,8 +6,37 @@
   text-transform: uppercase;
   font-weight: 900;
 }
-
+.loginHeading{
+  font-size: 30px;
+  text-align: center;
+  padding-bottom: 20px;
+  font-family: Poppins;
+  text-transform: uppercase;
+  font-weight: 900;
+}
 .form {
   font-family: Poppins;
   text-transform: uppercase;
 }
+.background-image-slide{
+  background-image:url("https://c.tenor.com/F4-i1leMvrUAAAAd/dunk-slam-dunk.gif");
+  background-image: cover;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.carousel{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+.register-form-card{
+  background-color: #f0f8ffbf;
+  border-radius: 25px;
+}
+.login-form-card{
+  background-color: #f0f8ffbf;
+  border-radius: 25px;
+}
+html{}
