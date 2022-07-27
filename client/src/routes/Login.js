@@ -16,7 +16,7 @@ import './Register.css'
 import { useNavigate } from 'react-router-dom'
 import { Carousel } from 'react-bootstrap'
 import LandingNav from '../components/LandingNav'
-import { useAddUserLoginMutation } from '../services/createUserApi'
+import { useAddUserLoginMutation, useGetCurrentUserQuery } from '../services/createUserApi'
 
 function Login() {
   const [form, setForm] = useState({
@@ -34,6 +34,7 @@ function Login() {
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [addUserLogin, isError] = useAddUserLoginMutation()
+  const { data, refetch } = useGetCurrentUserQuery()
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)

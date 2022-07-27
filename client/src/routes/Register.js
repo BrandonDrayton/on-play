@@ -29,8 +29,7 @@ function Register() {
     email: '',
     password: '',
     username: '',
-    iconText: '',
-    iconColor: '',
+    iconColor: '66CD00',
   })
   const navigate = useNavigate()
   const [error, setError] = useState('')
@@ -50,7 +49,6 @@ function Register() {
           email: '',
           password: '',
           username: '',
-          iconText: '',
           iconColor: '',
         })
       })
@@ -122,19 +120,10 @@ function Register() {
                 onChange={(e) => updateField('username', e.target.value)}
               />
             </FormControl>
-            <FormControl my="5">
-              <FormLabel htmlFor="iconText">Enter your initials here:</FormLabel>
-              <Input
-                id="iconText"
-                type="iconText"
-                required
-                value={form.iconText}
-                onChange={(e) => updateField('iconText', e.target.value)}
-              />
-            </FormControl>
             <FormControl w="65px" flexShrink="0">
               <FormLabel htmlFor="color">Color</FormLabel>
               <Input
+                isRequired
                 id="color"
                 type="color"
                 value={'#' + form.iconColor}
