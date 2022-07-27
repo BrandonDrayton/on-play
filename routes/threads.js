@@ -22,7 +22,6 @@ router.post('/:id/comment', checkAuth, async (req, res) => {
   if (isNaN(id)) return res.status(404).json({ error: 'thread not found' })
   const thread = await models.Thread.findByPk(id)
   if (!thread) return res.status(404).json({ error: 'thread not found' })
-  console.log('FIND MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', req.session.user.iconColor, req.session.user.name)
   const comment = await thread.createComment({
     body: req.body.body,
     likes: 0,
@@ -40,8 +39,6 @@ router.post('/:threadId/comment/:commentId', checkAuth, async (req, res) => {
   if (isNaN(threadId || commentId)) return res.status(404).json({ error: 'thread not found' })
   const thread = await models.Thread.findByPk(threadId)
   if (!thread) return res.status(404).json({ error: 'thread not found' })
-  console.log(req.session.user.iconColor)
-  console.log(req.session.user.name)
   const subComment = await thread.createComment({
     body: req.body.body,
     ParentId: commentId,
