@@ -18,18 +18,25 @@ function News() {
 
   const news = data?.items
   const teamLogo = team?.team.logos[1]
-
+  const teamNews = team?.team.displayName
   return (
     <>
       <Flex justifyContent="center">
         <div className="outer-div">
+          <Flex justifyContent="center">
+            <h1 className="news-headline">{teamNews ? ` Top Articles for ${teamNews}` : `Random Sports Articles`}</h1>
+          </Flex>
           <Flex>
             <div className="sidebar">
               {news?.slice(96, 100).map((team) => (
                 <div className="sidebar-section">
                   <div className="section-body">
                     {/* <img src={'/images/logo.png'} alt="" /> */}
-                    <img className="img-wrap" src={teamLogo?.href || '/images/logo.png'} alt="" />
+                    <img
+                      className={teamLogo?.href ? `img-wrap` : `alt-img`}
+                      src={teamLogo?.href || '/images/alt.png'}
+                      alt=""
+                    />
                   </div>
                   <div className="section-footer">
                     <div className="footer-information">

@@ -274,6 +274,10 @@ function ForumModel() {
                             </Flex>
                           </Flex>
                           {Comment.Children.map((Child) => {
+                            const currentDate = new Date(Child.createdAt)
+                            const childCreateAtDate = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
+                            const childCreatedAtTime = currentDate.toLocaleString(`en-us`, { timeStyle: `short` })
+                            const childSubCommentTime = currentDate.toLocaleString(`en-us`, { dateStyle: `short` })
                             return (
                               <Flex
                                 boxShadow="md"
@@ -299,7 +303,9 @@ function ForumModel() {
                                   </Flex>
                                   <Flex justify="flex-end" align={'center'}>
                                     <Box>
-                                      <Text mt="2">{Child.createdAt}</Text>
+                                      <Text mt="2">
+                                        {childCreateAtDate} {childCreatedAtTime}
+                                      </Text>
                                     </Box>
                                   </Flex>
                                 </Flex>

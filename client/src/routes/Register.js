@@ -66,7 +66,7 @@ function Register() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="slam-dunk">
         {error && (
           <Alert status="error">
             <AlertIcon /> {error}
@@ -136,47 +136,6 @@ function Register() {
           </Box>
         </Flex>
       </form>
-      <Box>
-        <Carousel fade controls={false} pause={false} indicators={false} interval={1000}>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://c.tenor.com/F4-i1leMvrUAAAAd/dunk-slam-dunk.gif"
-              alt="First slide"
-            />
-            <Carousel.Caption></Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://i.pinimg.com/originals/1d/65/f0/1d65f0e3d26176ce06025426082485f9.gif"
-              alt="Second slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://media4.giphy.com/media/SxMF64Np2fUCMlcUdE/giphy-downsized-large.gif"
-              alt="Third slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://media1.giphy.com/media/CxeRpYtRgC836X95ru/giphy.gif"
-              alt="Third slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://c.tenor.com/142oibHgfWwAAAAC/atlanta-united-goal.gif"
-              // src="https://wallpapercave.com/wp/wp6819375.jpg"
-              alt="Third slide"
-            />
-          </Carousel.Item>
-        </Carousel>
-      </Box>
     </>
   )
 }

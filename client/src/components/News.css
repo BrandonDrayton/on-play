@@ -32,7 +32,7 @@
   .sidebar {
     margin: 5em;
     border-radius: 5px;
-    background-color: grey;
+    background-color: black;
     height: 600px;
     display: flex;
     overflow: hidden;
@@ -98,6 +98,14 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     transition: transform 0.2s;
+  }
+  .alt-img{
+    position: absolute ;
+    object-fit: fill ;
+    top: 18%;
+    height: 37%;
+    width: 100%;
+
   }
   
   .footer-information {
@@ -203,7 +211,7 @@
     background-size: 200% auto;
     color: white;
     box-shadow: 0 0 20px #eee;
-    border-radius: 20px;
+    border-radius: 10px;
    }
   
   
@@ -213,7 +221,7 @@
   }
   
   .btn-1 {
-    background-image: linear-gradient(to right, #63615b 0%, #844635 51%, #47390b 100%);
+    background-color: yellowgreen;
     width: 300px;
   }
 
@@ -287,4 +295,9 @@
     }
   }
   
-   
+.news-headline{
+  padding-top: 26px;
+  font-size: 55px;
+  margin-bottom: -35px;
+  font-family: 'Poppins';
+}
