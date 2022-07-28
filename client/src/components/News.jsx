@@ -26,7 +26,7 @@ function News() {
           <Flex justifyContent="center">
             <h1 className="news-headline">{teamNews ? ` Top Articles for ${teamNews}` : `Random Sports Articles`}</h1>
           </Flex>
-          <Flex>
+          <Flex justifyContent="center">
             <div className="sidebar">
               {news?.slice(96, 100).map((team) => (
                 <div className="sidebar-section">
