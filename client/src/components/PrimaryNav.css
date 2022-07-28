@@ -50,6 +50,7 @@
   .drop-down-league{
     margin-bottom: 1em;
   }
+  
   .drop-down-selector{
     margin-top: 3em;
     flex-direction: column;
@@ -69,6 +70,7 @@
   }
   .drop-down-list{
   }
+  
 }
 .menu-links{
   background-color: black;
@@ -116,3 +118,11 @@
   border: none;
   color: yellowgreen;
 }
+.logout-button-on-drop{
+  margin-top: -25px; 
+   padding-left: auto; 
+
+  }
+  .logout-button-on-drop:hover{
+    color: yellowgreen;
+  }

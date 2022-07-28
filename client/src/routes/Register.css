@@ -40,7 +40,9 @@
   border-radius: 25px;
 }
 .slam-dunk{
-  height: 2000px;
+  height: 1284px;
+  background-repeat: no-repeat;
+  background-size: cover;
   background-image: url("https://www.gannett-cdn.com/-mm-/dfff082d1e4931b30569ae37195b6862a6a8ef8a/c=0-361-2915-2008/local/-/media/2018/05/22/USATODAY/USATODAY/636625868623447717-AP-APTOPIX-Heat-Bucks-Basketball-39255807.JPG");
 }
 @media (min-width: 320px) and (max-width: 680px){

@@ -93,7 +93,7 @@ function PrimaryNav() {
                   About Us
                 </Link>
               </MenuItem>
-              <MenuItem className="menu-links" _hover={{ bg: 'none' }}>
+              <MenuItem className="menu-links logout-button-on-drop" _hover={{ bg: 'none' }}>
                 {/* <Link className="link" to="/logout">
                   Logout
                 </Link> */}
@@ -112,7 +112,7 @@ function PrimaryNav() {
                     type="submit"
                     isLoading={isLoading}
                     mt={4}
-                    className="form logout-button"
+                    className="form logout-button-on-drop"
                     colorScheme="blackAlpha"
                     size="md"
                   >

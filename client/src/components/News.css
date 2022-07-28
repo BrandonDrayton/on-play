@@ -235,7 +235,14 @@
     display:flex;
     justify-content: space-evenly;
   }
- 
+  .news-headline{
+    padding-top: 26px;
+    font-size: 55px;
+    margin-bottom: -35px;
+    font-family: 'Poppins';
+    display: flex;
+    justify-content: center;
+  }
   
   @media(min-width: 320px) and (max-width: 480px) {
     .sidebar {
@@ -308,11 +315,3 @@
     }
   }
   
-  .news-headline{
-    padding-top: 26px;
-    font-size: 55px;
-    margin-bottom: -35px;
-    font-family: 'Poppins';
-    display: flex;
-    justify-content: center;
-  }
