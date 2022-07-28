@@ -80,17 +80,12 @@ router.get('/:id', checkAuth, async (req, res) => {
         where: { ParentId: null },
         include: ['Children', 'Likes'],
         required: false,
-        order: [['likes', 'DESC']],
-      },
-
-      {
-        model: models.User,
-        where: { id: req.session.user.id },
-        required: false,
       },
     ],
-
-    order: [['createdAt', 'DESC']],
+    order: [
+      ['createdAt', 'DESC'],
+      [models.Comment, 'likes', 'DESC'],
+    ],
   })
   if (!thread) return res.status(404).json({ error: 'thread not found' })
   res.json(thread)

@@ -51,11 +51,15 @@ function Register() {
           // username: '',
           iconColor: '',
         })
+        setSuccess('Registered Successfully')
+        navigate('/login')
+        setIsLoading(false)
       })
-      .catch((e) => {})
-    setSuccess('Registered Successfully')
-    navigate('/login')
-    setIsLoading(false)
+      .catch((e) => {
+        setError('Email is taken')
+        navigate('/register')
+        setIsLoading(false)
+      })
   }
   const updateField = (name, value) => {
     setForm({
