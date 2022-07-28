@@ -121,8 +121,9 @@
 .logout-button-on-drop{
   margin-top: -25px; 
    padding-left: auto; 
-
+   
   }
   .logout-button-on-drop:hover{
+    text-decoration: none;
     color: yellowgreen;
   }

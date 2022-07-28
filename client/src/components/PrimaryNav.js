@@ -113,8 +113,9 @@ function PrimaryNav() {
                     isLoading={isLoading}
                     mt={4}
                     className="form logout-button-on-drop"
-                    colorScheme="blackAlpha"
+                    colorScheme="white"
                     size="md"
+                    variant="link"
                   >
                     Logout
                   </Button>
