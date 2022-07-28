@@ -28,7 +28,7 @@ function Register() {
     name: '',
     email: '',
     password: '',
-    username: '',
+    // username: '',
     iconColor: '66CD00',
   })
   const navigate = useNavigate()
@@ -48,7 +48,7 @@ function Register() {
           name: '',
           email: '',
           password: '',
-          username: '',
+          // username: '',
           iconColor: '',
         })
       })
@@ -110,7 +110,7 @@ function Register() {
                 onChange={(e) => updateField('password', e.target.value)}
               />
             </FormControl>
-            <FormControl my="5">
+            {/* <FormControl my="5">
               <FormLabel htmlFor="username">Username</FormLabel>
               <Input
                 id="username"
@@ -119,9 +119,9 @@ function Register() {
                 value={form.username}
                 onChange={(e) => updateField('username', e.target.value)}
               />
-            </FormControl>
-            <FormControl w="65px" flexShrink="0">
-              <FormLabel htmlFor="color">Color</FormLabel>
+            </FormControl> */}
+            <FormControl w="70px" flexShrink="0">
+              <FormLabel htmlFor="color">Avatar Color</FormLabel>
               <Input
                 isRequired
                 id="color"
