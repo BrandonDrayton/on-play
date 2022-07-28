@@ -6,9 +6,9 @@ const checkAuth = require('../middleware/checkAuth')
 
 // GET /api/v1/users/register
 router.post('/register', async (req, res) => {
-  const { name, email, password, username, iconText, iconColor } = req.body
+  const { name, email, password, iconText, iconColor } = req.body
   // if required fields missing, send error
-  if (!email || !password || !username) {
+  if (!email || !password) {
     return res.status(400).json({ error: 'missing email and/or password' })
   }
   const existingUser = await models.User.findOne({
@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
   }
   // create new user in database and send success message
   const hash = await bcrypt.hash(password, 10)
-  const user = await models.User.create({ name, email, password: hash, username, iconText, iconColor })
+  const user = await models.User.create({ name, email, password: hash, iconText, iconColor })
   res.json({ success: 'registered successfully' })
 })
 
